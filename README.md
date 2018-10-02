@@ -1,10 +1,10 @@
 # EmbeddedSystemsDevelopment
 Repository for Embedded Systems Development Module
 
-Team 0xDEADBEEF
-@hsert29
-@dansteer
-@HarrisonJM
+Team 0xDEADBEEF\n
+@hsert29\n
+@dansteer\n
+@HarrisonJM\n
 
 #Directory Structure
 
