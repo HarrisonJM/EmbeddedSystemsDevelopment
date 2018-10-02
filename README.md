@@ -7,7 +7,7 @@ The top level folder (where this file is located) Contains any notes and none co
 
 ECGReader contains the CMake Structure.
 
-`.
+.
 ├── ECGReader
 │   ├── CMakeLists.txt
 │   ├── myApps
@@ -23,7 +23,7 @@ ECGReader contains the CMake Structure.
 │   │       └── display.c
 │   └── otherLibraries
 └── README.md
-'
+
 
 myApps contains any executables related to the assignment
 myLibraries contains all libraries written for the purposes of making the executables work
