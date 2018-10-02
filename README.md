@@ -31,5 +31,7 @@ ECGReader contains the CMake Structure.
 ```
 
 `myApps contains any executables related to the assignment`
+
 `myLibraries contains all libraries written for the purposes of making the executables work`
+
 `otherLibraries will contain any 3rd party libraries we've used for convenience and repackaged for the markers convenience`
