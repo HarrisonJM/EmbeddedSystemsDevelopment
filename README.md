@@ -2,9 +2,9 @@
 Repository for Embedded Systems Development Module
 
 Team 0xDEADBEEF
-### @hsert29
-### @dansteer
-### @HarrisonJM 
+@hsert29
+@dansteer
+@HarrisonJM
 
 #Directory Structure
 
