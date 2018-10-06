@@ -53,3 +53,4 @@ dkms.conf
 
 #Stupid mac files
 *.DS_Store
+.DS_Store
