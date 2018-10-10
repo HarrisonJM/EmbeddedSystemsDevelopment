@@ -54,5 +54,8 @@ dkms.conf
 #Stupid mac files
 *.DS_Store
 .DS_Store
+
+#Stupid Windows Files
 *.tmp
 docs/harrisonJM/~$am Analysis.docx
+*~*
