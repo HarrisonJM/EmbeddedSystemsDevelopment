@@ -1,0 +1,32 @@
+Standards Doc
+Introduction
+This document serves as a way to codify how tasks should be completed and carried out. From basic coding standards and rules up to workflow requirements. Basically Just a list of NBs (Note Bene’s)
+
+Workflow
+Tasks:
+    • All tasks that need to be completed will already be in the issue tracker.
+        ? All commits MUST be done against the issue ID (ESD-nnn)
+        ? If an issue has been previously closed and more work needs to be committed, open a new task and link them
+    • When adding a task, input a time estimation and a priority
+        ? If “re-opening” an issue, use the priority of the linked issue.
+    • Always fill in the time it took you to complete the task (roughly, no-one’s perfect)
+Coding:
+	When starting a new file, your own standards may be applied HOWEVER:
+    • ALL variables must start with lowerCamelCase
+    • ALL functions must start with UpperCamelCase
+    • Variables MUST have meaningful names.
+        ? If the variable is used often, keep it brief
+    • Functions must always have meaningful names
+        ? Brevity is key, but be descriptive
+    • Keep functions very simple
+        ? Limit their size to around 20 lines
+        ? They must perform at most one thing
+            ? If a function performs two tasks. Move those tasks into two separate functions and call them from the first
+    • Attempt to limit line length to around 80 characters
+        ? if it looks awful to wrap under this, don’t
+        ? DO NOT EXCEED 120 CHARACTERS
+    • If you are editing a file someone else has started in: attempt to emulate their style
+        ? If there are glaring issues with the format, edit them in a separate commit
+    • If you got a code review back
+        ? Any stylistic or formatting problems, separate commit to any algorithmic issues
+            ? The latter part should be handled by our unit tests though, hopefully.
