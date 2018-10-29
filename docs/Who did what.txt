@@ -1,5 +1,9 @@
-Huseyin:	docs/Design/initial_design.png	
-			docs/Design/initial_design.xml
+Huseyin:		Initial high level design
+			Screen SDLL
+			Ease of Use Acceptance Tests
+			Screen Acceptance Tests
+			BPM Acceptance Tests
+
 			
 			
 Harrison:	Requriements tidy up and codification
