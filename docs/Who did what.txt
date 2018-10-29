@@ -1,0 +1,22 @@
+Huseyin:	docs/Design/initial_design.png	
+			docs/Design/initial_design.xml
+			
+			
+Harrison:	Requriements tidy up and codification
+			ECG Design and LL
+			update to initial_design
+			HI Acceptance Tests
+			BPM Requirements
+			General tidying
+			initial standards
+
+
+Jesse:
+
+
+Dan:
+
+
+Team Effort: 	Initial requirements
+				Reveiwing eachother's work
+				Taking turns chairing meetings
