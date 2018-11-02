@@ -7,21 +7,20 @@
 #include <msp430.h>
 
 /* Timer variable setup */
-static int heartbeat = 1;
-int timer::adcReading = 1;
+int timerAdcReading = 1;
 
 /*!
  * @breif inits Timer0
  */
 void initTimer(void)
 {
-    P4DIR &= ~0x40;                             //p4.6
-    P4REN |= 0x40;                              // Set P1.1 pull-up resistor enabled
+    P4DIR &= ~0x40;                             /*p4.6*/
+    P4REN |= 0x40;                              /* Set P1.1 pull-up resistor enabled */
     P4OUT |= 0x40;
-    P4DIR |= 0x40;                              // Set P4.6 to output direction
+    P4DIR |= 0x40;                              /* Set P4.6 to output direction */
 
-    TA0CCR0 = 1023;                             // Count up to 1024
-    TA0CCTL0 = 0x10;                            // Enable counter interrupts, bit 4=1
+    TA0CCR0 = 1023;                             /* Count up to 1024 */
+    TA0CCTL0 = 0x10;                            /* Enable counter interrupts, bit 4=1 */
     TA0CCTL1 = OUTMOD_3;                        // TACCR1 set/reset
     TA0CCR1 = 1023;                             // TACCR1 PWM Duty Cycle
     TA0CTL = TASSEL_2 + MC_1;                   // Timer A using subsystem master clock, SMCLK(1.1 MHz)
@@ -37,11 +36,12 @@ void initTimer(void)
 __interrupt void Timer0_A0(void)
 {
 	//Time to take a reading
-	timer::adcReading++;
+    static int heartbeat = 1;
+	timerAdcReading++;
 
-	if (adcReading >= 40)
+	if (timerAdcReading >= 40)
 	{
-		timer::adcReading = 1;
+	    timerAdcReading = 1;
 	}
 
 	// Toggle the red LED 500ms on and 500ms off

@@ -8,7 +8,7 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-extern volatile int timer::adcReading;
+extern volatile int timerAdcReading;
 
 void initTimer(void);
 

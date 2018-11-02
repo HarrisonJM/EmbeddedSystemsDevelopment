@@ -3,11 +3,12 @@
 /*
  * main.c
  */
-#include "lcdHandler.h"
-#include "timer.h"
-#include "ADC_1.h"
-#include "stdio.h"
-#include "string.h"
+#include "screen/lcdHandler.h"
+#include "timer/timer.h"
+#include "measurer/ADC_1.h"
+
+#include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
@@ -27,7 +28,7 @@ int main(void)
     adc_1();
     while (1)
     {
-        if (adcReading == 1)
+        if (timerAdcReading == 1)
         {
             if (doneReading == 0)
             {
