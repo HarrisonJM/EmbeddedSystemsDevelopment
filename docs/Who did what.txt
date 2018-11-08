@@ -1,26 +1,28 @@
-Huseyin:		Initial high level design
-			Screen SDLL
-			Ease of Use Acceptance Tests
-			Screen Acceptance Tests
-			BPM Acceptance Tests
+Huseyin:	Initial high level design
+		Screen SDLL
+		Ease of Use Acceptance Tests
+		Screen Acceptance Tests
+		BPM Acceptance Tests
 
 			
 			
-Harrison:	Requriements tidy up and codification
-			ECG Design and LL
-			update to initial_design
-			HI Acceptance Tests
-			BPM Requirements
-			General tidying
-			initial standards
+Harrison:	Requirements tidy up and codification
+		ECG Design and LL
+		update to initial_design
+		HI Acceptance Tests
+		BPM Requirements
+		General tidying and initial standards
 
 
-Jesse:
+Jesse:		Acceptance Tests for Menu
+		Acceptance Tests for Data Handling
+		Low Level Software Design for Menu
+		Low Level Software Design for Data Handling
 
 
 Dan:
 
 
 Team Effort: 	Initial requirements
-				Reveiwing eachother's work
-				Taking turns chairing meetings
+		Reviewing each other's work
+		Rotating running meetings
