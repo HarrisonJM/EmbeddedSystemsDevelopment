@@ -1,3 +1,6 @@
+#ifndef __MENU_H__
+#define __MENU_H__
+
 #define SIZE_MENU_MAIN 4
 
 const char *menuMain[SIZE_MENU_MAIN] = 
@@ -7,3 +10,6 @@ const char *menuMain[SIZE_MENU_MAIN] =
 	"User Profile",
 	"Options"
 };
+
+
+#endif /* __MENU_H__ */
