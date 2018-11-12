@@ -9,14 +9,24 @@
 
 void InitButtonHandler();
 
-extern ButtonS1Timer();
-extern BUTTONSTATE_E GetButtonS1State();
-extern int GetButtonS1NumberOfPresses();
-extern void SetButtonS1NumberOfPresses(int newPresses);
-
-extern ButtonS2Timer();
-extern BUTTONSTATE_E GetButtonS2State();
-extern int GetButtonS2NumberOfPresses();
-extern void SetButtonS2NumberOfPresses(int newPresses);
+/*!
+ * @brief handle the continuation of a state
+ */
+void ButtonTimer(BUTTONSELECT_T button);
+/*!
+ * @brief Returns the current state to the user
+ * @return The state the button is currently in as defined by BUTTONSTATE_E
+ */
+BUTTONSTATE_E GetButtonState(BUTTONSELECT_T button);
+/*!
+ * @brief Returns the number of times the button has been pressed
+ * @return The number of times the button has been pressed by the user
+ */
+int GetButtonNumberOfPresses(BUTTONSELECT_T button);
+/*!
+ * @brief Sets the number of Times The Button has been pressed
+ */
+void SetButtonNumberOfPresses(BUTTONSELECT_T button,
+                              int newPresses);
 
 #endif /* __BUTTON_HANDLER_H__ */

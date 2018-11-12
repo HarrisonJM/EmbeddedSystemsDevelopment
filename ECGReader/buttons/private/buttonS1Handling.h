@@ -11,21 +11,20 @@
 /*!
  * @brief handle the continuation of a state
  */
-void ButtonS1Timer();
-
+void __ButtonS1Timer();
 /*!
  * @brief Returns the current state to the user
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
-BUTTONSTATE_E GetButtonS1State();
+BUTTONSTATE_E __ButtonS1GetState();
 /*!
  * @brief Returns the number of times the button has been pressed
  * @return The number of times the button has been pressed by the user
  */
-int GetButtonS1NumberOfPresses();
+int __ButtonS1GetNumberOfPresses();
 /*!
  * @brief Sets the number of Times The Button has been pressed
  */
-void SetButtonS1NumberOfPresses(int newPresses);
+void __ButtonS1SetNumberOfPresses(int newPresses);
 
 #endif /* __BUTTONS1HANDLING_H_ */
