@@ -4,6 +4,9 @@
  * @date 12/11/2018
  */
 
+#ifndef __BOOLINT_H__
+#define __BOOLINT_H__
+
 typedef unsigned char uint8_t;
 typedef unsigned int  uint16_t;
 typedef unsigned long uint32_t;
@@ -23,3 +26,5 @@ typedef uint8_t BOOL;
 typedef uint8_t bool;
 
 #endif
+
+#endif /* __BOOLINT_H__ */
