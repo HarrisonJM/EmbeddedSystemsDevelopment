@@ -5,15 +5,21 @@
  */
 
 #include <buttons/buttonHandlingUtility.h>
-#include "buttons/private/buttonS1Handling.h"
-#include "buttons/private/buttonS2Handling.h"
+
+#include "private/O_button.h"
+
+static ButtonStore_t S1;
+static ButtonStore_t S2;
+
 /*!
- * @brief Initialises both Handlers' variables
+ * @brief Initialises Handler variables
  */
 void ButtonInitHandler()
 {
-    ButtonS1InitHandler();
-    InitButtonS2Handler();
+    ButtonS1Init(&S1);
+    ButtonS2Init(&S2);
+    ButtonInitHandler(&S1);
+    ButtonInitHandler(&S2);
 }
 
 /*!
@@ -25,10 +31,10 @@ void ButtonTimer(BUTTONSELECT_T button)
     switch(button)
     {
     case BUTTONS1:
-        __ButtonS1Timer();
+        __ButtonTimer(&S1);
         break;
     case BUTTONS2:
-        __ButtonS2Timer();
+        __ButtonTimer(&S2);
         break;
     default:
         break;
@@ -44,10 +50,10 @@ BUTTONSTATE_E ButtonGetState(BUTTONSELECT_T button)
     switch(button)
     {
     case BUTTONS1:
-        __ButtonS1GetState();
+        __ButtonGetState(&S1);
         break;
     case BUTTONS2:
-        __ButtonGetS2State();
+        __ButtonGetState(&S2);
         break;
     default:
         break;
@@ -63,10 +69,10 @@ int ButtonGetNumberOfPresses(BUTTONSELECT_T button)
     switch(button)
     {
     case BUTTONS1:
-        __ButtonS1GetNumberOfPresses();
+        __ButtonGetNumberOfPresses(&S1);
         break;
     case BUTTONS2:
-        __ButtonGetS2NumberOfPresses();
+        __ButtonGetNumberOfPresses(&S2);
         break;
     default:
         break;
@@ -81,10 +87,10 @@ void ButtonSetNumberOfPresses(BUTTONSELECT_T button, int newPresses)
     switch(button)
     {
     case BUTTONS1:
-        __ButtonS1SetNumberOfPresses(newPresses);
+        __ButtonSetNumberOfPresses(&S1, newPresses);
         break;
     case BUTTONS2:
-        __ButtonSetS2NumberOfPresses(newPresses);
+        __ButtonSetNumberOfPresses(&S2, newPresses);
         break;
     default:
         break;
