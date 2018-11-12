@@ -5,8 +5,10 @@
 #ifndef __BUTTON_GET_H__
 #define __BUTTON_GET_H__
 
-int __initButtonHardware();
-int __ReadButtonS2();
-int __ReadButtonS1();
+#include <helpers/boollint.h>
+
+void __initButtonHardware();
+bool __ReadButtonS2();
+bool __ReadButtonS1();
 
 #endif /* __BUTTON_GET_H__ */
