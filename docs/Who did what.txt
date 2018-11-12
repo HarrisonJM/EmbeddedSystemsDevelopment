@@ -12,6 +12,12 @@ Harrison:	Requirements tidy up and codification
 		HI Acceptance Tests
 		BPM Requirements
 		General tidying and initial standards
+		Pulled Acceptance Tests into a single document
+		Added POST/Power On Acceptance Tests
+		Added FSM for buttons
+		Implemented Button Handler Framework
+			Added double click events
+		Added more standards
 
 
 Jesse:		Acceptance Tests for Menu
