@@ -4,7 +4,7 @@
  * @date 12/11/2018
  */
 
-#include "buttons/private/buttonHandlingUtility.h"
+#include <buttons/buttonHandlingUtility.h>
 #include "hardwareAbstractions/I_button.h"
 
 static void ButtonS1EnterState(int new_state);
@@ -92,16 +92,29 @@ static void ButtonS1ReleaseTimer()
     {
         if (buttonS1ReleaseTime >= (MINIMUM_BUTTON_INTERACTION_TIME/INTERVAL_BUTTON_HANDLER))
         {
-            buttonS1ReleaseTime = 0;
-            buttonS1State = BUTTON_PRESSED;
+            ReleaseTimer();
         }
-        else if (buttonS1ReleaseTime >= DOUBLE_CLICK_COUNTER/INTERVAL_BUTTON_HANDLER)
+    }
+}
+/*!
+ * @brief Handles timing for the semi-released state
+ */
+static void ButtonS1SemiReleaseTimer()
+{
+    if (ReadButtonS1() == 0)
+    {
+        if (buttonS1ReleaseTime <= (DOUBLE_CLICK_COUNTER/INTERVAL_BUTTON_HANDLER))
         {
-            // Pressed Again
-            if (ReadButtonS1() != 1)
-            {
-                ButtonS1EnterState(BUTTON_DOUBLE_CLICK);
-            }
+            buttonS1ReleaseTime = 0;
+            buttonS1State = BUTTON_DOUBLE_CLICK;
+        }
+        else if (buttonS1ReleaseTime >= (MINIMUM_BUTTON_INTERACTION_TIME/INTERVAL_BUTTON_HANDLER))
+        {
+            ReleaseTimer();
+        }
+        else if (buttonS1ReleaseTime > (MINIMUM_BUTTON_INTERACTION_TIME/INTERVAL_BUTTON_HANDLER))
+        {
+            ButtonEnterS1State(BUTTON_RELEASED);
         }
     }
 }
@@ -144,6 +157,8 @@ static void ButtonS1EnterState(int new_state)
         break;
     case BUTTON_RELEASED:
         break;
+    case BUTTON_SEMI_RELEASED:
+        break;
     case BUTTON_PRESSED:
         ButtonS1PressedEnter();
         break;
@@ -171,6 +186,9 @@ void __ButtonS1Timer()
         break;
     case BUTTON_RELEASED:
         ButtonS1ReleaseTimer();
+        break;
+    case BUTTON_SEMI_RELEASED:
+        ButtonS1SemiReleaseTimer();
         break;
     case BUTTON_PRESSED:
         ButtonS1PressedTimer();
@@ -218,7 +236,6 @@ static inline void HeldTimer(BUTTONSTATE_E finalState)
  * @brief Generic handler for "pressed" states
  */
 static inline void PressTimer(BUTTONSTATE_E finalState)
-
 {
     buttonS1pressTime++;
     if (ReadButtonS1() != 0)
@@ -238,4 +255,12 @@ static inline void PressTimer(BUTTONSTATE_E finalState)
             EnterButtonS1State(finalState);
         }
     }
+}
+/*!
+ * @brief Release timer for normal Release
+ */
+inline static void ReleaseTimer()
+{
+    buttonS1ReleaseTime = 0;
+    buttonS1State = BUTTON_PRESSED;
 }

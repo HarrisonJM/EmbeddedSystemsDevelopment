@@ -6,7 +6,7 @@
 #ifndef __BUTTONS1HANDLING_H_
 #define __BUTTONS1HANDLING_H_
 
-#include "buttonHandlingUtility.h"
+#include "../buttonHandlingUtility.h"
 
 /*!
  * @brief handle the continuation of a state

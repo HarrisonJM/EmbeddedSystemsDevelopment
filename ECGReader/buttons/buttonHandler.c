@@ -4,13 +4,13 @@
  * @date 12/11/2018
  */
 
-#include "buttons/private/buttonHandlingUtility.h"
+#include <buttons/buttonHandlingUtility.h>
 #include "buttons/private/buttonS1Handling.h"
 #include "buttons/private/buttonS2Handling.h"
 /*!
  * @brief Initialises both Handlers' variables
  */
-void InitButtonHandler()
+void ButtonInitHandler()
 {
     ButtonS1InitHandler();
     InitButtonS2Handler();
@@ -39,7 +39,7 @@ void ButtonTimer(BUTTONSELECT_T button)
  * @param button The button state we wish to get
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
-BUTTONSTATE_E GetButtonState(BUTTONSELECT_T button)
+BUTTONSTATE_E ButtonGetState(BUTTONSELECT_T button)
 {
     switch(button)
     {
@@ -47,7 +47,7 @@ BUTTONSTATE_E GetButtonState(BUTTONSELECT_T button)
         __ButtonS1GetState();
         break;
     case BUTTONS2:
-        __GetButtonS2State();
+        __ButtonGetS2State();
         break;
     default:
         break;
@@ -58,7 +58,7 @@ BUTTONSTATE_E GetButtonState(BUTTONSELECT_T button)
  * @param button The button that we want to get the number of presses for
  * @return The number of times the button has been pressed by the user
  */
-int GetButtonNumberOfPresses(BUTTONSELECT_T button)
+int ButtonGetNumberOfPresses(BUTTONSELECT_T button)
 {
     switch(button)
     {
@@ -66,7 +66,7 @@ int GetButtonNumberOfPresses(BUTTONSELECT_T button)
         __ButtonS1GetNumberOfPresses();
         break;
     case BUTTONS2:
-        __GetButtonS2NumberOfPresses();
+        __ButtonGetS2NumberOfPresses();
         break;
     default:
         break;
@@ -76,7 +76,7 @@ int GetButtonNumberOfPresses(BUTTONSELECT_T button)
  * @brief Sets the number of Times The Button has been pressed
  * @param button The button for which we want to set the number of presses
  */
-void SetButtonNumberOfPresses(BUTTONSELECT_T button, int newPresses)
+void ButtonSetNumberOfPresses(BUTTONSELECT_T button, int newPresses)
 {
     switch(button)
     {
@@ -84,7 +84,7 @@ void SetButtonNumberOfPresses(BUTTONSELECT_T button, int newPresses)
         __ButtonS1SetNumberOfPresses(newPresses);
         break;
     case BUTTONS2:
-        __SetButtonS2NumberOfPresses(newPresses);
+        __ButtonSetS2NumberOfPresses(newPresses);
         break;
     default:
         break;

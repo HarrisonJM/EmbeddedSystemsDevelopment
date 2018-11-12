@@ -4,12 +4,13 @@
  * @date 12/11/2018
  */
 
-#include "buttons/private/buttonHandlingUtility.h"
+#include <buttons/buttonHandlingUtility.h>
 
-void EnterButtonS2State(int new_state);
-inline static void HeldEnter();
-inline static void HeldTimer(BUTTONSTATE_E finalState);
+void ButtonEnterS2State(BUTTONSTATE_E newState);
+inline static void ButtonHeldEnter();
+inline static void ButtonHeldTimer(BUTTONSTATE_E finalState);
 inline static void PressTimer(BUTTONSTATE_E finalState);
+inline static void ReleaseTimer();
 
 /* Private */
 static int buttonS2NumberOfPresses;
@@ -22,7 +23,7 @@ static int buttonS2ReleaseTime;
  * @brief Returns the current state to the user
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
-BUTTONSTATE_E __GetButtonS2State()
+BUTTONSTATE_E __ButtonGetS2State()
 {
     return buttonS2State;
 }
@@ -30,18 +31,17 @@ BUTTONSTATE_E __GetButtonS2State()
  * @brief Returns the number of times the button has been pressed
  * @return The number of times the button has been pressed by the user
  */
-int __GetButtonS2NumberOfPresses()
+int __ButtonGetS2NumberOfPresses()
 {
     return buttonS2NumberOfPresses;
 }
 /*!
  * @brief Sets the number of Times The Button has been pressed
  */
-void __SetButtonS2NumberOfPresses(int newPresses)
+void __ButtonSetS2NumberOfPresses(int newPresses)
 {
     buttonS2NumberOfPresses = newPresses;
 }
-
 /* Private Functions */
 /*!
  * @brief Iinitialises our button's variables
@@ -72,14 +72,14 @@ static void ButtonS2PressedTimer()
  */
 static void ButtonS2HeldEnter()
 {
-    HeldEnter();
+    ButtonHeldEnter();
 }
 /*!
  * @brief Handling the button continuing to be held
  */
 static void ButtonS2HeldTimer()
 {
-    HeldTimer(BUTTON_HELD);
+    ButtonHeldTimer(BUTTON_HELD);
 }
 /*!
  * @brief What to do while to button is released
@@ -90,8 +90,29 @@ static void ButtonS2ReleaseTimer()
     {
         if (buttonS2ReleaseTime >= (MINIMUM_BUTTON_INTERACTION_TIME/INTERVAL_BUTTON_HANDLER))
         {
+            ReleaseTimer();
+        }
+    }
+}
+/*!
+ * @brief Handles the precursor semi-released state for button 2
+ */
+static void ButtonS2SemiReleaseTimer()
+{
+    if (ReadButtonS2() == 0)
+    {
+        if (buttonS2ReleaseTime <= (DOUBLE_CLICK_COUNTER/INTERVAL_BUTTON_HANDLER))
+        {
             buttonS2ReleaseTime = 0;
-            buttonS2State = BUTTON_PRESSED;
+            buttonS2State = BUTTON_DOUBLE_CLICK;
+        }
+        else if (buttonS2ReleaseTime >= (MINIMUM_BUTTON_INTERACTION_TIME/INTERVAL_BUTTON_HANDLER))
+        {
+            ReleaseTimer();
+        }
+        else if (buttonS2ReleaseTime > (MINIMUM_BUTTON_INTERACTION_TIME/INTERVAL_BUTTON_HANDLER))
+        {
+            ButtonEnterS2State(BUTTON_RELEASED);
         }
     }
 }
@@ -114,21 +135,21 @@ static void ButtonS2DoubleClickTimer()
  */
 static void ButtonS2DoubleClickHeldEnter()
 {
-    HeldEnter();
+    ButtonHeldEnter();
 }
 /*!
  * @brief Handling the button continuing to be held
  */
 static void ButtonS2DoubleClickHeldTimer()
 {
-    HeldTimer(BUTTON_DOUBLE_CLICK_HELD);
+    ButtonHeldTimer(BUTTON_DOUBLE_CLICK_HELD);
 }
 /*!
  * @brief Enter the new button state
  */
-static void EnterButtonS2State(int new_state)
+static void ButtonEnterS2State(BUTTONSTATE_E newState)
 {
-    switch (new_state)
+    switch (newState)
     {
     case BUTTON_NULL:
         break;
@@ -149,7 +170,7 @@ static void EnterButtonS2State(int new_state)
         break;
     }
 
-    buttonS2State = new_state;
+    buttonS2State = newState;
 }
 
 /*!
@@ -179,10 +200,11 @@ void __ButtonS2Timer()
         break;
     }
 }
+
 /*!
  * @brief Handles entering a Held state
  */
-static inline void HeldEnter()
+static inline void ButtonHeldEnter()
 {
     buttonS2pressTime = 0;
     buttonS2NumberOfPresses++;
@@ -190,20 +212,20 @@ static inline void HeldEnter()
 /*!
  * @brief Generic function for handling all held timers
  */
-static inline void HeldTimer(BUTTONSTATE_E finalState)
+static inline void ButtonHeldTimer(BUTTONSTATE_E finalState)
 {
     buttonS2pressTime++;
     if (ReadButtonS2() != 0)
     {
         // Released
-        EnterButtonS2State(BUTTON_RELEASED);
+        ButtonEnterS2State(BUTTON_RELEASED);
     }
     else
     {
         // Still pressed
         if (buttonS2pressTime >= (BUTTON_HELD_TIME/INTERVAL_BUTTON_HANDLER))
         {
-            EnterButtonS2State(finalState);
+            ButtonEnterS2State(finalState);
         }
     }
 }
@@ -220,14 +242,22 @@ static inline void PressTimer(BUTTONSTATE_E finalState)
         {
             buttonS2NumberOfPresses++;
         }
-        EnterButtonS2State(BUTTON_RELEASED);
+        ButtonEnterS2State(BUTTON_RELEASED);
     }
     else
     {
         // Still pressed
         if (buttonS2pressTime >= (BUTTON_HELD_TIME/INTERVAL_BUTTON_HANDLER))
         {
-            EnterButtonS2State(finalState);
+            ButtonEnterS2State(finalState);
         }
     }
+}
+/*!
+ * @brief Release timer for normal Release
+ */
+inline static void ReleaseTimer()
+{
+    buttonS2ReleaseTime = 0;
+    buttonS2State = BUTTON_PRESSED;
 }
