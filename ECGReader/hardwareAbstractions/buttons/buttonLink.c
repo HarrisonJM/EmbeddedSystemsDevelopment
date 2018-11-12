@@ -8,6 +8,9 @@
 #include "buttonGet.h"
 #include "hardwareAbstractions/I_button.h"
 
+/*!
+ * @brief Assigns the Lowlevel implementations with our higher level abstractions
+ */
 void CreateButtonLinks()
 {
     initButtonHardware = &__initButtonHardware;

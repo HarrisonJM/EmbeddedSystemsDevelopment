@@ -7,10 +7,12 @@
 #ifndef __I_BUTTON_H__
 #define __I_BUTTON_H__
 
+#include <helpers/boollint.h>
+
 extern void CreateButtonLinks();
 
-int (*initButtonHardware)();
-int (*ReadButtonS2)();
-int (*ReadButtonS1)();
+void (*initButtonHardware)();
+bool (*ReadButtonS2)();
+bool (*ReadButtonS1)();
 
 #endif /* __I_BUTTON_H__ */
