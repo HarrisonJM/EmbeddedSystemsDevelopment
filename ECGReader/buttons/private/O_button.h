@@ -8,12 +8,13 @@
 #define __O_BUTTON_H__
 
 #include "../../helpers/boollint.h"
+#include "../buttonHandlingUtility.h"
 
 typedef struct Button
 {
     bool (*ReadButton)();
     int buttonNumberOfPresses;
-    int buttonState;
+    BUTTONSTATE_E buttonState;
     int buttonpressTime;
     int buttonReleaseTime;
 

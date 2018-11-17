@@ -8,7 +8,7 @@
 #include "hardwareAbstractions/I_button.h"
 #include "O_button.h"
 
-static void ButtonEnterState(ButtonStore_t* buttonStore, int new_state);
+static void ButtonEnterState(ButtonStore_t* buttonStore, int newState);
 inline static void HeldEnter(ButtonStore_t* buttonStore);
 inline static void HeldTimer(ButtonStore_t* buttonStore, BUTTONSTATE_E finalState);
 inline static void PressTimer(ButtonStore_t* buttonStore, BUTTONSTATE_E finalState);
@@ -17,6 +17,7 @@ inline static void ReleaseTimer(ButtonStore_t* buttonStore);
 /* Mutators/Accessors */
 /*!
  * @brief Returns the current state to the user
+ * @param buttonStore A pointer to the button struct
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
 BUTTONSTATE_E __ButtonGetState(ButtonStore_t* buttonStore)
@@ -25,6 +26,7 @@ BUTTONSTATE_E __ButtonGetState(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Returns the number of times the button has been pressed
+ * @param buttonStore A pointer to the button struct
  * @return The number of times the button has been pressed by the user
  */
 int __ButtonGetNumberOfPresses(ButtonStore_t* buttonStore)
@@ -33,6 +35,11 @@ int __ButtonGetNumberOfPresses(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Sets the number of Times The Button has been pressed
+ *
+ * Should only really be used for decrementing the button presses when performing some function
+ *
+ * @param buttonStore A pointer to the button struct
+ * @param newPresses The new number of presses
  */
 void __ButtonSetNumberOfPresses(ButtonStore_t* buttonStore, int newPresses)
 {
@@ -42,7 +49,8 @@ void __ButtonSetNumberOfPresses(ButtonStore_t* buttonStore, int newPresses)
 
 /* Functions */
 /*!
- * @brief Iinitialises our button's variables
+ * @brief Initialises our button's variables
+ * @param buttonStore A pointer to the button struct
  */
 void ButtonInitHandler(ButtonStore_t* buttonStore)
 {
@@ -53,6 +61,7 @@ void ButtonInitHandler(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Resets the pressed timer
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonPressedEnter(ButtonStore_t* buttonStore)
 {
@@ -60,6 +69,7 @@ static void ButtonPressedEnter(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Measures the amount of time the button is pressed. Handles debouncing
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonPressedTimer(ButtonStore_t* buttonStore)
 {
@@ -67,6 +77,7 @@ static void ButtonPressedTimer(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief How to handle the held state start
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonHeldEnter(ButtonStore_t* buttonStore)
 {
@@ -74,6 +85,7 @@ static void ButtonHeldEnter(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Handling the button continuing to be held
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonHeldTimer(ButtonStore_t* buttonStore)
 {
@@ -81,6 +93,7 @@ static void ButtonHeldTimer(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief What to do while to button is released
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonReleaseTimer(ButtonStore_t* buttonStore)
 {
@@ -94,6 +107,7 @@ static void ButtonReleaseTimer(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Handles timing for the semi-released state
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonSemiReleaseTimer(ButtonStore_t* buttonStore)
 {
@@ -116,6 +130,7 @@ static void ButtonSemiReleaseTimer(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Handles A double Click
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonDoubleClickEnter(ButtonStore_t* buttonStore)
 {
@@ -123,6 +138,7 @@ static void ButtonDoubleClickEnter(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Handles the "double click" state
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonDoubleClickTimer(ButtonStore_t* buttonStore)
 {
@@ -130,6 +146,7 @@ static void ButtonDoubleClickTimer(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Handles a "double click" held state
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonDoubleClickHeldEnter(ButtonStore_t* buttonStore)
 {
@@ -137,6 +154,7 @@ static void ButtonDoubleClickHeldEnter(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Handles the "double click held event"
+ * @param buttonStore A pointer to the button struct
  */
 static void ButtonDoubleClickHeldTimer(ButtonStore_t* buttonStore)
 {
@@ -144,10 +162,12 @@ static void ButtonDoubleClickHeldTimer(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Enter the new button state
+ * @param buttonStore Pointer to the button struct
+ * @param newState The new state the button will take
  */
-static void ButtonEnterState(ButtonStore_t* buttonStore, int new_state)
+static void ButtonEnterState(ButtonStore_t* buttonStore, int newState)
 {
-    switch (new_state)
+    switch (newState)
     {
     case BUTTON_NULL:
         break;
@@ -169,10 +189,11 @@ static void ButtonEnterState(ButtonStore_t* buttonStore, int new_state)
         break;
     }
 
-    buttonStore->buttonState = new_state;
+    buttonStore->buttonState = newState;
 }
 /*!
- * @brief handle the continuation of a state
+ * @brief Handle the continuation of a state
+ * @param buttonStore A pointer to the button struct
  */
 void __ButtonTimer(ButtonStore_t* buttonStore)
 {
@@ -202,6 +223,7 @@ void __ButtonTimer(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Handles entering a Held state
+ * @param buttonStore A pointer to the button struct
  */
 static inline void HeldEnter(ButtonStore_t* buttonStore)
 {
@@ -210,6 +232,8 @@ static inline void HeldEnter(ButtonStore_t* buttonStore)
 }
 /*!
  * @brief Generic function for handling all held timers
+ * @param buttonStore A pointer to the button struct
+ * @param finalState What the final state will be
  */
 static inline void HeldTimer(ButtonStore_t* buttonStore, BUTTONSTATE_E finalState)
 {
@@ -230,6 +254,8 @@ static inline void HeldTimer(ButtonStore_t* buttonStore, BUTTONSTATE_E finalStat
 }
 /*!
  * @brief Generic handler for "pressed" states
+ * @param buttonStore Pointer to button struct
+ * @param finalState The final state the button will take
  */
 static inline void PressTimer(ButtonStore_t* buttonStore, BUTTONSTATE_E finalState)
 {
@@ -255,6 +281,7 @@ static inline void PressTimer(ButtonStore_t* buttonStore, BUTTONSTATE_E finalSta
 }
 /*!
  * @brief Release timer for normal Release
+ * @param buttonStore Pointer to button struct
  */
 inline static void ReleaseTimer(ButtonStore_t* buttonStore)
 {

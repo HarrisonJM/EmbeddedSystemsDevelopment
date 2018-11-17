@@ -4,9 +4,9 @@
  * @date 12/11/2018
  */
 
-#include <buttons/buttonHandlingUtility.h>
+#include "../buttonHandlingUtility.h"
 
-#include "private/O_button.h"
+#include "O_button.h"
 
 static ButtonStore_t S1;
 static ButtonStore_t S2;
