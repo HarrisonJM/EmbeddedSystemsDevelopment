@@ -45,8 +45,6 @@ void __ButtonSetNumberOfPresses(ButtonStore_t* buttonStore, int newPresses)
 {
     buttonStore->buttonNumberOfPresses = newPresses;
 }
-
-
 /* Functions */
 /*!
  * @brief Initialises our button's variables

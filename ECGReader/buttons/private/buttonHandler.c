@@ -14,14 +14,13 @@ static ButtonStore_t S2;
 /*!
  * @brief Initialises Handler variables
  */
-void ButtonInitHandler()
+void ButtonInitHandlerBothButtons()
 {
     ButtonS1Init(&S1);
     ButtonS2Init(&S2);
     ButtonInitHandler(&S1);
     ButtonInitHandler(&S2);
 }
-
 /*!
  * @brief handle the continuation of a state
  * @param button The button timer we wish to use
@@ -47,17 +46,20 @@ void ButtonTimer(BUTTONSELECT_T button)
  */
 BUTTONSTATE_E ButtonGetState(BUTTONSELECT_T button)
 {
+    BUTTONSTATE_E state = BUTTON_NULL;
     switch(button)
     {
     case BUTTONS1:
-        __ButtonGetState(&S1);
+        state  = __ButtonGetState(&S1);
         break;
     case BUTTONS2:
-        __ButtonGetState(&S2);
+        state  = __ButtonGetState(&S2);
         break;
     default:
         break;
     }
+
+    return state;
 }
 /*!
  * @brief Returns the number of times the button has been pressed
@@ -66,17 +68,20 @@ BUTTONSTATE_E ButtonGetState(BUTTONSELECT_T button)
  */
 int ButtonGetNumberOfPresses(BUTTONSELECT_T button)
 {
+    int buttonPressNum = 0;
     switch(button)
     {
     case BUTTONS1:
-        __ButtonGetNumberOfPresses(&S1);
+        buttonPressNum = __ButtonGetNumberOfPresses(&S1);
         break;
     case BUTTONS2:
-        __ButtonGetNumberOfPresses(&S2);
+        buttonPressNum = __ButtonGetNumberOfPresses(&S2);
         break;
     default:
         break;
     }
+
+    return buttonPressNum;
 }
 /*!
  * @brief Sets the number of Times The Button has been pressed
