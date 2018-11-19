@@ -44,8 +44,9 @@ int MenuDisplaySelected(int position)
  */
 int MenuDisplay(const char **menuOptions, int menuSize)
 {
-	int position = 0;	
-	for(int i = 0; i < menuSize; i++)
+	int position = 0;
+	int i;
+	for(i = 0; i < menuSize; i++)
 	{
 		/*printf("%s\n", menuOptions[i]);*/
 	}
@@ -81,8 +82,8 @@ int MenuLoad(char option[])
 /*!
  * @brief load default menu option (main menu)
  */
-int main()
+/*int MenuInit()
 {
 	MenuLoad("main");
 	return 0;
-}
+}*/
