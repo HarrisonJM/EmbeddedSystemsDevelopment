@@ -26,7 +26,12 @@ Jesse:		Acceptance Tests for Menu
 		Low Level Software Design for Data Handling
 
 
-Dan:
+Dan:		Acceptance tests: Interfacing Between Devices
+		Low level design: Interfacing between Devices	
+		Acceptance tests: Database
+		Low level design: Database
+
+
 
 
 Team Effort: 	Initial requirements
