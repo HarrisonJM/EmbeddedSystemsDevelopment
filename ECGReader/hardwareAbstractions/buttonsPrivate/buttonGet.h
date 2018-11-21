@@ -5,7 +5,10 @@
 #ifndef __BUTTON_GET_H__
 #define __BUTTON_GET_H__
 
-#include <helpers/boollint.h>
+#include <msp430.h>
+
+#include <hardwareAbstractions/buttonsPrivate/buttonGet.h>
+#include "../../helpers/boollint.h"
 
 void __initButtonHardware();
 bool __ReadButtonS2();

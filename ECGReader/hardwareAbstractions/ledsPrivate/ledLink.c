@@ -4,11 +4,12 @@
  * @date 12/11/2018
  */
 
+#include <hardwareAbstractions/ledsPrivate/ledUse.h>
 #include "hardwareAbstractions/I_led.h"
-#include "ledUse.h"
 
 void CreateLEDLinks()
 {
+    LEDHardwareInit = &__LEDHardwareInit;
     LEDOnGreen = &__LEDGreenOn;
     LEDOffGreen = &__LEDGreenOff;
     LEDToggleGreen = &__LEDGreenToggle;

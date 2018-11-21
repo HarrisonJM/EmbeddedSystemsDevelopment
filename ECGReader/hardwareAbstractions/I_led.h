@@ -9,6 +9,7 @@
 
 extern void CreateLEDLinks();
 
+void (*LEDHardwareInit)();
 void (*LEDOnGreen)();
 void (*LEDOffGreen)();
 void (*LEDToggleGreen)();
