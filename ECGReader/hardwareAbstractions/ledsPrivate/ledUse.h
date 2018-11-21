@@ -6,6 +6,10 @@
 #define __LED_USE_H__
 
 /*!
+ * @brief inits the LEDs
+ */
+void __LEDHardwareInit();
+/*!
  * @brief Toggles the red LED
  */
 void __LEDRedToggle();

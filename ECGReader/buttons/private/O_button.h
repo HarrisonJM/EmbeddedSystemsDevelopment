@@ -20,7 +20,7 @@ typedef struct Button
 
 } ButtonStore_t;
 
-void ButtonS1init(ButtonStore_t* S1);
-void ButtonS2init(ButtonStore_t* S2);
+void ButtonS1Init(ButtonStore_t* S1);
+void ButtonS2Init(ButtonStore_t* S2);
 
 #endif /* __O_BUTTON_H__ */

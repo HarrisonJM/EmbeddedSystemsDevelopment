@@ -5,11 +5,11 @@
  * @date 9 Nov 18
  */
 
-#include "buttonGet.h"
+#include <hardwareAbstractions/buttonsPrivate/buttonGet.h>
 #include "hardwareAbstractions/I_button.h"
 
 /*!
- * @brief Assigns the Lowlevel implementations with our higher level abstractions
+ * @brief Assigns the low-level implementations with our higher level abstractions
  */
 void CreateButtonLinks()
 {
