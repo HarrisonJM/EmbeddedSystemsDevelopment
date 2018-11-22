@@ -22,7 +22,10 @@ Harrison:	Requirements tidy up and codification
 
 Jesse:		Acceptance Tests for Menu
 		Acceptance Tests for Data Handling
-		Low Level Software Design for Menu
+		Low Level Software Design for Main Menu
+		Low Level Software Design for Options Menu
+		Low Level Software Design for ECG Activity
+		Low Level Software Design for User Data Menu
 		Low Level Software Design for Data Handling
 
 
