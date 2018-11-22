@@ -7,6 +7,14 @@
 #include <msp430.h>
 
 /*!
+ * @brief Inits the LED hardware
+ */
+void __LEDHardwareInit()
+{
+    P1DIR |= 0X01; /* green */
+    P4DIR |= 0x20; /* red */
+}
+/*!
  * @brief Toggles the red LED
  */
 void __LEDRedToggle()

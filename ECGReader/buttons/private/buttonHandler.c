@@ -4,9 +4,9 @@
  * @date 12/11/2018
  */
 
-#include "../buttonHandlingUtility.h"
-
 #include "O_button.h"
+#include "../buttonHandlingUtility.h"
+#include "ButtonGenericHandler.h"
 
 static ButtonStore_t S1;
 static ButtonStore_t S2;
@@ -27,7 +27,7 @@ void ButtonInitHandlerBothButtons()
  */
 void ButtonTimer(BUTTONSELECT_T button)
 {
-    switch(button)
+    switch (button)
     {
     case BUTTONS1:
         __ButtonTimer(&S1);
@@ -44,16 +44,16 @@ void ButtonTimer(BUTTONSELECT_T button)
  * @param button The button state we wish to get
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
-BUTTONSTATE_E ButtonGetState(BUTTONSELECT_T button)
+BUTTONSTATE_E ButtonGetState(const BUTTONSELECT_T button)
 {
     BUTTONSTATE_E state = BUTTON_NULL;
-    switch(button)
+    switch (button)
     {
     case BUTTONS1:
-        state  = __ButtonGetState(&S1);
+        state = __ButtonGetState(&S1);
         break;
     case BUTTONS2:
-        state  = __ButtonGetState(&S2);
+        state = __ButtonGetState(&S2);
         break;
     default:
         break;
@@ -66,10 +66,10 @@ BUTTONSTATE_E ButtonGetState(BUTTONSELECT_T button)
  * @param button The button that we want to get the number of presses for
  * @return The number of times the button has been pressed by the user
  */
-int ButtonGetNumberOfPresses(BUTTONSELECT_T button)
+int ButtonGetNumberOfPresses(const BUTTONSELECT_T button)
 {
     int buttonPressNum = 0;
-    switch(button)
+    switch (button)
     {
     case BUTTONS1:
         buttonPressNum = __ButtonGetNumberOfPresses(&S1);
@@ -87,9 +87,10 @@ int ButtonGetNumberOfPresses(BUTTONSELECT_T button)
  * @brief Sets the number of Times The Button has been pressed
  * @param button The button for which we want to set the number of presses
  */
-void ButtonSetNumberOfPresses(BUTTONSELECT_T button, int newPresses)
+void ButtonSetNumberOfPresses(const BUTTONSELECT_T button,
+                              const int newPresses)
 {
-    switch(button)
+    switch (button)
     {
     case BUTTONS1:
         __ButtonSetNumberOfPresses(&S1, newPresses);
