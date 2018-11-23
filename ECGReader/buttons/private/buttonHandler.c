@@ -44,9 +44,9 @@ void ButtonTimer(BUTTONSELECT_T button)
  * @param button The button state we wish to get
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
-BUTTONSTATE_E ButtonGetState(const BUTTONSELECT_T button)
+int ButtonGetState(const BUTTONSELECT_T button)
 {
-    BUTTONSTATE_E state = BUTTON_NULL;
+    int state = BUTTON_NULL;
     switch (button)
     {
     case BUTTONS1:
@@ -86,6 +86,7 @@ int ButtonGetNumberOfPresses(const BUTTONSELECT_T button)
 /*!
  * @brief Sets the number of Times The Button has been pressed
  * @param button The button for which we want to set the number of presses
+ * @param newPresses The value for the new number of presses the button should take
  */
 void ButtonSetNumberOfPresses(const BUTTONSELECT_T button,
                               const int newPresses)

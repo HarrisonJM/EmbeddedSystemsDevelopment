@@ -10,6 +10,11 @@
 #include "../../helpers/boollint.h"
 #include "../buttonHandlingUtility.h"
 
+/*!
+ * @brief the button store object
+ * This struct is used to track each button's state
+ * across the same functions, limiting the number of handlers we need
+ */
 typedef struct Button
 {
     bool (*ReadButton)();

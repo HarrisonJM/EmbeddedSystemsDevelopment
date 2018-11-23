@@ -1,5 +1,5 @@
 /*!
- * @brief LED Link header for function pointers
+ * @brief LED functions for using the LEDs
  * @author Harrison J Marcks
  * @date 12/11/18
  */

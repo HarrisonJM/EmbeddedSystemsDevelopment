@@ -10,6 +10,6 @@
 
 extern volatile int timerAdcReading;
 
-void initTimer(void);
+void __TimerInit(void);
 
 #endif /* TIMER_H_ */

@@ -8,21 +8,15 @@
 #include "hardwareAbstractions/I_button.h"
 #include "O_button.h"
 
-#define INTERVAL_BUTTON_HANDLER 10
-#define BUTTON_PRESS_TIME 100
-#define BUTTON_HELD_TIME 200
-#define DOUBLE_CLICK_COUNTER 50
+#define INTERVAL_BUTTON_HANDLER 10 /* Divide by for interval in timer */
+#define BUTTON_PRESS_TIME 100 /* The amount of time before a press is registered */
+#define BUTTON_HELD_TIME 200 /*  The amount of time before a hold is registered */
 
+#define DOUBLE_CLICK_COUNTER 100 /* Used to measure the time inbetween button releases */
+
+/* Prototype for common function */
 static void ButtonEnterState(ButtonStore_t* buttonStore,
                              const BUTTONSTATE_E newState);
-//inline static void HeldEnter(ButtonStore_t* buttonStore);
-//inline static void HeldTimer(ButtonStore_t* buttonStore,
-//                             const BUTTONSTATE_E finalState);
-//inline static void PressTimer(ButtonStore_t* buttonStore,
-//                              const BUTTONSTATE_E finalState);
-//inline static void ReleaseTimer(ButtonStore_t* buttonStore);
-
-/* Mutators/Accessors */
 /*!
  * @brief Returns the current state to the user
  * @param buttonStore A pointer to the button struct
@@ -81,9 +75,9 @@ static void ButtonPressedEnter(ButtonStore_t* buttonStore)
 static void ButtonPressedTimer(ButtonStore_t* buttonStore)
 {
     buttonStore->buttonpressTime++;
-    if (buttonStore->ReadButton != 0)
+    if (buttonStore->ReadButton() != 0)
     {
-        // Released
+        /* Released */
         if (buttonStore->buttonpressTime >= (BUTTON_PRESS_TIME/INTERVAL_BUTTON_HANDLER))
         {
             buttonStore->buttonNumberOfPresses++;
@@ -92,7 +86,7 @@ static void ButtonPressedTimer(ButtonStore_t* buttonStore)
     }
     else
     {
-        // Still pressed
+        /* Still pressed */
         if (buttonStore->buttonpressTime >= (BUTTON_HELD_TIME/INTERVAL_BUTTON_HANDLER))
         {
             ButtonEnterState(buttonStore, BUTTON_HELD);
@@ -116,14 +110,14 @@ static void ButtonHeldTimer(ButtonStore_t* buttonStore)
 {
     buttonStore->buttonpressTime++;
 
-    if (buttonStore->ReadButton != 0)
+    if (buttonStore->ReadButton() != 0)
     {
-        // Released
+        /* Released */
         ButtonEnterState(buttonStore, BUTTON_RELEASED);
     }
     else
     {
-        // Still pressed
+        /* Still pressed */
         if (buttonStore->buttonpressTime >= (BUTTON_HELD_TIME/INTERVAL_BUTTON_HANDLER))
         {
             ButtonEnterState(buttonStore, BUTTON_HELD);
@@ -136,9 +130,9 @@ static void ButtonHeldTimer(ButtonStore_t* buttonStore)
  */
 static void ButtonReleaseTimer(ButtonStore_t* buttonStore)
 {
-    if (buttonStore->ReadButton == 0)
+    if (buttonStore->ReadButton() == 0)
     {
-        // Pressed
+        /* Pressed */
         ButtonEnterState(buttonStore, BUTTON_PRESSED);
     }
 }
@@ -168,6 +162,7 @@ static void ButtonEnterState(ButtonStore_t* buttonStore,
         break;
     }
 
+    /* Set new state */
     buttonStore->buttonState = newState;
 }
 /*!

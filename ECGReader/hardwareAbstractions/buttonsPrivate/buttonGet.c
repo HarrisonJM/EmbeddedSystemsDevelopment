@@ -3,9 +3,9 @@
  * @author Harrison J Marcks
  * @date 8 Nov 2018
  */
-#include <hardwareAbstractions/buttonsPrivate/buttonGet.h>
 #include <msp430.h>
 
+#include "helpers/boollint.h"
 /*!
  * @brief Initialises the button hardware
  */
