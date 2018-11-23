@@ -1,0 +1,851 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 1.6.1
+% see http://writer2latex.sourceforge.net for more info
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,textcomp}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{array}
+\usepackage{supertabular}
+\usepackage{hhline}
+\usepackage{hyperref}
+\hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=, pdfauthor=Harrison Marcks, pdfsubject=, pdfkeywords=}
+% Outline numbering
+\setcounter{secnumdepth}{0}
+\makeatletter
+\newcommand\arraybslash{\let\\\@arraycr}
+\makeatother
+% Page layout (geometry)
+\setlength\voffset{-1in}
+\setlength\hoffset{-1in}
+\setlength\topmargin{1.251cm}
+\setlength\oddsidemargin{2cm}
+\setlength\textheight{24.65cm}
+\setlength\textwidth{17.001cm}
+\setlength\footskip{0.901cm}
+\setlength\headheight{0.75cm}
+\setlength\headsep{0.649cm}
+% Footnote rule
+\setlength{\skip\footins}{0.119cm}
+\renewcommand\footnoterule{\vspace*{-0.018cm}\setlength\leftskip{0pt}\setlength\rightskip{0pt plus 1fil}\noindent\textcolor{black}{\rule{0.25\columnwidth}{0.018cm}}\vspace*{0.101cm}}
+% Pages styles
+\makeatletter
+\newcommand\ps@Standard{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\makeatother
+\pagestyle{Standard}
+\setlength\tabcolsep{1mm}
+\renewcommand\arraystretch{1.3}
+\title{}
+\author{Harrison Marcks}
+\date{2018-10-19}
+\begin{document}
+\clearpage\setcounter{page}{1}\pagestyle{Standard}
+\section{Requirements}
+{\selectlanguage{english}
+Key: POST/Power on = P, \textbf{Ease Of Use = E,} Interfacing Between Devices = I, \textbf{Menu = M, }Data Handling,
+\textbf{Database = DB, }Human Interface = H, \textbf{ECG = EL, }Screen = S, \textbf{Sphygmomanometer = B}}
+
+
+\bigskip
+
+{\selectlanguage{english}
+\textbf{Key: }S = Show Stopper, \textbf{C = Critical, }M = Major, \textbf{N= Normal}, T = Trivial}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{0.14400001cm}m{2.804cm}|m{2.414cm}|m{2.271cm}|m{2.388cm}|}
+\hline
+{\selectlanguage{english}\bfseries ID} &
+\multicolumn{2}{m{3.492cm}|}{{\selectlanguage{english}\bfseries SUMMARY OF REQUIREMENT}
+
+{\selectlanguage{english}\bfseries (I WANT TO)}
+
+~
+
+~
+} &
+{\selectlanguage{english}\bfseries RATIONALE }
+
+{\selectlanguage{english}\bfseries (SO THAT I CAN)}
+
+~
+ &
+{\selectlanguage{english}\bfseries PRIORITY} &
+{\selectlanguage{english}\bfseries SOURCE} &
+{\selectlanguage{english}\bfseries CREATED}\\\hline
+\multicolumn{7}{|m{15.97cm}|}{{\selectlanguage{english}\bfseries POST/Power on}}\\\hline
+{\selectlanguage{english}\bfseries P1} &
+{\selectlanguage{english} Be able to test the memory} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} Verify the board will work correctly}} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries P2} &
+{\selectlanguage{english} Be able to test the screen} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} Verify the screen will display correctly}} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries P3} &
+{\selectlanguage{english} Be able to test the CPU (Jump instructions)} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} Verify the board will work correctly}} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries P4} &
+{\selectlanguage{english} Be able to test the power} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} Verify the board will work correctly}} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries P5} &
+{\selectlanguage{english} Be able to test ROM} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} Verify the board will work correctly}} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries P6} &
+{\selectlanguage{english} Be able to perform POST/Power on the device} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} So the board can actually be used and boot up}} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries P7} &
+{\selectlanguage{english} Be able to check buttons} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} So that the buttons can be used}} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries P8} &
+{\selectlanguage{english} Check network interface} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} So that we can wired devices}} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}
+
+~
+\\\hline
+{\selectlanguage{english}\bfseries P9} &
+{\selectlanguage{english} Check blue tooth module} &
+\multicolumn{2}{m{3.148cm}|}{{\selectlanguage{english} So that we can connect devices}} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+~
+ &
+~
+ &
+\multicolumn{2}{m{3.148cm}|}{~
+} &
+~
+ &
+~
+ &
+~
+\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Ease Of Use}}\\\hline
+{\selectlanguage{english}\bfseries E1} &
+{\selectlanguage{english} Be able to use the device within 2 minutes} &
+{\selectlanguage{english} So that the user can get a reading as soon as possible} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E2} &
+{\selectlanguage{english} Not charge it very often} &
+{\selectlanguage{english} Not have to worry too often} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E3} &
+{\selectlanguage{english} Power it via USB} &
+{\selectlanguage{english} A special cable is not needed} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E4} &
+{\selectlanguage{english} Be able to take it with me} &
+{\selectlanguage{english} Take a reading whenever} &
+{\selectlanguage{english} C} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E5} &
+{\selectlanguage{english} Be able to view results on a screen} &
+{\selectlanguage{english} Give the readings meaning in the moment} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E6} &
+{\selectlanguage{english} Be able to adjust screen brightness} &
+{\selectlanguage{english} Have a more comfortable viewing experience} &
+{\selectlanguage{english} C} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E7} &
+{\selectlanguage{english} Be able to adjust the text size} &
+{\selectlanguage{english} I can read the words incase they're too small} &
+{\selectlanguage{english} C} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E8} &
+{\selectlanguage{english} Be able to improve accessibility for visually impaired} &
+{\selectlanguage{english} More people have access to the device} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries E9} &
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+\\\hline
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Interfacing Between Devices}}\\\hline
+{\selectlanguage{english}\bfseries I1} &
+{\selectlanguage{english} Be able to interface with a computer via USB} &
+{\selectlanguage{english} I can download past results} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries I2} &
+{\selectlanguage{english} Be able to interface with a computer via blue tooth} &
+{\selectlanguage{english} I can download past results if I don't have a cable} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries I3} &
+{\selectlanguage{english} Be able to interface with the board via wifi} &
+{\selectlanguage{english} I can gather results without a cable} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries I4} &
+{\selectlanguage{english} Be able to interface with the board via ethernet} &
+{\selectlanguage{english} I can gather results remotely} &
+{\selectlanguage{english} C} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries I5} &
+{\selectlanguage{english} Be able to receive results via text} &
+{\selectlanguage{english} I can immediately alert a Dr. or family member } &
+{\selectlanguage{english} D} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries I6} &
+{\selectlanguage{english} Be able to interface with a remote database} &
+{\selectlanguage{english} I can save results to something else} &
+{\selectlanguage{english} C} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries I7} &
+{\selectlanguage{english} Be able to interface a local database} &
+{\selectlanguage{english} I can save results from previous tests} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Menu}}\\\hline
+{\selectlanguage{english}\bfseries M1} &
+{\selectlanguage{english} Navigate a menu} &
+{\selectlanguage{english} Select different options} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries M2} &
+{\selectlanguage{english} Select a menu option} &
+{\selectlanguage{english} My navigation has meaning} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries M3} &
+{\selectlanguage{english} Return to Menu} &
+{\selectlanguage{english} I can select something else} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries M4} &
+{\selectlanguage{english} Select the ECG from the menu} &
+{\selectlanguage{english} I can take a reading} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries M5} &
+{\selectlanguage{english} Select User options from the menu} &
+{\selectlanguage{english} I can configure user profiles} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries M6} &
+{\selectlanguage{english} Select Historical ECG readings} &
+{\selectlanguage{english} I can view old readings} &
+{\selectlanguage{english} C} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries M7} &
+{\selectlanguage{english} Reboot the board} &
+{\selectlanguage{english} I can perform more controlled maintenance and fixing} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries M8} &
+{\selectlanguage{english} Have an Options option} &
+{\selectlanguage{english} I can edit options} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Data Handling}}\\\hline
+{\selectlanguage{english}\bfseries D1} &
+{\selectlanguage{english} Record readings to a file} &
+{\selectlanguage{english} I can export the file} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries D2 } &
+{\selectlanguage{english} Record readings to a human readable format} &
+{\selectlanguage{english} I can view the readings} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries D3} &
+{\selectlanguage{english} Be able to store data} &
+{\selectlanguage{english} I can store data for later} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Database}}\\\hline
+{\selectlanguage{english}\bfseries DB1} &
+{\selectlanguage{english} Load data from a database} &
+{\selectlanguage{english} Store a data for querying} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries DB2} &
+{\selectlanguage{english} Commit data to a database} &
+{\selectlanguage{english} Data can later be queried} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries DB3} &
+{\selectlanguage{english} Store user data in database} &
+{\selectlanguage{english} Multiple users can be stored} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries DB4} &
+{\selectlanguage{english} Load user data from the database} &
+{\selectlanguage{english} Different user data can be loaded} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries DB5} &
+{\selectlanguage{english} Keep track of previous readings} &
+{\selectlanguage{english} Keep a record of previous readings} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Human Interface}}\\\hline
+{\selectlanguage{english}\bfseries H1} &
+{\selectlanguage{english} Perform a button press} &
+{\selectlanguage{english} I can interact with the device} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H2} &
+{\selectlanguage{english} Perform a button double click} &
+{\selectlanguage{english} I can interact with the device} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H3} &
+{\selectlanguage{english} Perform a long button press} &
+{\selectlanguage{english} I can interact with the device} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H4} &
+{\selectlanguage{english} Perform a multi-button press} &
+{\selectlanguage{english} I can interact with the device} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H5} &
+{\selectlanguage{english} Use the slider} &
+{\selectlanguage{english} I can interact with the device} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H6} &
+{\selectlanguage{english} View feedback on the screen} &
+{\selectlanguage{english} I can interact with the device} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H7} &
+{\selectlanguage{english} Enter user information} &
+{\selectlanguage{english} I can have multiple profiles} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H8} &
+{\selectlanguage{english} Change scale of ECG using slider} &
+{\selectlanguage{english} I can view more precise readings} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 17/10/2018}\\\hline
+{\selectlanguage{english}\bfseries H9} &
+{\selectlanguage{english} Change the scale of the UI using the slider} &
+{\selectlanguage{english} I can enlarge the words on screen} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 17/10/2018}\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Screen}}\\\hline
+{\selectlanguage{english}\bfseries S1} &
+{\selectlanguage{english} Display heartrate} &
+{\selectlanguage{english} See the heart rate immediately} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries S2} &
+{\selectlanguage{english} Show all available data on the screen} &
+{\selectlanguage{english} The screen real estate is used effectively} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries S3} &
+{\selectlanguage{english} Display heartrate in realtime} &
+{\selectlanguage{english} See readings are relevant} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries S4} &
+{\selectlanguage{english} Display multiple ECG readings} &
+{\selectlanguage{english} Compare previous readings} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries S5} &
+{\selectlanguage{english} Display a menu} &
+{\selectlanguage{english} Select different menu options} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+ &
+~
+\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries ECG}}\\\hline
+{\selectlanguage{english}\bfseries EL1} &
+{\selectlanguage{english} Measure a user's heart rate} &
+{\selectlanguage{english} Measure a user's heartrate} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries EL2} &
+{\selectlanguage{english} Send ECG readings to screen} &
+{\selectlanguage{english} View a user's heart rate} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries EL3} &
+{\selectlanguage{english} Read data from all the electrodes} &
+{\selectlanguage{english} So that readings can be gathered} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries EL4} &
+{\selectlanguage{english} Adjust sensitivity based on age} &
+{\selectlanguage{english} Readings can be more precise based on the type of user} &
+{\selectlanguage{english} B} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries EL5} &
+{\selectlanguage{english} Filter out interference} &
+{\selectlanguage{english} The readings aren't skewed} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+{\selectlanguage{english}\bfseries EL6} &
+{\selectlanguage{english} Measure heartrate in real time} &
+{\selectlanguage{english} Viewable readings are relevant} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 04/10/2018}\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{1.601cm}|m{3.148cm}|m{3.146cm}|m{2.414cm}|m{2.271cm}|m{2.389cm}|}
+\hline
+\multicolumn{6}{|m{15.969001cm}|}{{\selectlanguage{english}\bfseries Sphygmomanometer}}\\\hline
+{\selectlanguage{english}\bfseries B1} &
+{\selectlanguage{english} Measure a user's blood pressure} &
+{\selectlanguage{english} Take readings and make medical judgements} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 15/10/2018}\\\hline
+{\selectlanguage{english}\bfseries B2} &
+{\selectlanguage{english} Send BP readings to screen} &
+{\selectlanguage{english} View a user's blood pressure} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 15/10/2018}\\\hline
+{\selectlanguage{english}\bfseries B3} &
+{\selectlanguage{english} Read data from the reader} &
+{\selectlanguage{english} So that readings can be gathered} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 17/10/2018}\\\hline
+{\selectlanguage{english}\bfseries B4} &
+{\selectlanguage{english} Take average blood pressure } &
+{\selectlanguage{english} Have better results} &
+{\selectlanguage{english} A} &
+~
+ &
+{\selectlanguage{english} 17/10/2018}\\\hline
+{\selectlanguage{english}\bfseries B5} &
+{\selectlanguage{english} Filter out erroneous readings and data} &
+{\selectlanguage{english} Have more accurate results} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 17/10/2018}\\\hline
+{\selectlanguage{english}\bfseries B6} &
+{\selectlanguage{english} Measure blood pressure in real time} &
+{\selectlanguage{english} Read more relevant ratings } &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 17/10/2018}\\\hline
+{\selectlanguage{english}\bfseries B7} &
+{\selectlanguage{english}ETC } &
+{\selectlanguage{english} ETC} &
+{\selectlanguage{english} S} &
+~
+ &
+{\selectlanguage{english} 19/10/2018}\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablefirsthead{\hline
+{\bfseries\color{black} REQUIREMENT NUMBER} &
+{\bfseries\color{black} REQUIREMENT DESCRIPTION}\\}
+\tablehead{\hline
+{\bfseries\color{black} REQUIREMENT NUMBER} &
+{\bfseries\color{black} REQUIREMENT DESCRIPTION}\\}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|m{2.8899999cm}|m{8.253cm}|}
+\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{1}}} &
+{\color{black} Be able to power up}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{2}}} &
+{\color{black} Ready to use within x amount of minutes}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{3}}} &
+{\color{black} Be low power (via USB)}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{4}}} &
+{\color{black} Be able to measure heart rate}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{5}}} &
+{\color{black} Be able to display heart rate}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{6}}} &
+{\color{black} Be able to store data}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{7}}} &
+{\color{black} Format said data into readable format}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{8}}} &
+{\color{black} Accept input from electrode sensors simultaneously}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{9}}} &
+{\color{black} Adjust sensitivity based on user's age}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{10}}} &
+{\color{black} Be portable}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{11}}} &
+{\color{black} Can interface with a PC}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{12}}} &
+{\color{black} Take in user data }\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{13}}} &
+{\color{black} Export formatted data (to document)}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{14}}} &
+{\color{black} do POST (power on self test, check is working)}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{15}}} &
+{\color{black} check ROM}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{16}}} &
+{\color{black} check RAM}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{17}}} &
+{\color{black} check CPU (instructions)}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{18}}} &
+{\color{black} be able to record enough data to fill the screen}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{19}}} &
+{\color{black} have a screen}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{20}}} &
+{\color{black} check buttons}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{21}}} &
+{\color{black} menu navigation}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{22}}} &
+{\color{black} exploit various button states (its free real estate)}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{23}}} &
+{\color{black} store multiple past readings}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{24}}} &
+{\color{black} display more than one ECG reading for comparison}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{25}}} &
+{\color{black} display current heart rate while in use}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{26}}} &
+{\color{black} networking}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{27}}} &
+{\color{black} interface with phone via bluetooth}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{28}}} &
+{\color{black} ping results via text}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{29}}} &
+{\color{black} transfer data to computer as file}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{30}}} &
+{\color{black} interface with database}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{31}}} &
+{\color{black} load from database}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{32}}} &
+{\color{black} store user data in database}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{33}}} &
+{\color{black} load user data from database}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{34}}} &
+{\color{black} screen brightness}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{35}}} &
+{\color{black} adjust text size}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{36}}} &
+{\color{black} accessibility for visually impaired}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{37}}} &
+{\color{black} process electrode sensor input}\\\hline
+\raggedleft{\selectlanguage{english} \textbf{\textcolor{black}{38}}} &
+~
+\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+\end{document}
