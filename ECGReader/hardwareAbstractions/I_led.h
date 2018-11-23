@@ -7,15 +7,33 @@
 #ifndef __I_LEDS_H__
 #define __I_LEDS_H__
 
-extern void CreateLEDLinks();
-
-void (*LEDHardwareInit)();
-void (*LEDOnGreen)();
-void (*LEDOffGreen)();
-void (*LEDToggleGreen)();
-
-void (*LEDOnRed)();
-void (*LEDOffRed)();
-void (*LEDToggleRed)();
+/*!
+ * @brief inits the LEDHardware
+ */
+extern void __LEDHardwareInit();
+/*!
+ * @brief Toggles the red LED
+ */
+extern void __LEDRedToggle();
+/*!
+ * @brief Turns off the red LED
+ */
+extern void __LEDRedOff();
+/*!
+ * @brief Turns on the red LED
+ */
+extern void __LEDRedOn();
+/*!
+ * @brief Toggles the green LED
+ */
+extern void __LEDGreenToggle();
+/*!
+ * @brief Turns off the green LED
+ */
+extern void __LEDGreenOff();
+/*!
+ * @brief Turns on the green LED
+ */
+extern void __LEDGreenOn();
 
 #endif /* __I_LEDS_H__ */

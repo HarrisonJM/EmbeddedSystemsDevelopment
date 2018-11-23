@@ -70,3 +70,7 @@ lnk_msp430fr5969.cmd
 .cproject
 .project
 .launches/
+
+## doxygen
+html/
+latex/

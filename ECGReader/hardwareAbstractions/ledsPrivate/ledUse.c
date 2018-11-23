@@ -8,11 +8,14 @@
 
 /*!
  * @brief Inits the LED hardware
+ * @param foo I do foo
+ * @param bar I bar things
+ * @return and integer for checking, 999 for no, etc
  */
-void __LEDHardwareInit()
+int __LEDHardwareInit(int foo, char bar)
 {
-    P1DIR |= 0X01; /* green */
-    P4DIR |= 0x20; /* red */
+    P1DIR |= 0x01; /* green */
+    P4DIR |= 0x40; /* red */
 }
 /*!
  * @brief Toggles the red LED
@@ -26,21 +29,21 @@ void __LEDRedToggle()
  */
 void __LEDRedOff()
 {
-    P4OUT &= (0xFF-0x01);
+    P4OUT &= (0xFF-0x40);
 }
 /*!
  * Turns on the red LED
  */
 void __LEDRedOn()
 {
-    P4OUT |= 0x01;
+    P4OUT |= 0x40;
 }
 /*!
  * @brief Toggles the green LED
  */
 void __LEDGreenToggle()
 {
-    P1OUT ^= 0x40;
+    P1OUT ^= 0x01;
 }
 /*!
  * @brief Turns off the green LED

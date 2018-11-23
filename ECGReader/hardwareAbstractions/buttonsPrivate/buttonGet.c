@@ -16,14 +16,14 @@ void __initButtonHardware()
     P1REN |= 0x02; // P1.1 pull up resistor
 
     /* Button S1 WIP */
-    P4DIR &= ~0x20; /* P4.5 input (switch 1) 0b0010 0000*/
-    P4REN |= 0x20; /* P4.5 pull up resistor */
+    P4DIR &= ~0x20; /* P4.5 input (switch 1) 0b00100000*/
+    P4REN |= 0x02; /* P4.5 pull up resistor */
 }
 /*!
  * @brief hardware implementation for reading button S2 (right)
  * @return 1 for no press detected, otherwise 0
  */
-inline bool __ReadButtonS2()
+bool __ReadButtonS2()
 {
     return (P1IN & 0x02);
 }
