@@ -10,7 +10,7 @@
 #include <hardwareAbstractions/buttonsPrivate/buttonGet.h>
 #include "../../helpers/boollint.h"
 
-void __initButtonHardware();
+void __ButtonHardwareinit();
 bool __ReadButtonS2();
 bool __ReadButtonS1();
 

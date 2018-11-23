@@ -12,7 +12,7 @@
 /*!
  * @brief Initialises the button hardware
  */
-extern void __initButtonHardware();
+extern void __ButtonHardwareinit();
 /*!
  * @brief hardware implementation for reading button S2 (right)
  * @return 1 for no press detected, otherwise 0
@@ -22,6 +22,6 @@ extern bool __ReadButtonS2();
  * @brief Hardware implementation for reading Button S1 (left)
  * @return 1 for no press detected, otherwise 0
  */
-bool __ReadButtonS1();
+extern bool __ReadButtonS1();
 
 #endif /* __I_BUTTON_H__ */
