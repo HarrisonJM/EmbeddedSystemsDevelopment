@@ -3,6 +3,7 @@ Huseyin:	Initial high level design
 		Ease of Use Acceptance Tests
 		Screen Acceptance Tests
 		BPM Acceptance Tests
+		
 
 			
 			
@@ -16,7 +17,7 @@ Harrison:	Requirements tidy up and codification
 		Added POST/Power On Acceptance Tests
 		Added FSM for buttons
 		Implemented Button Handler Framework
-			Added double click events
+		Added double click events
 		Added more standards
 
 
