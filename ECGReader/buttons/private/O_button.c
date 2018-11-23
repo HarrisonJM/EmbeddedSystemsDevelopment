@@ -9,10 +9,10 @@
 
 void ButtonS1Init(ButtonStore_t* S1)
 {
-    S1->ReadButton = ReadButtonS1;
+    S1->ReadButton = __ReadButtonS1;
 }
 
 void ButtonS2Init(ButtonStore_t* S2)
 {
-    S2->ReadButton = ReadButtonS2;
+    S2->ReadButton = __ReadButtonS2;
 }
