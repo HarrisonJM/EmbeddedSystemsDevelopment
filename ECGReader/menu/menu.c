@@ -45,12 +45,9 @@ int MenuDisplaySelected(int position)
 int MenuDisplay(const char **menuOptions, int menuSize)
 {
 	int position = 0;
-<<<<<<< Updated upstream
 	int i;
 	for(i = 0; i < menuSize; i++)
-=======
 //	for(int i = 0; i < menuSize; i++)
->>>>>>> Stashed changes
 	{
 		/*printf("%s\n", menuOptions[i]);*/
 	}
@@ -83,7 +80,7 @@ int MenuLoad(char option[])
 	return 0;
 }
 
-<<<<<<< Updated upstream
+
 /*!
  * @brief load default menu option (main menu)
  */
@@ -92,7 +89,7 @@ int MenuLoad(char option[])
 	MenuLoad("main");
 	return 0;
 }*/
-=======
+
 ///*!
 // * @brief load default menu option (main menu)
 // */
@@ -101,4 +98,3 @@ int MenuLoad(char option[])
 //	MenuLoad("main");
 //	return 0;
 //}
->>>>>>> Stashed changes
