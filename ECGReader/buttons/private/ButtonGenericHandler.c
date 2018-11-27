@@ -4,6 +4,7 @@
  * @date 12/11/2018
  */
 
+#include "eventQueue/eventQueue.h"
 #include <buttons/buttonHandlingUtility.h>
 #include "hardwareAbstractions/I_button.h"
 #include "O_button.h"
@@ -12,11 +13,12 @@
 #define BUTTON_PRESS_TIME 100 /* The amount of time before a press is registered */
 #define BUTTON_HELD_TIME 200 /*  The amount of time before a hold is registered */
 
-#define DOUBLE_CLICK_COUNTER 100 /* Used to measure the time inbetween button releases */
+#define DOUBLE_CLICK_COUNTER 100 /* Used to measure the time in between button releases */
 
 /* Prototype for common function */
 static void ButtonEnterState(ButtonStore_t* buttonStore,
                              const BUTTONSTATE_E newState);
+/*! Accessors/Mutators */
 /*!
  * @brief Returns the current state to the user
  * @param buttonStore A pointer to the button struct
@@ -48,17 +50,45 @@ void __ButtonSetNumberOfPresses(ButtonStore_t* buttonStore,
 {
     buttonStore->buttonNumberOfPresses = newPresses;
 }
+/*!
+ * @brief Returns the buttons event Queue
+ * @param buttonStore A pointer to the button who's queue we want to get
+ * @return The address of the buttons queue
+ */
+EVENTQUEUE_T* __ButtonGetEventQueue(ButtonStore_t* buttonStore)
+{
+    return &(buttonStore->buttonQueue);
+}
+
 /* Functions */
 /*!
- * @brief Initialises our button's variables
+ * @brief Adds a button event
+ * @param event The event to add
+ * @param buttonStore A pointer to the button containing the store we're working with
+ */
+void ButtonAddEvent(const BUTTONSTATE_E event,
+                    ButtonStore_t* buttonStore)
+{
+    EVENTQUEUE_T* q_p = &(buttonStore->buttonQueue);
+    EVENT_T e;
+    e.event = event;
+
+    if(q_p->PushBack(q_p, &e) != true);
+    {
+        /*! @todo Handle this somehow */
+    }
+}
+/*!
+ * @brief Initialises our button store
  * @param buttonStore A pointer to the button struct
  */
 void ButtonInitHandler(ButtonStore_t* buttonStore)
 {
-    buttonStore->buttonState = BUTTON_RELEASED;
+    buttonStore->buttonState = EVENT_BUTTON_RELEASED;
     buttonStore->buttonNumberOfPresses = 0;
     buttonStore->buttonpressTime = 0;
     buttonStore->buttonReleaseTime = 0;
+    QueueInit(&(buttonStore->buttonQueue));
 }
 /*!
  * @brief Resets the pressed timer
@@ -74,22 +104,28 @@ static void ButtonPressedEnter(ButtonStore_t* buttonStore)
  */
 static void ButtonPressedTimer(ButtonStore_t* buttonStore)
 {
-    buttonStore->buttonpressTime++;
+    ButtonAddEvent(EVENT_BUTTON_PRESSED,
+                               buttonStore);
+
     if (buttonStore->ReadButton() != 0)
     {
-        /* Released */
-        if (buttonStore->buttonpressTime >= (BUTTON_PRESS_TIME/INTERVAL_BUTTON_HANDLER))
+        /* Actually pressed for a while i.e by a human */
+        if (buttonStore->buttonpressTime >= (BUTTON_PRESS_TIME / INTERVAL_BUTTON_HANDLER))
         {
-            buttonStore->buttonNumberOfPresses++;
+            ButtonAddEvent(EVENT_BUTTON_PRESSED,
+                           buttonStore);
         }
-        ButtonEnterState(buttonStore, BUTTON_RELEASED);
+
+        /* Full release/never pressed */
+        ButtonEnterState(buttonStore, EVENT_BUTTON_RELEASED);
     }
     else
     {
         /* Still pressed */
-        if (buttonStore->buttonpressTime >= (BUTTON_HELD_TIME/INTERVAL_BUTTON_HANDLER))
+        if (buttonStore->buttonpressTime
+                >= (BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER))
         {
-            ButtonEnterState(buttonStore, BUTTON_HELD);
+            ButtonEnterState(buttonStore, EVENT_BUTTON_HELD);
         }
     }
 }
@@ -112,15 +148,21 @@ static void ButtonHeldTimer(ButtonStore_t* buttonStore)
 
     if (buttonStore->ReadButton() != 0)
     {
+        ButtonAddEvent(EVENT_BUTTON_RELEASED,
+                       buttonStore);
         /* Released */
-        ButtonEnterState(buttonStore, BUTTON_RELEASED);
+        ButtonEnterState(buttonStore, EVENT_BUTTON_RELEASED);
     }
     else
     {
         /* Still pressed */
-        if (buttonStore->buttonpressTime >= (BUTTON_HELD_TIME/INTERVAL_BUTTON_HANDLER))
+        if (buttonStore->buttonpressTime
+                >= (BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER))
         {
-            ButtonEnterState(buttonStore, BUTTON_HELD);
+            ButtonAddEvent(EVENT_BUTTON_HELD,
+                           buttonStore);
+
+            ButtonEnterState(buttonStore, EVENT_BUTTON_HELD);
         }
     }
 }
@@ -132,8 +174,8 @@ static void ButtonReleaseTimer(ButtonStore_t* buttonStore)
 {
     if (buttonStore->ReadButton() == 0)
     {
-        /* Pressed */
-        ButtonEnterState(buttonStore, BUTTON_PRESSED);
+        /* Press detected */
+        ButtonEnterState(buttonStore, EVENT_BUTTON_PRESSED);
     }
 }
 /*!
@@ -146,22 +188,21 @@ static void ButtonEnterState(ButtonStore_t* buttonStore,
 {
     switch (newState)
     {
-    case BUTTON_NULL:
+    case EVENT_BUTTON_NULL:
         break;
-    case BUTTON_RELEASED:
+    case EVENT_BUTTON_RELEASED:
         break;
-    case BUTTON_PRESSED:
+    case EVENT_BUTTON_PRESSED:
         ButtonPressedEnter(buttonStore);
         break;
-    case BUTTON_HELD:
+    case EVENT_BUTTON_HELD:
         ButtonHeldEnter(buttonStore);
         break;
-    case BUTTON_DOUBLE_CLICK:
-    case BUTTON_DOUBLE_CLICK_HELD:
+    case EVENT_BUTTON_DOUBLE_CLICK:
+    case EVENT_BUTTON_DOUBLE_CLICK_HELD:
     default:
         break;
     }
-
     /* Set new state */
     buttonStore->buttonState = newState;
 }
@@ -173,19 +214,19 @@ void __ButtonTimer(ButtonStore_t* buttonStore)
 {
     switch (buttonStore->buttonState)
     {
-    case BUTTON_NULL:
+    case EVENT_BUTTON_NULL:
         break;
-    case BUTTON_RELEASED:
+    case EVENT_BUTTON_RELEASED:
         ButtonReleaseTimer(buttonStore);
         break;
-    case BUTTON_PRESSED:
+    case EVENT_BUTTON_PRESSED:
         ButtonPressedTimer(buttonStore);
         break;
-    case BUTTON_HELD:
+    case EVENT_BUTTON_HELD:
         ButtonHeldTimer(buttonStore);
         break;
-    case BUTTON_DOUBLE_CLICK:
-    case BUTTON_DOUBLE_CLICK_HELD:
+    case EVENT_BUTTON_DOUBLE_CLICK:
+    case EVENT_BUTTON_DOUBLE_CLICK_HELD:
     default:
         break;
     }

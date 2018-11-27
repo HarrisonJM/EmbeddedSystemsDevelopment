@@ -7,6 +7,7 @@
 #include "O_button.h"
 #include "../buttonHandlingUtility.h"
 #include "ButtonGenericHandler.h"
+#include "../../eventQueue/eventQueue.h"
 
 static ButtonStore_t S1;
 static ButtonStore_t S2;
@@ -46,7 +47,7 @@ void ButtonTimer(BUTTONSELECT_T button)
  */
 int ButtonGetState(const BUTTONSELECT_T button)
 {
-    int state = BUTTON_NULL;
+    int state = EVENT_BUTTON_NULL;
     switch (button)
     {
     case BUTTONS1:
@@ -102,4 +103,25 @@ void ButtonSetNumberOfPresses(const BUTTONSELECT_T button,
     default:
         break;
     }
+}
+/*!
+ * @brief Returns the address of the slected button's event queue
+ * @param button The button we wish to get the queue for
+ * @param queue An empty pointer we wish to set the queue to
+ * @return The address for the selcted buttosn event queue
+ */
+EVENTQUEUE_T* ButtonGetQueue(const BUTTONSELECT_T button)
+{
+    EVENTQUEUE_T* queue_p;
+    switch(button)
+    {
+    case BUTTONS1:
+        queue_p = __ButtonGetEventQueue(&S1);
+        break;
+    case BUTTONS2:
+        queue_p = __ButtonGetEventQueue(&S2);
+        break;
+    }
+
+    return queue_p;
 }

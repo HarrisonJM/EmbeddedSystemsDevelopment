@@ -6,7 +6,8 @@
 
 #include "O_LED.h"
 #include "../LedHandlerUtility.h"
-#include "buttons/buttonHandler.h"
+#include "buttons/buttonHandlingUtility.h"
+#include "eventQueue/eventQueue.h"
 
 /* How often the LEDs are interacted with */
 #define LED_PERIOD 50
@@ -33,21 +34,24 @@ LEDSTATE_T __LEDGetState(LEDSTORE_T *ledStore)
  * @param button The button selector for the button that's controlling the LED
  */
 void __LEDHandler(LEDSTORE_T* ledStore,
-                  BUTTONSELECT_T button)
+                  EVENTQUEUE_T *eventQueue)
 {
+    EVENT_T e;
     ledStore->period++;
+
     if (ledStore->period >= LED_PERIOD)
     {
         ledStore->period = 0;
         switch (ledStore->state)
         {
         case LED_OFF:
-            if (ButtonGetNumberOfPresses(button) > 0)
+            if (eventQueue->PopFront(eventQueue, &e))
             {
-                ButtonSetNumberOfPresses(button,
-                                         ButtonGetNumberOfPresses(button)-1);
-                ledStore->LEDOn();
-                ledStore->state = LED_ON;
+                if(e.event == EVENT_BUTTON_PRESSED)
+                {
+                    ledStore->LEDOn();
+                    ledStore->state = LED_ON;
+                }
             }
             else
             {

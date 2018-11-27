@@ -5,15 +5,21 @@
  *      Author: Len Biro
  */
 #include <msp430.h>
+
 #include "buttons/buttonHandler.h"
 #include "buttons/buttonHandlingUtility.h"
-#include "hardwareAbstractions/I_led.h"
+#include "leds/LedHandler.h"
+#include "leds/LedHandlerUtility.h"
+#include "eventQueue/eventQueue.h"
 
 /* Timer variable setup */
 int timerAdcReading = 1;
 /* Counter */
 int msCounter10 = 0;
 int msCounter100 = 0;
+/* Queues */
+extern EVENTQUEUE_T* buttonS1Queue;
+extern EVENTQUEUE_T* buttonS2Queue;
 
 /*!
  * @brief Inits Timer0
@@ -29,7 +35,6 @@ void __TimerInit(void)
                               // and count UP to create a 1ms interrupt
                               // PWM Period
 }
-
 /*!
  * @brief Timer0 A0 1ms interrupt service routine
  *
@@ -43,8 +48,18 @@ __interrupt void Timer0_A0(void)
 
     if (10 == msCounter10)
     {
-        msCounter10 = 0;
         ButtonTimer(BUTTONS1);
         ButtonTimer(BUTTONS2);
+    }
+
+    if(buttonS1Queue->size > 0)
+    {
+        /*!
+         * @todo here we would actually pop from the
+         * queue into an event and use that for everything
+         * that requires it
+         */
+        LEDTimer(LEDGREEN,
+                 BUTTONS1);
     }
 }

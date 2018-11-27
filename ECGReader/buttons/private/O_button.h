@@ -9,6 +9,7 @@
 
 #include "../../helpers/boollint.h"
 #include "../buttonHandlingUtility.h"
+#include "../../eventQueue/eventQueue.h"
 
 /*!
  * @brief the button store object
@@ -17,12 +18,14 @@
  */
 typedef struct Button
 {
-    bool (*ReadButton)();
-    int buttonNumberOfPresses;
-    BUTTONSTATE_E buttonState;
-    int buttonpressTime;
-    int buttonReleaseTime;
-
+    /*!{*/
+    int buttonNumberOfPresses;  /*! < The number of times the button has been pressed (deprecated)*/
+    BUTTONSTATE_E buttonState;  /*! < The current state of the button */
+    int buttonpressTime;        /*! < The Amount of time the button has been pressed for */
+    int buttonReleaseTime;      /*! < The amount of time the button has been released for*/
+    bool (*ReadButton)();       /*! < A function pointer to the relevant button check */
+    EVENTQUEUE_T buttonQueue;   /*! < The queue to read the button from */
+    /*!}*/
 } ButtonStore_t;
 
 void ButtonS1Init(ButtonStore_t* S1);

@@ -56,11 +56,11 @@ void LEDTimer(const LEDSELECT_T led,
     switch(led)
     {
     case LEDGREEN:
-        __LEDHandler(&redStore,
+        __LEDHandler(&greenStore,
                      button);
         break;
     case LEDRED:
-        __LEDHandler(&greenStore,
+        __LEDHandler(&redStore,
                      button);
         break;
     }

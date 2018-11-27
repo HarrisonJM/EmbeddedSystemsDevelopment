@@ -8,6 +8,7 @@
 #define __BUTTON_HANDLER_H__
 
 #include "buttonHandlingUtility.h"
+#include "../eventQueue/eventQueue.h"
 
 /*!
  * @brief Initialise button related things
@@ -37,5 +38,12 @@ extern int ButtonGetNumberOfPresses(const BUTTONSELECT_T button);
  */
 extern void ButtonSetNumberOfPresses(const BUTTONSELECT_T button,
                                      const int newPresses);
+/*!
+ * @brief Returns the address of the slected button's event queue
+ * @param button The button we wish to get the queue for
+ * @param queue An empty pointer we wish to set the queue to
+ * @return The address for the selcted buttosn event queue
+ */
+EVENTQUEUE_T* ButtonGetQueue(const BUTTONSELECT_T button);
 
 #endif /* __BUTTON_HANDLER_H__ */

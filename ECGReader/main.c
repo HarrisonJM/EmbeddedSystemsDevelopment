@@ -6,12 +6,59 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "hardwareAbstractions/buttons/buttonGet.h"
+#include "buttons/buttonHandler.h"
+#include "buttons/buttonHandlingUtility.h"
+#include "leds/LedHandler.h"
+#include "leds/LedHandlerUtility.h"
+#include "hardwareAbstractions/I_button.h"
+#include "hardwareAbstractions/I_led.h"
+#include "timer/timer.h"
+
+#include "buttons/private/O_button.h"
+
+EVENTQUEUE_T* buttonS1Queue;
+EVENTQUEUE_T* buttonS2Queue;
 
 int main(void)
 {
-    initButtonHardware();
+    WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
+    PM5CTL0 &= ~LOCKLPM5; // Disable the GPIO power-on default high-impedance mode
+    _BIS_SR(GIE); // enable interrupts
 
+    /* Setup button related things */
+    __ButtonHardwareinit();
+    ButtonInitHandlerBothButtons();
+    buttonS1Queue = ButtonGetQueue(BUTTONS1);
+    buttonS2Queue = ButtonGetQueue(BUTTONS2);
+
+    __LEDHardwareInit();
+    LEDInitHandlerBothLEDs();
+    __TimerInit();
+
+    while(1)
+    {
+        BUTTONSTATE_E state = ButtonGetState(BUTTONS1);
+
+        if (__ReadButtonS1() == false)
+        {
+            __LEDGreenOn();
+        }
+        else
+        {
+            __LEDGreenOff();
+        }
+
+//        state = ButtonGetState(BUTTONS2);
+//
+//        if ((state == BUTTON_PRESSED))
+//        {
+//            __LEDRedOn();
+//        }
+//        else
+//        {
+//            __LEDRedOff();
+//        }
+    }
 
 //    char adcRdg [5];
 //    char doneReading = 0;
@@ -49,5 +96,5 @@ int main(void)
 //
 //    }
 
-    return 0;
+//    return 0;
 }
