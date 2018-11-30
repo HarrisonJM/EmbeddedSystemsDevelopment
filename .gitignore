@@ -72,5 +72,6 @@ lnk_msp430fr5969.cmd
 .launches/
 
 ## doxygen
+doxygen/
 html/
 latex/
