@@ -9,7 +9,10 @@
 #include "ButtonGenericHandler.h"
 #include "../../eventQueue/eventQueue.h"
 
+/*! Filescope Variables */
+/*! @brief Stores state information about button S1 */
 static ButtonStore_t S1;
+/*! @brief Stores state information about button S2 */
 static ButtonStore_t S2;
 
 /*!

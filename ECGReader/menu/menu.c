@@ -1,17 +1,98 @@
 /*!
  * @brief Framework for displaying and navigating the menu. Selected option will load relevant code
  * @author Dan Steer
+ * @author Harrison Marcks
  * @date 12/11/2018
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <screen/handler/screenHandler.h>
 #include "menu.h"
+
+MENUCONTEXT_T menu;
+
+void MenuNull()
+{
+ /* Splash screen/initialization or smth */
+}
+
+void MenuECG()
+{
+
+}
+
+void MenuPreviousReading()
+{
+    ScreenSetText(2,
+            0,
+            "> Previous"
+            ,false);
+}
+
+void MenuProfile()
+{
+    ScreenSetText(3,
+                0,
+                "> Profile"
+                ,false);
+}
+
+void MenuOptions()
+{
+    ScreenSetText(4,
+            0,
+            "> Options"
+            ,false);
+}
+
+void MenuReboot()
+{
+    ScreenSetText(5,
+            0,
+            "> Reboot"
+            ,false);
+}
+
+/*!
+ * @brief Decides whether an action needs to take place
+ */
+void MenuTimer()
+{
+    /* Print all options */
+    /*
+     * Option selection/inversion is handled by
+     * some file scoped toggleable booleans
+     */
+}
+
+/*!
+ * @brief Controls moving the menu to a new state
+ *
+ */
+void MenuEnterState(MENUSELECT_T newState)
+{
+    switch(menu.selectedOption)
+    {
+    case MENU_NULL:
+        break;
+    case MENU_ECG:
+        break;
+    case MENU_PREVREAD:
+        break;
+    case MENU_PROFILE:
+        break;
+    case MENU_OPTIONS:
+        break;
+    case MENU_REBOOT:
+        break;
+    }
+
+    menu.selectedOption = newState;
+}
 
 /*!
  * @brief load relevant activity when selected
  */
-int LoadActivity()
+int LoadActivity(MENUSELECT_T activityToRun)
 {
 	return 0;
 }
@@ -45,12 +126,11 @@ int MenuDisplaySelected(int position)
 int MenuDisplay(const char **menuOptions, int menuSize)
 {
 	int position = 0;
-	int i;
-	for(i = 0; i < menuSize; i++)
-//	for(int i = 0; i < menuSize; i++)
-	{
-		/*printf("%s\n", menuOptions[i]);*/
-	}
+//	int i;
+//	for(i = 0; i < menuSize; i++)
+//	{
+//		/*printf("%s\n", menuOptions[i]);*/
+//	}
 
 	MenuDisplaySelected(position);
 	MenuNavigate(menuOptions, menuSize, position);

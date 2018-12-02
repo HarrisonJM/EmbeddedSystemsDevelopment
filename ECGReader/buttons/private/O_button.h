@@ -21,7 +21,7 @@ typedef struct Button
     /*!{*/
     int buttonNumberOfPresses;  /*! < The number of times the button has been pressed (deprecated)*/
     BUTTONSTATE_E buttonState;  /*! < The current state of the button */
-    int buttonpressTime;        /*! < The Amount of time the button has been pressed for */
+    int buttonPressTime;        /*! < The Amount of time the button has been pressed for */
     int buttonReleaseTime;      /*! < The amount of time the button has been released for*/
     bool (*ReadButton)();       /*! < A function pointer to the relevant button check */
     EVENTQUEUE_T buttonQueue;   /*! < The queue to read the button from */

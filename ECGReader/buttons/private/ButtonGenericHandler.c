@@ -6,13 +6,12 @@
 
 #include "eventQueue/eventQueue.h"
 #include <buttons/buttonHandlingUtility.h>
-#include "hardwareAbstractions/I_button.h"
+#include "hardwareAbstractions/public/I_button.h"
 #include "O_button.h"
 
-#define INTERVAL_BUTTON_HANDLER 10 /* Divide by for interval in timer */
+#define INTERVAL_BUTTON_HANDLER 10 /* Divide by for interval in timer (represents how often the timer function is triggered)  */
 #define BUTTON_PRESS_TIME 100 /* The amount of time before a press is registered */
 #define BUTTON_HELD_TIME 200 /*  The amount of time before a hold is registered */
-
 #define DOUBLE_CLICK_COUNTER 100 /* Used to measure the time in between button releases */
 
 /* Prototype for common function */
@@ -86,7 +85,7 @@ void ButtonInitHandler(ButtonStore_t* buttonStore)
 {
     buttonStore->buttonState = EVENT_BUTTON_RELEASED;
     buttonStore->buttonNumberOfPresses = 0;
-    buttonStore->buttonpressTime = 0;
+    buttonStore->buttonPressTime = 0;
     buttonStore->buttonReleaseTime = 0;
     QueueInit(&(buttonStore->buttonQueue));
 }
@@ -96,7 +95,7 @@ void ButtonInitHandler(ButtonStore_t* buttonStore)
  */
 static void ButtonPressedEnter(ButtonStore_t* buttonStore)
 {
-    buttonStore->buttonpressTime = 0;
+    buttonStore->buttonPressTime = 0;
 }
 /*!
  * @brief Measures the amount of time the button is pressed. Handles debouncing
@@ -104,13 +103,13 @@ static void ButtonPressedEnter(ButtonStore_t* buttonStore)
  */
 static void ButtonPressedTimer(ButtonStore_t* buttonStore)
 {
-    ButtonAddEvent(EVENT_BUTTON_PRESSED,
-                               buttonStore);
+    buttonStore->buttonPressTime++;
 
+    /* On button release */
     if (buttonStore->ReadButton() != 0)
     {
-        /* Actually pressed for a while i.e by a human */
-        if (buttonStore->buttonpressTime >= (BUTTON_PRESS_TIME / INTERVAL_BUTTON_HANDLER))
+        /* Actually pressed for a while i.e by a human. Register press on final release */
+        if (buttonStore->buttonPressTime >= (BUTTON_PRESS_TIME / INTERVAL_BUTTON_HANDLER))
         {
             ButtonAddEvent(EVENT_BUTTON_PRESSED,
                            buttonStore);
@@ -122,7 +121,7 @@ static void ButtonPressedTimer(ButtonStore_t* buttonStore)
     else
     {
         /* Still pressed */
-        if (buttonStore->buttonpressTime
+        if (buttonStore->buttonPressTime
                 >= (BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER))
         {
             ButtonEnterState(buttonStore, EVENT_BUTTON_HELD);
@@ -135,7 +134,7 @@ static void ButtonPressedTimer(ButtonStore_t* buttonStore)
  */
 static void ButtonHeldEnter(ButtonStore_t* buttonStore)
 {
-    buttonStore->buttonpressTime = 0;
+    buttonStore->buttonPressTime = 0;
     buttonStore->buttonNumberOfPresses++;
 }
 /*!
@@ -144,7 +143,7 @@ static void ButtonHeldEnter(ButtonStore_t* buttonStore)
  */
 static void ButtonHeldTimer(ButtonStore_t* buttonStore)
 {
-    buttonStore->buttonpressTime++;
+    buttonStore->buttonPressTime++;
 
     if (buttonStore->ReadButton() != 0)
     {
@@ -156,7 +155,7 @@ static void ButtonHeldTimer(ButtonStore_t* buttonStore)
     else
     {
         /* Still pressed */
-        if (buttonStore->buttonpressTime
+        if (buttonStore->buttonPressTime
                 >= (BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER))
         {
             ButtonAddEvent(EVENT_BUTTON_HELD,

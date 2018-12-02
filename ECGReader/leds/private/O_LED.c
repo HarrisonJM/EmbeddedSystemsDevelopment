@@ -5,7 +5,7 @@
  */
 
 #include "O_LED.h"
-#include "hardwareAbstractions/I_led.h"
+#include "hardwareAbstractions/public/I_led.h"
 
 /*!
  * @brief Assigns functions to the store's function pointers for the Red led

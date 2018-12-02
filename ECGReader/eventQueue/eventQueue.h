@@ -8,8 +8,15 @@
 #define __EVENT_QUEUE_H__
 
 #include "../helpers/boollint.h"
-
+/*! @brief defines the maximum size the event queue can have */
 #define SIZE_OF_EVENT_Q   8
+
+/*! @brief typedef for allowing the struct to contain an understanding of itself within itself*/
+typedef struct EVENTQUEUE EVENTQUEUE_T;
+/*!
+ * @brief Public declaration of the QueueInit function
+ */
+void QueueInit(EVENTQUEUE_T *q);
 
 /*!
  * @brief EVENT_T Stores details for a specific event
@@ -23,9 +30,6 @@ typedef struct EVENT
     int param3; /*! < The third parameter for the event */
     /*!}*/
 } EVENT_T;
-
-/*! @brief typedef for allowing the struct to contain an understanding of itself within itself*/
-typedef struct EVENTQUEUE EVENTQUEUE_T;
 /*!
  * @brief EVENTQUEUE_T The actual queue that will hold events
  */
@@ -48,14 +52,6 @@ struct EVENTQUEUE
                     const EVENT_T *e); /*! < A function pointer to the PushBack function */
     /*!}*/
 };
-/*!
- * @brief Public declaration of the QueueInit function
- */
-void QueueInit(EVENTQUEUE_T *q);
-
 
 #endif /* __EVENT_QUEUE_H__ */
-
-// Move to Timer
-//struct EventQueue led_q;
 

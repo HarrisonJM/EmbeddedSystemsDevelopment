@@ -4,7 +4,7 @@
  * @date 12/11/2018
  */
 
-#include "hardwareAbstractions/I_button.h"
+#include "hardwareAbstractions/public/I_button.h"
 #include "O_button.h"
 
 /*!
