@@ -59,17 +59,17 @@ void ScreenPrintChar(uint8_t x
                      , const char ch
                      , bool invert)
 {
-    uint8_t i = CHARPIXELWIDTH; /* Character byte iterator */
+    uint8_t i = CHARPIXELWIDTH - 1; /* Character byte iterator */
 
-    /* Verify our values */
-    if(SCREENMAXX < x)
-    {
-        x = 11;
-    }
-    if(LCDPIXELMAXY < y)
-    {
-        y = (LCDPIXELMAXY - CHARPIXELWIDTH);
-    }
+//    /* Verify our values */
+//    if(SCREENMAXX < x)
+//    {
+//        x = 11;
+//    }
+//    if(LCDPIXELMAXY < y)
+//    {
+//        y = (LCDPIXELMAXY - CHARPIXELWIDTH);
+//    }
 
     for(; (i < CHARPIXELWIDTH); --i)
     {
@@ -98,7 +98,7 @@ void ScreenSetText(uint8_t x
                    , const char* str_p
                    , bool invert)
 {
-    uint8_t j; /* Column iterator */
+    uint8_t j; /* Column by pixel iterator */
 
     char ch;
     j = 0;
@@ -108,12 +108,12 @@ void ScreenSetText(uint8_t x
         ch = (*str_p++) - ' ';
         /* Print the string to the screen */
         /*! @todo Move division to RAM */
-        ScreenPrintChar((x / CHARPIXELWIDTH + j)
+        ScreenPrintChar(((x / CHARPIXELWIDTH) + j)
                         , y
                         , ch
                         , invert);
 
-        j += 1; /* move to next char position */
+        j += 1; /* move to next pixel */
     }
 }
 /*!
@@ -179,7 +179,9 @@ static char __ReverseByte(char inByte)
  *
  * The counting up loops are, unfortunately, required in this implementation
  * otherwise nothing appears to work.
+ *
  * @todo Figure out how to change loops to counting done to improve efficiency
+ * @todo remove tight loops in the while() function and instead do it using interrupts
  */
 void ScreenFlushDisplayBuffer()
 {
@@ -205,6 +207,7 @@ void ScreenFlushDisplayBuffer()
         /* EOL byte */
         LCDWriteCommandOrData(0x00);
     }
+
     /* End of block byte */
     LCDWriteCommandOrData(0x00);
 

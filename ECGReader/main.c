@@ -3,27 +3,37 @@
  */
 
 #include <msp430.h>
-#include <stdio.h>
-#include <string.h>
+#include <screen/handler/screenHandler.h>
+
+#include "helpers/boollint.h"
 
 #include "buttons/buttonHandler.h"
 #include "buttons/buttonHandlingUtility.h"
+#include "buttons/private/O_button.h"
+#include "hardwareAbstractions/public/I_button.h"
+
 #include "leds/LedHandler.h"
 #include "leds/LedHandlerUtility.h"
-#include "hardwareAbstractions/I_button.h"
-#include "hardwareAbstractions/I_led.h"
+#include "hardwareAbstractions/public/I_led.h"
+
 #include "timer/timer.h"
 
-#include "buttons/private/O_button.h"
+#include "hardwareAbstractions/public/I_lcd.h"
 
 EVENTQUEUE_T* buttonS1Queue;
 EVENTQUEUE_T* buttonS2Queue;
 
 int main(void)
 {
-    WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
-    PM5CTL0 &= ~LOCKLPM5; // Disable the GPIO power-on default high-impedance mode
-    _BIS_SR(GIE); // enable interrupts
+    /*! @brief Stop watchdog timer */
+    WDTCTL = WDTPW | WDTHOLD;
+    /*!
+     * @brief Disable the GPIO power-on default high-impedance mode
+     * Changining/removing this means that all pins must be set manually (including unused ones. Perhaps it helps with re-flashing?
+     */
+    PM5CTL0 &= ~LOCKLPM5;
+    /*! @brief enable interrupts */
+    _BIS_SR(GIE);
 
     /* Setup button related things */
     __ButtonHardwareinit();
@@ -31,33 +41,24 @@ int main(void)
     buttonS1Queue = ButtonGetQueue(BUTTONS1);
     buttonS2Queue = ButtonGetQueue(BUTTONS2);
 
+    /* Setup LED stuff*/
     __LEDHardwareInit();
-    LEDInitHandlerBothLEDs();
+    /* Timers and interrupts */
     __TimerInit();
+
+    /* Display stuff*/
+    LCDInitHardware();
+    ScreenDisplayBufferInit(' ');
+    ScreenFlushDisplayBuffer();
+
+    ScreenPrintChar(0
+                    , 0
+                    , 'K'
+                    , false);
+    ScreenFlushDisplayBuffer();
 
     while(1)
     {
-        BUTTONSTATE_E state = ButtonGetState(BUTTONS1);
-
-        if (__ReadButtonS1() == false)
-        {
-            __LEDGreenOn();
-        }
-        else
-        {
-            __LEDGreenOff();
-        }
-
-//        state = ButtonGetState(BUTTONS2);
-//
-//        if ((state == BUTTON_PRESSED))
-//        {
-//            __LEDRedOn();
-//        }
-//        else
-//        {
-//            __LEDRedOff();
-//        }
     }
 
 //    char adcRdg [5];

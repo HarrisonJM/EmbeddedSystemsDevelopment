@@ -57,7 +57,8 @@ bool LCDCheckReady()
  */
 void LCDWriteCommandOrData(uint16_t commandOrData)
 {
-    LCDCheckReady();
+    while(!LCDCheckReady());
+
     UCB0TXBUF = commandOrData;
 }
 /*!

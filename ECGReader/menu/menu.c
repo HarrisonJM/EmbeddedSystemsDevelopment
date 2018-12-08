@@ -17,39 +17,42 @@ void MenuNull()
 
 void MenuECG()
 {
-
+    ScreenSetText(2
+                  ,0
+                  ,"> ECG"
+                  ,false);
 }
 
 void MenuPreviousReading()
 {
-    ScreenSetText(2,
-            0,
-            "> Previous"
-            ,false);
+    ScreenSetText(2
+                  ,0
+                  ,"> Previous"
+                  ,false);
 }
 
 void MenuProfile()
 {
-    ScreenSetText(3,
-                0,
-                "> Profile"
-                ,false);
+    ScreenSetText(3
+                  ,0
+                  ,"> Profile",
+                  false);
 }
 
 void MenuOptions()
 {
-    ScreenSetText(4,
-            0,
-            "> Options"
-            ,false);
+    ScreenSetText(4
+                  , 0
+                  , "> Options"
+                  , false);
 }
 
 void MenuReboot()
 {
-    ScreenSetText(5,
-            0,
-            "> Reboot"
-            ,false);
+    ScreenSetText(5
+                  , 0
+                  , "> Reboot"
+                  , false);
 }
 
 /*!

@@ -56,7 +56,7 @@ static void __CircBuffPushHard(CIRCULARBUFFER_T* circBuff
                       , const void* data
                       , size_t dataSizeBytes)
 {
-    void *mcRet = memcpy(((circBuff->__buffer)+circBuff->__head)
+    void *mcRet = memcpy(((circBuff->__buffer)+(circBuff->__head))
                        , data
                        , dataSizeBytes);
 
