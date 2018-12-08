@@ -9,9 +9,6 @@
 
 #include "../../helpers/boollint.h"
 
-#define LCDPIXELMAXX 95
-#define LCDPIXELMAXY 95
-
 extern void ScreenDisplayBufferInit(char setting);
 extern void ScreenPrintChar(uint8_t x
                      , uint8_t y

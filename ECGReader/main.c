@@ -51,10 +51,8 @@ int main(void)
     ScreenDisplayBufferInit(' ');
     ScreenFlushDisplayBuffer();
 
-    ScreenPrintChar(0
-                    , 0
-                    , 'K'
-                    , false);
+    ScreenPrint("Hello, World!",
+                false);
     ScreenFlushDisplayBuffer();
 
     while(1)

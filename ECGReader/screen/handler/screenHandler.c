@@ -9,15 +9,14 @@
  #include "screen/handler/screenHandler.h"
 
 #include "hardwareAbstractions/public/I_lcd.h"
-#include "hardwareAbstractions/public/I_led.h"
 
 #include "helpers/boollint.h"
 
 #include "font8x8_basic.h"
 
 #define CHARPIXELWIDTH 8
-#define SCREENMAXX 11
-#define SCREENMAXY 11
+#define SCREENMAXX 12
+#define SCREENMAXY 12
 
 /* The display buffer we're using */
 uint8_t DisplayBuffer[96][96 / CHARPIXELWIDTH];
@@ -49,8 +48,8 @@ void ScreenDisplayBufferInit(char setting)
 }
 /*!
  * @brief Sets the display buffer to contain a single char in the given position
- * @param x The column we wish to print to (Actual number, 0->SCREENMAXX)
- * @param y The row we wish to print to (in pixel location 0->SCREENPIXELMAXY
+ * @param x The pixel column we wish to print to (Actual number, 0->LCDPIXELMAXX)
+ * @param y The row we wish to print to (in pixel location 0->LCDPIXELMAXY
  * @param ch The character we wish to print
  * @param invert Whether to invert the text colour (true for black background/white text)
  */
@@ -60,30 +59,13 @@ void ScreenPrintChar(uint8_t x
                      , bool invert)
 {
     uint8_t i = CHARPIXELWIDTH - 1; /* Character byte iterator */
+    char chActual = 0;
+    /* Assign char to array value */
+    chActual = ch - ' ';
 
-//    /* Verify our values */
-//    if(SCREENMAXX < x)
-//    {
-//        x = 11;
-//    }
-//    if(LCDPIXELMAXY < y)
-//    {
-//        y = (LCDPIXELMAXY - CHARPIXELWIDTH);
-//    }
-
-    for(; (i < CHARPIXELWIDTH); --i)
+    for(i = 0; (i < CHARPIXELWIDTH); ++i)
     {
-        if(false != invert)
-        {
-            DisplayBuffer[y + i][x] = font8x8_basic[ch][i];
-        }
-        else
-        {
-            DisplayBuffer[y + i][x] = __ReverseByte(font8x8_basic[ch][i]);
-        }
-
-        if(i > CHARPIXELWIDTH)
-            __LEDGreenOn();
+            DisplayBuffer[y + i][x] = __ReverseByte(font8x8_basic[chActual][i]);
     }
 }
 /*!
@@ -99,18 +81,14 @@ void ScreenSetText(uint8_t x
                    , bool invert)
 {
     uint8_t j; /* Column by pixel iterator */
-
-    char ch;
     j = 0;
     while (*str_p != '\0')
     {
-        /* Assign char to array value */
-        ch = (*str_p++) - ' ';
         /* Print the string to the screen */
         /*! @todo Move division to RAM */
         ScreenPrintChar(((x / CHARPIXELWIDTH) + j)
                         , y
-                        , ch
+                        , (*str_p++)
                         , invert);
 
         j += 1; /* move to next pixel */
@@ -185,10 +163,9 @@ static char __ReverseByte(char inByte)
  */
 void ScreenFlushDisplayBuffer()
 {
-    uint8_t* flushData = &DisplayBuffer[0][0];
-    /* line and column names are no redundant but left in just for piece of mind */
-    uint32_t line = 0;
+    /* line and column names are now redundant but left in just for piece of mind */
     uint32_t column = 0;
+    uint32_t line = 0;
     /*! @brief Write lines (0x80, image update mode ) and VCOM bit (0x40, video communication) */
     static const uint8_t command = 0xC0;
 
@@ -196,13 +173,13 @@ void ScreenFlushDisplayBuffer()
 
     LCDWriteCommandOrData(command);
 
-    for(; line < SCREENMAXX; ++line)
+    for(line = 0; line < LCDPIXELMAXX; ++line)
     {
         LCDWriteCommandOrData(__ReverseByte(line + 1));
 
-        for(; column < (SCREENMAXX>>3); ++column)
+        for(column = 0; column < SCREENMAXX; ++column)
         {
-            LCDWriteCommandOrData(*(flushData++));
+            LCDWriteCommandOrData(DisplayBuffer[line][column]);
         }
         /* EOL byte */
         LCDWriteCommandOrData(0x00);
@@ -216,4 +193,5 @@ void ScreenFlushDisplayBuffer()
     __delay_cycles(8); /* Ensure a 2us minutes delay to meet the LCD's thSCS */
 
     LCDSetCSLow();
+
 }

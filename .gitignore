@@ -75,3 +75,8 @@ lnk_msp430fr5969.cmd
 doxygen/
 html/
 latex/
+
+.pio
+.pioenvs
+.piolibdeps
+.vscode/

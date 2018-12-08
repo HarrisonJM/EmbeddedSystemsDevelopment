@@ -7,6 +7,12 @@
 #include <msp430.h>
 #include "../../helpers/boollint.h"
 
+/*! Defines */
+/*!@{*/
+#define LCDPIXELMAXX 96
+#define LCDPIXELMAXY 96
+/*!@}*/
+
 /* init */
 extern void LCDInitHardware();
 
