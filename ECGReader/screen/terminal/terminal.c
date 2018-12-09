@@ -37,17 +37,17 @@ void TerminalInit()
             linesForBuffer);
 }
 /*!
- * @brief Sets the cursor to 0,0
+ * @brief Sets the cursor to 0,0 and resets the circular buffer
  */
-void TerminalReset()
+void TerminalBufferReset()
 {
     TerminalBasicReset();
     myTerm.lineBuffer.Reset(&(myTerm.lineBuffer));
 }
 /*!
- * @brief Clears the terminal i.e. sets the cursor to 0,0 and clears the screen
+ * @brief Clears the terminal i.e. Resets the terminal, buffer AND clears the screen
  */
-void TerminalClear()
+void TerminalFullReset()
 {
     TerminalBasicReset();
     myTerm.lineBuffer.Reset(&(myTerm.lineBuffer));
@@ -63,6 +63,7 @@ void TerminalClear()
                       clear,
                       false);
     }
+    ScreenFlushDisplayBuffer();
 }
 /*!
  * @brief Prints to the terminal
@@ -70,7 +71,10 @@ void TerminalClear()
  */
 void TerminalPrint(const char* str_p)
 {
+    while(!(*str_p) != '\0')
+    {
 
+    }
 }
 
 

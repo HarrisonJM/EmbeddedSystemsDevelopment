@@ -8,176 +8,111 @@
 #include <screen/handler/screenHandler.h>
 #include "menu.h"
 
-MENUCONTEXT_T menu;
+/*! Pre-processor Macros */
+#define SIZE_MENU_MAIN 6 /*! < The size of the Menu */
 
+/* Prototypes */
+void MenuEnter();
+
+/* File scope variables */
+static MENUCONTEXT_T menu;
+
+/* Definitions */
 void MenuNull()
 {
  /* Splash screen/initialization or smth */
-}
 
-void MenuECG()
+    menu.selectedOption = MENU_ECG;
+}
+/*!
+ * @brief Prints the menu to the screen, with the selected option
+ */
+void MenuEnter()
 {
-    ScreenSetText(2
-                  ,0
-                  ,"> ECG"
-                  ,false);
+    bool invert = false;
+    int i = 0;
+    for(i = 0; i < SIZE_MENU_MAIN; ++i)
+    {
+        if ( i == menu.textIndex)
+        {
+            invert = true;
+        }
+        ScreenSetText(0, i*SCREENMAXY, *(menuMain+i), invert);
+        invert = false;
+    }
+    ScreenFlushDisplayBuffer();
 }
-
-void MenuPreviousReading()
-{
-    ScreenSetText(2
-                  ,0
-                  ,"> Previous"
-                  ,false);
-}
-
-void MenuProfile()
-{
-    ScreenSetText(3
-                  ,0
-                  ,"> Profile",
-                  false);
-}
-
-void MenuOptions()
-{
-    ScreenSetText(4
-                  , 0
-                  , "> Options"
-                  , false);
-}
-
-void MenuReboot()
-{
-    ScreenSetText(5
-                  , 0
-                  , "> Reboot"
-                  , false);
-}
-
 /*!
  * @brief Decides whether an action needs to take place
  */
-void MenuTimer()
+void MenuTimer(EVENT_T *bS1Event, EVENT_T *bS2Event)
 {
-    /* Print all options */
-    /*
-     * Option selection/inversion is handled by
-     * some file scoped toggleable booleans
-     */
+    /* Left button, next option */
+    if(bS1Event->event == EVENT_BUTTON_PRESSED)
+    {
+        MenuEnterState(menu.selectedOption+1);
+    }
+    /* Right button, select activity */
+    else if(bS1Event->event == EVENT_BUTTON_PRESSED)
+    {
+        LoadActivity
+    }
 }
-
 /*!
  * @brief Controls moving the menu to a new state
- *
+ * @param newState The state the menu should take
  */
 void MenuEnterState(MENUSELECT_T newState)
 {
-    switch(menu.selectedOption)
+    switch(newState)
     {
     case MENU_NULL:
+        menu.textIndex = 0;
         break;
     case MENU_ECG:
+        menu.textIndex = 1;
         break;
     case MENU_PREVREAD:
+        menu.textIndex = 2;
         break;
     case MENU_PROFILE:
+        menu.textIndex = 3;
         break;
     case MENU_OPTIONS:
+        menu.textIndex = 4;
         break;
     case MENU_REBOOT:
+        menu.textIndex = 5;
         break;
     }
 
+    MenuEnter();
     menu.selectedOption = newState;
 }
-
 /*!
  * @brief load relevant activity when selected
  */
-int LoadActivity(MENUSELECT_T activityToRun)
+int MenuLoadActivity()
 {
-	return 0;
+    switch(newState)
+    {
+    case MENU_NULL:
+        /* Shouldn't ever be here */
+        break;
+    case MENU_ECG:
+        /* Open the ECG activity. Which should probably be a tight loop */
+        break;
+    case MENU_PREVREAD:
+        /* Open the Previous reads activity. Goes to another menu that let's you select previous read dates, then just replays the results */
+        break;
+    case MENU_PROFILE:
+        /* Loads another menu that lets you select users and new users, etc*/
+        break;
+    case MENU_OPTIONS:
+        /* Goes to the options menu*/
+        break;
+    case MENU_REBOOT:
+        /* Reboots the machine */
+        break;
+    }
 }
-
-/*!
- * @brief navigate the menu using the buttons
- * @param menuOptions array of menu options
- * @param menuSize how many menu options to be displayed
- * @param position current position within the menu
- */
-int MenuNavigate(const char **menuOptions, int menuSize, int position)
-{
-	/*printf("%s\n", *menuOptions);*/
-	return 0;
-}
-
-/*!
- * @brief highlight the active menu option
- * @param position current position within the menu
- */
-int MenuDisplaySelected(int position)
-{
-	return 0;
-}
-
-/*!
- * @brief push each menu option to the screen
- * @param menuOptions array of menu options
- * @param menuSize how many menu options to be displayed
- */
-int MenuDisplay(const char **menuOptions, int menuSize)
-{
-	int position = 0;
-//	int i;
-//	for(i = 0; i < menuSize; i++)
-//	{
-//		/*printf("%s\n", menuOptions[i]);*/
-//	}
-
-	MenuDisplaySelected(position);
-	MenuNavigate(menuOptions, menuSize, position);
-	return 0;
-}
-
-/*!
- * @brief load menu options based on select. Main menu is loaded on system start.
- * @param option The menu of which to load options 
- */
-int MenuLoad(char option[])
-{
-	const char **menuOptions;
-	int menuSize;
-
-	if(option == "main")
-	{
-		menuOptions = menuMain;
-		menuSize = SIZE_MENU_MAIN;
-		MenuDisplay(menuOptions, menuSize);
-	}
-	else
-	{
-		/*printf("Error: invalid option\n");*/
-	}
-
-	return 0;
-}
-
-
-/*!
- * @brief load default menu option (main menu)
- */
-/*int MenuInit()
-{
-	MenuLoad("main");
-	return 0;
-}*/
-
-///*!
-// * @brief load default menu option (main menu)
-// */
-//int main()
-//{
-//	MenuLoad("main");
-//	return 0;
-//}

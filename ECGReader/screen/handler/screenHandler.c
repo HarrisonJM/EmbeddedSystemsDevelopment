@@ -14,10 +14,6 @@
 
 #include "font8x8_basic.h"
 
-#define CHARPIXELWIDTH 8
-#define SCREENMAXX 12
-#define SCREENMAXY 12
-
 /* The display buffer we're using */
 uint8_t DisplayBuffer[96][96 / CHARPIXELWIDTH];
 
@@ -65,7 +61,14 @@ void ScreenPrintChar(uint8_t x
 
     for(i = 0; (i < CHARPIXELWIDTH); ++i)
     {
+        if(invert)
+        {
+            DisplayBuffer[y + i][x] = __ReverseByte(~font8x8_basic[chActual][i]);
+        }
+        else
+        {
             DisplayBuffer[y + i][x] = __ReverseByte(font8x8_basic[chActual][i]);
+        }
     }
 }
 /*!

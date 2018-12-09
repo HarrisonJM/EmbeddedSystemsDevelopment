@@ -38,7 +38,6 @@ void __TimerInit(void)
 }
 /*!
  * @brief Timer0 A0 1ms interrupt service routine
- *
  */
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer0_A0(void)
@@ -52,23 +51,26 @@ __interrupt void Timer0_A0(void)
         ButtonTimer(BUTTONS2);
     }
 
-//    if(buttonS1Queue->size > 0)
-//    {
-//        /*!
-//         * @todo here we would actually pop from the
-//         * queue into an event and use that for everything
-//         * that requires it
-//         */
-//        EVENT_T e;
-//        buttonS1Queue->PopFront(buttonS1Queue, &e);
-//
-//        if(e.event == EVENT_BUTTON_PRESSED)
-//        {
-//            __LEDRedOn();d
-//        }
-//        else
-//        {
-//            __LEDRedOff();
-//        }
-//    }
+    if(ButtonGetState(BUTTONS2) == EVENT_BUTTON_PRESSED)
+        __LEDGreenOn();
+
+    if(buttonS1Queue->size > 0)
+    {
+        /*!
+         * @todo here we would actually pop from the
+         * queue into an event and use that for everything
+         * that requires it
+         */
+        EVENT_T e;
+        buttonS1Queue->PopFront(buttonS1Queue, &e);
+
+        if(e.event == EVENT_BUTTON_PRESSED)
+        {
+            __LEDRedOn();
+        }
+        else
+        {
+            __LEDRedOff();
+        }
+    }
 }

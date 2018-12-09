@@ -20,6 +20,8 @@
 
 #include "hardwareAbstractions/public/I_lcd.h"
 
+#include "menu/menu.h"
+
 EVENTQUEUE_T* buttonS1Queue;
 EVENTQUEUE_T* buttonS2Queue;
 
@@ -51,9 +53,7 @@ int main(void)
     ScreenDisplayBufferInit(' ');
     ScreenFlushDisplayBuffer();
 
-    ScreenPrint("Hello, World!",
-                false);
-    ScreenFlushDisplayBuffer();
+
 
     while(1)
     {

@@ -9,6 +9,13 @@
 
 #include "../../helpers/boollint.h"
 
+/*! Definitions */
+/*!@{*/
+#define CHARPIXELWIDTH 8 /*! < The size of a character */
+#define SCREENMAXX 12 /*! < The maximum size of the screen along the X */
+#define SCREENMAXY 12 /*! < The maximum size of the screen along the Y */
+/*!@}*/
+
 extern void ScreenDisplayBufferInit(char setting);
 extern void ScreenPrintChar(uint8_t x
                      , uint8_t y
