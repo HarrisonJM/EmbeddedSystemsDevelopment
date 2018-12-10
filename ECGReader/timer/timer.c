@@ -16,6 +16,8 @@
 /* Counter */
 int msCounter10 = 0;
 int msCounter100 = 0;
+int timerAdcReading = 1;
+
 /* Queues */
 extern EVENTQUEUE_T* buttonS1Queue;
 extern EVENTQUEUE_T* buttonS2Queue;
@@ -47,6 +49,12 @@ __interrupt void Timer0_A0(void)
     {
 //        ButtonTimer(BUTTONS1);
 //        ButtonTimer(BUTTONS2);
+    }
+
+    if(timerAdcReading >= 40)
+    {
+        ;
+        timerAdcReading = 1;
     }
 
     if(ButtonGetState(BUTTONS2) == EVENT_BUTTON_PRESSED)

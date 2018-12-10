@@ -58,11 +58,13 @@ void activityECGTimer()
     uint8_t i = 0;
     for(; i < LCDPIXELMAXX; ++i)
     {
-        ScreenPrintPixel(i, 16, false);
+        //ScreenPrintPixel(i, 16, false);
     }
 
-//    ScreenPrint("TEST", false);
+    ScreenPrint("TEST", false);
 
+
+    ScreenSetText(0, 16, "TEST2", false);
     ScreenFlushDisplayBuffer();
 }
 /*!

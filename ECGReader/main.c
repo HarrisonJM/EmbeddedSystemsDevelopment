@@ -18,6 +18,8 @@
 
 #include "menu/activities/ECG/activityECG.h"
 
+#include "measurer/adc.h"
+
 EVENTQUEUE_T* buttonS1Queue;
 EVENTQUEUE_T* buttonS2Queue;
 
@@ -45,13 +47,13 @@ int main(void)
     /* Setup LED stuff*/
 //    __LEDHardwareInit();
     /* Timers and interrupts */
-//    __TimerInit();
+    __TimerInit();
 
     /* Display stuff*/
     LCDInitHardware();
 //    ScreenDisplayBufferInit(' ');
 //    ScreenFlushDisplayBuffer();
-
+    ADCInitHardware();
     activityECGEnter();
     activityECGTimer();
 
