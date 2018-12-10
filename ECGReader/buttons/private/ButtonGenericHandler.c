@@ -4,8 +4,8 @@
  * @date 12/11/2018
  */
 
-#include "eventQueue/eventQueue.h"
 #include <buttons/buttonHandlingUtility.h>
+#include <helpers/eventQueue/eventQueue.h>
 #include "hardwareAbstractions/public/I_button.h"
 #include "O_button.h"
 

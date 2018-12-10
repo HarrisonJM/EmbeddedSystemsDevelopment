@@ -5,55 +5,25 @@
 
 #include <msp430.h>
 
-#include "helpers/boollint.h"
+#include "postPowerOn/POST.h"
 
-#include "buttons/buttonHandler.h"
-#include "buttons/buttonHandlingUtility.h"
-#include "hardwareAbstractions/public/I_button.h"
+#include "helpers/eventQueue/eventQueue.h"
 
-#include "hardwareAbstractions/public/I_led.h"
-
-#include "hardwareAbstractions/public/I_lcd.h"
-#include "screen/handler/screenHandler.h"
-
-#include "menu/activities/ECG/activityECG.h"
+#include "menu/activities/activites.h"
 
 EVENTQUEUE_T* buttonS1Queue;
 EVENTQUEUE_T* buttonS2Queue;
 
 int main(void)
 {
-    /*! @todo move into an init function */
-    /*!@{*/
-    /*! @brief Stop watchdog timer */
-    WDTCTL = WDTPW | WDTHOLD;
-    /*!
-     * @brief Disable the GPIO power-on default high-impedance mode
-     * changing/removing this means that all pins must be set manually (including unused ones. Perhaps it helps with re-flashing?
-     */
-    PM5CTL0 &= ~LOCKLPM5;
-    /*! @brief enable interrupts */
-    _BIS_SR(GIE);
-    /*!@}*/
+    /* Perform the post */
+    POST();
 
-    /* Setup button related things */
-//    __ButtonHardwareinit();
-//    ButtonInitHandlerBothButtons();
-//    buttonS1Queue = ButtonGetQueue(BUTTONS1);
-//    buttonS2Queue = ButtonGetQueue(BUTTONS2);
+    ActivityECGEnter();
+    ActivityECGTimer();
 
-    /* Setup LED stuff*/
-//    __LEDHardwareInit();
-    /* Timers and interrupts */
-//    __TimerInit();
-
-    /* Display stuff*/
-    LCDInitHardware();
-//    ScreenDisplayBufferInit(' ');
-//    ScreenFlushDisplayBuffer();
-
-    activityECGEnter();
-    activityECGTimer();
+//    ScreenPrint("TEST", false);
+//    ScreenSetText(0, 0, "TEST", false);
 
     while(1)
     {

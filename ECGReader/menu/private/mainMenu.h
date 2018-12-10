@@ -7,8 +7,8 @@
 #ifndef __MENU_H__
 #define __MENU_H__
 
+#include "../../helpers/eventQueue/eventQueue.h"
 #include "../public/menuUtility.h"
-#include "../../eventQueue/eventQueue.h"
 
 #define SIZEMENUMAIN 6 /*! < The size of the Menu */
 

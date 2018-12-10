@@ -7,7 +7,7 @@
 #include "O_button.h"
 #include "../buttonHandlingUtility.h"
 #include "ButtonGenericHandler.h"
-#include "../../eventQueue/eventQueue.h"
+#include "../../helpers/eventQueue/eventQueue.h"
 
 /*! Filescope Variables */
 /*! @brief Stores state information about button S1 */
@@ -18,7 +18,7 @@ static ButtonStore_t S2;
 /*!
  * @brief Initialises Handler variables
  */
-void ButtonInitHandlerBothButtons()
+void ButtonHandlerInitBothButtons()
 {
     ButtonS1Init(&S1);
     ButtonS2Init(&S2);

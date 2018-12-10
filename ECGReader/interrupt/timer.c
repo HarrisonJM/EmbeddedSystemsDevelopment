@@ -1,18 +1,19 @@
 /*!
- * @brief implements the 1ms timer interrupt
- *
- *  Created on: 17 Nov 2015
- *      Author: Len Biro
+ * @brief Implements the timer interrupts
+ * @author Harrison Marcks
+ * @date 10/12/18
  */
+#include <helpers/eventQueue/eventQueue.h>
 #include <msp430.h>
 
 #include "buttons/buttonHandler.h"
 #include "buttons/buttonHandlingUtility.h"
 //#include "leds/LedHandler.h"
 //#include "leds/LedHandlerUtility.h"
-#include "eventQueue/eventQueue.h"
 #include "hardwareAbstractions/public/I_led.h"
 
+
+extern volatile int timerAdcReading;
 /* Counter */
 int msCounter10 = 0;
 int msCounter100 = 0;
@@ -20,20 +21,6 @@ int msCounter100 = 0;
 extern EVENTQUEUE_T* buttonS1Queue;
 extern EVENTQUEUE_T* buttonS2Queue;
 
-/*!
- * @brief Inits Timer0(1ms)
- */
-void __TimerInit(void)
-{
-    TA0CCR0 = 1024; /* Count up to 1024 */
-    TA0CCTL0 = 0x10; /* Enable counter interrupts, bit 4=1 (5th bit = 1) */
-
-    TA0CCTL1 = OUTMOD_3;                        // TACCR1 set/reset
-    TA0CCR1 = 1023;                             // TACCR1 PWM Duty Cycle
-    TA0CTL = TASSEL_2 + MC_1; // Timer A using subsystem master clock, SMCLK(1.1 MHz)
-                              // and count UP to create a 1ms interrupt
-                              // PWM Period
-}
 /*!
  * @brief Timer0 A0 1ms interrupt service routine
  */

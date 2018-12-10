@@ -7,6 +7,9 @@
 #include <msp430.h>
 #include "../../helpers/boollint.h"
 
+#ifndef __I_LCD_H__
+#define __I_LCD_H__
+
 /*! Defines */
 /*!@{*/
 #define LCDPIXELMAXX 96
@@ -22,3 +25,5 @@ extern bool LCDCheckReady();
 extern void LCDWriteCommandOrData(uint16_t commandOrData);
 void LCDWaitUntilDone();
 void LCDSetCSLow();
+
+#endif /* __I_LCD_H__ */

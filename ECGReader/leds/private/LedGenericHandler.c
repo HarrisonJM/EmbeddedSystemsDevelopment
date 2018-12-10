@@ -4,10 +4,10 @@
  * @date 23/11/18
  */
 
+#include <helpers/eventQueue/eventQueue.h>
 #include "O_LED.h"
 #include "../LedHandlerUtility.h"
 #include "buttons/buttonHandlingUtility.h"
-#include "eventQueue/eventQueue.h"
 
 /* How often the LEDs are interacted with */
 #define LED_PERIOD 50

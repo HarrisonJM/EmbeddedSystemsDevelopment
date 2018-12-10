@@ -9,7 +9,7 @@
 
 #include "../../helpers/boollint.h"
 #include "../buttonHandlingUtility.h"
-#include "../../eventQueue/eventQueue.h"
+#include "../../helpers/eventQueue/eventQueue.h"
 
 /*!
  * @brief the button store object

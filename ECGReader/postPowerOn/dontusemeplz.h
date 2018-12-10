@@ -699,7 +699,6 @@ void outputHex(int row, int column, WORD number)
     }
 }
 
-
 int k = 0;
 
 void buildScene()
@@ -798,9 +797,5 @@ void lcd_handler()
 /********************************************************************/
 /***  End of LCD Handler                                          ***/
 /********************************************************************/
-
-
-
-
 
 #endif /* HEADER_H_ */

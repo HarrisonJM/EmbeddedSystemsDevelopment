@@ -7,7 +7,8 @@
 #ifndef __EVENT_QUEUE_H__
 #define __EVENT_QUEUE_H__
 
-#include "../helpers/boollint.h"
+#include "../boollint.h"
+
 /*! @brief defines the maximum size the event queue can have */
 #define SIZE_OF_EVENT_Q   8
 

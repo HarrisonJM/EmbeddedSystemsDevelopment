@@ -33,35 +33,26 @@ void __ShiftBuffer();
  * @brief Performs Activity initialisation, zeroes out the  display buffer,
  * @todo Starts the ECG work/interrupts?
  */
-void activityECGEnter()
+void ActivityECGEnter()
 {
-    uint8_t y = 0;
-    uint8_t x = 0;
-
-    for(; y < LCDPIXELMAXY; ++y)
-    {
-        for(; x < SCREENMAXX; ++x)
-        {
-//            GraphDisplayBuffer[y][x] = 0X00;
-        }
-    }
+    ScreenDisplayBufferInit(' ');
 }
 /*!
  * @brief Performs timer activity work. Only run when the ADC has a value
  */
-void activityECGTimer()
+void ActivityECGTimer()
 {
     double rawVal = 0.0; /* Get value from ADC */
 
     __ShiftBuffer();
 
     uint8_t i = 0;
+    uint8_t j = 0;
     for(; i < LCDPIXELMAXX; ++i)
     {
-        ScreenPrintPixel(i, 16, false);
+        for(; j < 12; ++j)
+            ScreenPrintPixel(i, j, false);
     }
-
-//    ScreenPrint("TEST", false);
 
     ScreenFlushDisplayBuffer();
 }

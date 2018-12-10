@@ -8,7 +8,7 @@
 #ifndef __ACTIVITY_ECG_H__
 #define __ACTIVITY_ECG_H__
 
-void activityECGEnter();
-void activityECGTimer();
+void ActivityECGEnter();
+void ActivityECGTimer();
 
 #endif /* __ACTIVITY_ECG_H__ */

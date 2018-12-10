@@ -4,8 +4,8 @@
  * @date 24/11/18
  */
 
+#include <helpers/eventQueue/eventQueue.h>
 #include "helpers/boollint.h"
-#include "eventQueue.h"
 
 #define EVENT_NULL      0
 #define EVENT_BUTTON_PRESS  1

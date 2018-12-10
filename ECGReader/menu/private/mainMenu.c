@@ -6,6 +6,8 @@
  */
 
 #include "mainMenu.h"
+#include "../activities/activites.h"
+
 #include <screen/handler/screenHandler.h>
 #include "buttons/buttonHandlingUtility.h"
 
@@ -108,7 +110,8 @@ void MainMenuEnterActivity()
         /* Shouldn't ever be here */
         break;
     case MENU_ECG:
-        /* Open the ECG activity. Which should probably be a tight loop */
+        /* Open the ECG activity. */
+        ActivityECGEnter();
         break;
     case MENU_PREVREAD:
         /* Open the Previous reads activity. Goes to another menu that let's you select previous read dates, then just replays the results */
@@ -135,7 +138,8 @@ void MainMenuTimerActivity()
         /* Shouldn't ever be here */
         break;
     case MENU_ECG:
-        /* Open the ECG activity. Which should probably be a tight loop */
+        /* Open the ECG activity. */
+        ActivityECGTimer();
         break;
     case MENU_PREVREAD:
         /* Open the Previous reads activity. Goes to another menu that let's you select previous read dates, then just replays the results */

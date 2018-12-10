@@ -7,13 +7,13 @@
 #ifndef __BUTTON_HANDLER_H__
 #define __BUTTON_HANDLER_H__
 
+#include "../helpers/eventQueue/eventQueue.h"
 #include "buttonHandlingUtility.h"
-#include "../eventQueue/eventQueue.h"
 
 /*!
  * @brief Initialise button related things
  */
-extern void ButtonInitHandlerBothButtons();
+extern void ButtonHandlerInitBothButtons();
 /*!
  * @brief handle the continuation of a state
  * @param button enum of the button we wish to reference

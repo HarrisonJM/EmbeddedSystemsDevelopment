@@ -161,8 +161,7 @@ void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX],
  *
  * @param DB_a The array/double pointer to where the display buffer is stored
  *
- * @todo Figure out how to change loops to counting done to improve efficiency
- * @todo remove tight loops in the while() function and instead do it using interrupts
+ * @todo Figure out how to change loops to counting down to improve efficiency
  */
 void __ScreenFlushDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
