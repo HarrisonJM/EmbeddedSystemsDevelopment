@@ -1,59 +1,59 @@
-/*
- * main.c
+/*!
+ * @brief defines the main entry point for the program
+ * @date 10/12/2018
  */
 
 #include <msp430.h>
-#include <screen/handler/screenHandler.h>
 
 #include "helpers/boollint.h"
 
 #include "buttons/buttonHandler.h"
 #include "buttons/buttonHandlingUtility.h"
-#include "buttons/private/O_button.h"
 #include "hardwareAbstractions/public/I_button.h"
 
-#include "leds/LedHandler.h"
-#include "leds/LedHandlerUtility.h"
 #include "hardwareAbstractions/public/I_led.h"
 
-#include "timer/timer.h"
-
 #include "hardwareAbstractions/public/I_lcd.h"
+#include "screen/handler/screenHandler.h"
 
-#include "menu/menu.h"
+#include "menu/activities/ECG/activityECG.h"
 
 EVENTQUEUE_T* buttonS1Queue;
 EVENTQUEUE_T* buttonS2Queue;
 
 int main(void)
 {
+    /*! @todo move into an init function */
+    /*!@{*/
     /*! @brief Stop watchdog timer */
     WDTCTL = WDTPW | WDTHOLD;
     /*!
      * @brief Disable the GPIO power-on default high-impedance mode
-     * Changining/removing this means that all pins must be set manually (including unused ones. Perhaps it helps with re-flashing?
+     * changing/removing this means that all pins must be set manually (including unused ones. Perhaps it helps with re-flashing?
      */
     PM5CTL0 &= ~LOCKLPM5;
     /*! @brief enable interrupts */
     _BIS_SR(GIE);
+    /*!@}*/
 
     /* Setup button related things */
-    __ButtonHardwareinit();
-    ButtonInitHandlerBothButtons();
-    buttonS1Queue = ButtonGetQueue(BUTTONS1);
-    buttonS2Queue = ButtonGetQueue(BUTTONS2);
+//    __ButtonHardwareinit();
+//    ButtonInitHandlerBothButtons();
+//    buttonS1Queue = ButtonGetQueue(BUTTONS1);
+//    buttonS2Queue = ButtonGetQueue(BUTTONS2);
 
     /* Setup LED stuff*/
-    __LEDHardwareInit();
+//    __LEDHardwareInit();
     /* Timers and interrupts */
-    __TimerInit();
+//    __TimerInit();
 
     /* Display stuff*/
     LCDInitHardware();
-    ScreenDisplayBufferInit(' ');
-    ScreenFlushDisplayBuffer();
+//    ScreenDisplayBufferInit(' ');
+//    ScreenFlushDisplayBuffer();
 
-
+    activityECGEnter();
+    activityECGTimer();
 
     while(1)
     {

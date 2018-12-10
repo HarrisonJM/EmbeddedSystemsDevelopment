@@ -5,64 +5,72 @@
  * @date 12/11/2018
  */
 
+#include "mainMenu.h"
 #include <screen/handler/screenHandler.h>
-#include "menu.h"
-
-/*! Pre-processor Macros */
-#define SIZE_MENU_MAIN 6 /*! < The size of the Menu */
+#include "buttons/buttonHandlingUtility.h"
 
 /* Prototypes */
-void MenuEnter();
+void MainMenuEnterState(MENUSELECT_T newState);
+void MainMenuEnterActivity();
+void MainMenuTimerActivity();
 
 /* File scope variables */
 static MENUCONTEXT_T menu;
 
-/* Definitions */
-void MenuNull()
+/* Function definitions */
+void MainMenuNull()
 {
- /* Splash screen/initialization or smth */
-
+    /* Splash screen/initialization or smth */
     menu.selectedOption = MENU_ECG;
 }
 /*!
  * @brief Prints the menu to the screen, with the selected option
  */
-void MenuEnter()
+void MainMenuEnter()
 {
     bool invert = false;
     int i = 0;
-    for(i = 0; i < SIZE_MENU_MAIN; ++i)
+    for(i = 0; i < SIZEMENUMAIN; ++i)
     {
         if ( i == menu.textIndex)
         {
             invert = true;
         }
-        ScreenSetText(0, i*SCREENMAXY, *(menuMain+i), invert);
+        ScreenSetText(0, i*SCREENMAXY, *(MainMenuStrings+i), invert);
         invert = false;
     }
     ScreenFlushDisplayBuffer();
 }
 /*!
  * @brief Decides whether an action needs to take place
+ * @param bS1Event The latest event on button S1
+ * @param bS1Event The latest event on button S2
  */
-void MenuTimer(EVENT_T *bS1Event, EVENT_T *bS2Event)
+void MainMenuTimer(EVENT_T *bS1Event, EVENT_T *bS2Event)
 {
-    /* Left button, next option */
-    if(bS1Event->event == EVENT_BUTTON_PRESSED)
+    if(menu.selected == false)
     {
-        MenuEnterState(menu.selectedOption+1);
+        /* Left button, next option */
+        if(bS1Event->event == EVENT_BUTTON_PRESSED)
+        {
+            MainMenuEnterState(menu.selectedOption++);
+        }
+        /* Right button, select activity */
+        else if(bS1Event->event == EVENT_BUTTON_PRESSED)
+        {
+            MainMenuEnterActivity();
+        }
     }
-    /* Right button, select activity */
-    else if(bS1Event->event == EVENT_BUTTON_PRESSED)
+    else
     {
-        LoadActivity
+        MainMenuTimerActivity();
     }
 }
 /*!
  * @brief Controls moving the menu to a new state
  * @param newState The state the menu should take
  */
-void MenuEnterState(MENUSELECT_T newState)
+void MainMenuEnterState(MENUSELECT_T newState)
 {
     switch(newState)
     {
@@ -86,15 +94,42 @@ void MenuEnterState(MENUSELECT_T newState)
         break;
     }
 
-    MenuEnter();
+    MainMenuEnterActivity();
     menu.selectedOption = newState;
 }
 /*!
- * @brief load relevant activity when selected
+ * @brief Load relevant activity when selected
  */
-int MenuLoadActivity()
+void MainMenuEnterActivity()
 {
-    switch(newState)
+    switch(menu.selectedOption)
+    {
+    case MENU_NULL:
+        /* Shouldn't ever be here */
+        break;
+    case MENU_ECG:
+        /* Open the ECG activity. Which should probably be a tight loop */
+        break;
+    case MENU_PREVREAD:
+        /* Open the Previous reads activity. Goes to another menu that let's you select previous read dates, then just replays the results */
+        break;
+    case MENU_PROFILE:
+        /* Loads another menu that lets you select users and new users, etc*/
+        break;
+    case MENU_OPTIONS:
+        /* Goes to the options menu*/
+        break;
+    case MENU_REBOOT:
+        /* Reboots the machine */
+        break;
+    }
+}
+/*!
+ * @brief Enter the relevant activity's timer
+ */
+void MainMenuTimerActivity()
+{
+    switch(menu.selectedOption)
     {
     case MENU_NULL:
         /* Shouldn't ever be here */

@@ -13,8 +13,6 @@
 #include "eventQueue/eventQueue.h"
 #include "hardwareAbstractions/public/I_led.h"
 
-/* Timer variable setup */
-int timerAdcReading = 1;
 /* Counter */
 int msCounter10 = 0;
 int msCounter100 = 0;
@@ -47,8 +45,8 @@ __interrupt void Timer0_A0(void)
 
     if (10 == msCounter10)
     {
-        ButtonTimer(BUTTONS1);
-        ButtonTimer(BUTTONS2);
+//        ButtonTimer(BUTTONS1);
+//        ButtonTimer(BUTTONS2);
     }
 
     if(ButtonGetState(BUTTONS2) == EVENT_BUTTON_PRESSED)
