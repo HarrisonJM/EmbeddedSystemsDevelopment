@@ -52,8 +52,8 @@ void ADCStart(void)
   /*ADC12CTL0 how to configure coversions | ADC12ENC enable conversions | ADC12SC start conversion*/
     ADC12CTL0 |= ADC12ENC | ADC12SC; /*Start sampling/conversion*/
 
-    __bis_SR_register(LPM0_bits | GIE); /*LPM0, ADC12_ISR will force exit*/
-    __no_operation(); /*For debugger*/  
+    //__bis_SR_register(LPM0_bits | GIE); /*LPM0, ADC12_ISR will force exit*/
+    //__no_operation(); /*For debugger*/  
 }
 
 

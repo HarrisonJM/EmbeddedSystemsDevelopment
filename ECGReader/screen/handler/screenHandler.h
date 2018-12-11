@@ -11,6 +11,7 @@
 #include "../../hardwareAbstractions/public/I_lcd.h"
 #include "../../helpers/boollint.h"
 
+extern uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
 
 extern void ScreenDisplayBufferInit(char setting);
 

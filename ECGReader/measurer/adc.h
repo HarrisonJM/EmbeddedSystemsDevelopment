@@ -15,6 +15,6 @@ extern int rdgsArray[RDGSARRAYSIZE];
 
 extern void ADCInitHardware(void);
 
-extern void ADC(void);
+extern void ADCStart(void);
 
 #endif /* ADC_H_ */

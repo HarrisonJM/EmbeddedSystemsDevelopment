@@ -20,6 +20,8 @@
 
 #include "measurer/adc.h"
 
+#include "timer/timer.h"
+
 EVENTQUEUE_T* buttonS1Queue;
 EVENTQUEUE_T* buttonS2Queue;
 
@@ -45,21 +47,65 @@ int main(void)
 //    buttonS2Queue = ButtonGetQueue(BUTTONS2);
 
     /* Setup LED stuff*/
-//    __LEDHardwareInit();
+//    
     /* Timers and interrupts */
-    __TimerInit();
+   // __LEDHardwareInit();
 
+    bool invert = true; 
     /* Display stuff*/
     LCDInitHardware();
-//    ScreenDisplayBufferInit(' ');
-//    ScreenFlushDisplayBuffer();
-    ADCInitHardware();
-    activityECGEnter();
-    activityECGTimer();
+   // ScreenDisplayBufferInit(' ');
+    ScreenPrintCustom(DisplayBuffer, "Hello World", invert);
+    ScreenFlushDisplayBuffer();
+    
+    ///__TimerInit();
+    
+    //ADCInitHardware();
+    //activityECGEnter();
+    //activityECGTimer();
+    /*char adcRdg [5];
+    char timerAdcReading = 0;*/
 
+    char adcRdg [5];
+    char doneReading = 0;
+    ADCStart();
     while(1)
     {
+        
+        if(timerAdcReading == 1)
+        {
+            if(doneReading == 0) 
+            {
+                //ScreenPrintCustom(DisplayBuffer, "Hello Worlsd", invert);
+                //ScreenFlushDisplayBuffer();
+                sprintf (adcRdg, "%d", rdg);
+               ScreenPrintCustom(DisplayBuffer, adcRdg, invert);
+                ScreenFlushDisplayBuffer();
+                doneReading = 1;
+            }
+        }
+        else
+        {
+            doneReading = 0;
+        }
+            
     }
+/*
+
+
+        if (adcReading == 1){
+            if (doneReading == 0){
+                /*setText (0, 24, "    ");
+                sprintf (adcRdg, "%d", rdg);
+                setText(0, 24, adcRdg);
+                setText(40, 24,"bits");
+                outputDisplayBuffer(0, 96);*/
+
+               // doneReading = 1;
+           // }
+
+      /*  }else
+            doneReading = 0;*/    
 
 //    char adcRdg [5];
 //    char doneReading = 0;

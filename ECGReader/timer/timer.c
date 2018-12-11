@@ -51,9 +51,9 @@ __interrupt void Timer0_A0(void)
 //        ButtonTimer(BUTTONS2);
     }
 
+    timerAdcReading++;
     if(timerAdcReading >= 40)
     {
-        ;
         timerAdcReading = 1;
     }
 
