@@ -1,5 +1,5 @@
 /*!
- * @brief defines the main entry point for the program
+ * @brief POST, RAM Checks, some initialisation
  * @author Jesse Batt
  * @date 10/12/2018
  * @todo TIDY EVERYTHING
