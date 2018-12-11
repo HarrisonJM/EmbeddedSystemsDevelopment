@@ -1,5 +1,5 @@
 /*!
- * @brief An LED handler for interacting with the button handler more effectively
+ * @brief An LED handler for tracking the state of the buttons
  * @author Harrison J Marcks
  * @date 23/11/18
  */
@@ -9,8 +9,13 @@
 #include "../LedHandlerUtility.h"
 #include "buttons/buttonHandlingUtility.h"
 
-/* How often the LEDs are interacted with */
+/* Definitions */
+/*! @brief How often the LEDs are interacted with */
 #define LED_PERIOD 50
+
+/* Prototypes */
+static void __LEDTurnOn(LEDSTORE_T* ledStore);
+static void __LEDTurnOff(LEDSTORE_T* ledStore);
 /*!
  * @brief Initialises the LED "objects" with values
  * @param ledStore Pointer to the LED store we're init'ing
@@ -24,46 +29,53 @@ void LEDStoreInit(LEDSTORE_T* ledStore)
  * @brief Returns the selected LEDs state
  * @param ledStore the ledStore we wish to get from
  */
-LEDSTATE_T __LEDGetState(LEDSTORE_T *ledStore)
+LEDACTION_T __LEDGetState(LEDSTORE_T *ledStore)
 {
     return ledStore->state;
 }
 /*!
- * @brief handles LEDs uniformly, but only for button presses, so actually a bit useless atm
+ * @brief Handles LEDs uniformly, gives us a way to track, in software, what the lights are doing
  * @param ledStore A pointer to the LED we wish to use
- * @param button The button selector for the button that's controlling the LED
  */
-void __LEDHandler(LEDSTORE_T* ledStore,
-                  EVENTQUEUE_T *eventQueue)
+void __LEDHandler(LEDSTORE_T* ledStore
+                  , const LEDACTION_T newState)
 {
-    EVENT_T e;
-    ledStore->period++;
-
-    if (ledStore->period >= LED_PERIOD)
+    switch(newState)
     {
-        ledStore->period = 0;
-        switch (ledStore->state)
+    case LED_NULL:
+    case LED_ON:
+        __LEDTurnOn(ledStore);
+        break;
+    case LED_OFF:
+        __LEDTurnOff(ledStore);
+        break;
+    case LED_TOGGLE:
+        if(ledStore->state == LED_ON)
         {
-        case LED_OFF:
-            if (eventQueue->PopFront(eventQueue, &e))
-            {
-                if(e.event == EVENT_BUTTON_PRESSED)
-                {
-                    ledStore->LEDOn();
-                    ledStore->state = LED_ON;
-                }
-            }
-            else
-            {
-                ledStore->state = LED_ON;
-            }
-            break;
-        case LED_ON:
-            ledStore->LEDOff();
-            ledStore->state = LED_OFF;
-            break;
-        default:
-            break;
+            __LEDTurnOff(ledStore);
         }
+        else
+        {
+            __LEDTurnOn(ledStore);
+        }
+        break;
     }
+}
+/*!
+ * @brief turns the LED off
+ * @param ledStore A pointer to the LED we wish to use
+ */
+static void __LEDTurnOn(LEDSTORE_T* ledStore)
+{
+    ledStore->LEDOn();
+    ledStore->state = LED_ON;
+}
+/*!
+ * @brief turns the LED off
+ * @param ledStore A pointer to the LED we wish to use
+ */
+static void __LEDTurnOff(LEDSTORE_T* ledStore)
+{
+    ledStore->LEDOff();
+    ledStore->state = LED_OFF;
 }

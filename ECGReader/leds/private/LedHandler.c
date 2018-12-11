@@ -2,12 +2,10 @@
  * @brief Implementationf or public interface functions
  * @author Harrison J Marcks
  * @date 23/11/2018
- * @todo Extend this to be more useful
  */
 
 #include "O_LED.h"
 #include "leds/LedHandlerUtility.h"
-#include "buttons/buttonHandlingUtility.h"
 #include "LedGenericHandler.h"
 
 /* LED objects */
@@ -29,9 +27,9 @@ void LEDInitHandlerBothLEDs()
  * @param button enum of the button we wish to reference
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
-LEDSTATE_T LEDGetState(const LEDSELECT_T led)
+LEDACTION_T LEDGetState(const LEDSELECT_T led)
 {
-    LEDSTATE_T ledState = LED_NULL;
+    LEDACTION_T ledState = LED_NULL;
     switch(led)
     {
     case LEDGREEN:
@@ -49,19 +47,18 @@ LEDSTATE_T LEDGetState(const LEDSELECT_T led)
 /*!
  * @brief Run the entire LED Handler
  * @param led The LED selector for the LED we wish to handle
+ * @param newState The new state the LED should take
  */
-void LEDTimer(const LEDSELECT_T led,
-              const BUTTONSELECT_T button)
+void LEDTimer(const LEDSELECT_T led
+              , const LEDACTION_T newState)
 {
     switch(led)
     {
     case LEDGREEN:
-        __LEDHandler(&greenStore,
-                     button);
+        __LEDHandler(&greenStore);
         break;
     case LEDRED:
-        __LEDHandler(&redStore,
-                     button);
+        __LEDHandler(&redStore);
         break;
     }
 }

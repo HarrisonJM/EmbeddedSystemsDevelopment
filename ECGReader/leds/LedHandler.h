@@ -22,13 +22,9 @@ extern BUTTONSTATE_E LEDGetState(const LEDSELECT_T led);
 /*!
  * @brief Run the entire LED Handler
  * @param led The LED selector for the LED we wish to handle
+ * @param newState The new state the light should be
  */
-/*!
- * @brief Run the entire LED Handler
- * @param led The LED selector for the LED we wish to handle
- * @param button The button selector that we are acting on
- */
-extern void LEDTimer(const LEDSELECT_T led,
-              const BUTTONSELECT_T button);
+extern void LEDTimer(const LEDSELECT_T led
+                     , const LEDACTION_T newState);
 
 #endif /* __LEDHANDLER_H__ */

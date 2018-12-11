@@ -8,8 +8,7 @@
 #define __LEDGENERICHANDLER_H__
 
 void LEDStoreInit(LEDSTORE_T* ledStore);
-LEDSTATE_T __LEDGetState(LEDSTORE_T *ledStore);
-void __LEDHandler(LEDSTORE_T* ledStore,
-                  BUTTONSELECT_T button);
+LEDACTION_T __LEDGetState(LEDSTORE_T *ledStore);
+void __LEDHandler(LEDSTORE_T* ledStore);
 
 #endif /* __LEDGENERICHANDLER_H__ */
