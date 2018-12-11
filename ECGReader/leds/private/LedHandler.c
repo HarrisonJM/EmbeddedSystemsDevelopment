@@ -15,7 +15,7 @@ static LEDSTORE_T redStore;
 /*!
  * @brief Initialise led related things
  */
-void LEDInitHandlerBothLEDs()
+void LEDHandlerInitBothLEDs()
 {
     LEDGreenInit(&greenStore);
     LEDRedInit(&redStore);
@@ -32,10 +32,10 @@ LEDACTION_T LEDGetState(const LEDSELECT_T led)
     LEDACTION_T ledState = LED_NULL;
     switch(led)
     {
-    case LEDGREEN:
+    case LED_GREEN:
         ledState = __LEDGetState(&greenStore);
         break;
-    case LEDRED:
+    case LED_RED:
         ledState = __LEDGetState(&redStore);
         break;
     default:
@@ -49,15 +49,15 @@ LEDACTION_T LEDGetState(const LEDSELECT_T led)
  * @param led The LED selector for the LED we wish to handle
  * @param newState The new state the LED should take
  */
-void LEDTimer(const LEDSELECT_T led
+void LEDUse(const LEDSELECT_T led
               , const LEDACTION_T newState)
 {
     switch(led)
     {
-    case LEDGREEN:
+    case LED_GREEN:
         __LEDHandler(&greenStore);
         break;
-    case LEDRED:
+    case LED_RED:
         __LEDHandler(&redStore);
         break;
     }

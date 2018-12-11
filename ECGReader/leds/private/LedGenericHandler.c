@@ -22,7 +22,7 @@ static void __LEDTurnOff(LEDSTORE_T* ledStore);
  */
 void LEDStoreInit(LEDSTORE_T* ledStore)
 {
-    ledStore->state = LED_OFF;
+    ledStore->state = LED_NULL;
     ledStore->period = 0;
 }
 /*!
@@ -42,10 +42,10 @@ void __LEDHandler(LEDSTORE_T* ledStore
 {
     switch(newState)
     {
-    case LED_NULL:
     case LED_ON:
         __LEDTurnOn(ledStore);
         break;
+    case LED_NULL:
     case LED_OFF:
         __LEDTurnOff(ledStore);
         break;

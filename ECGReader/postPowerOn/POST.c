@@ -16,8 +16,8 @@
 #include "hardwareAbstractions/public/I_watchdog.h"
 #include "hardwareAbstractions/public/I_interrupt.h"
 
-#include "buttons/buttonHandlingUtility.h"
 #include "buttons/buttonHandler.h"
+#include "leds/LedHandler.h"
 
 #include "screen/handler/screenHandler.h"
 
@@ -187,6 +187,8 @@ void POST(void)
 
     /* Initialisation - Software */
     ButtonHandlerInitBothButtons();
+    LEDHandlerInitBothLEDs();
+
     /* Clear the Screen */
     ScreenDisplayBufferInit(' ');
     ScreenFlushDisplayBuffer();

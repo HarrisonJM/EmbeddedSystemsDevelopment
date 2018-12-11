@@ -18,8 +18,8 @@ typedef enum {
 
 /*! @brief The two LEDs we have*/
 typedef enum {
-    LEDGREEN,
-    LEDRED
+    LED_GREEN,
+    LED_RED
 } LEDSELECT_T;
 
 #endif /* __LEDHANDLERUTILITY_H__ */

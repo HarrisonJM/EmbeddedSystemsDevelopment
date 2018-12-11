@@ -8,6 +8,8 @@
 #include "helpers/boollint.h"
 #include "hardwareAbstractions/public/I_led.h"
 
+#include "leds/LedHandler.h"
+
 extern volatile bool restarting;
 
 extern int main();
@@ -17,7 +19,8 @@ extern int main();
 __interrupt void watchdog_timer(void)
 {
     WDTCTL = WDTPW + WDTCNTCL + 3; /* Reset the watchdog */
-    __LEDRedOn();
     restarting = true;
+    LEDUse(LED_RED
+           , LED_ON);
     main();
 }
