@@ -1,5 +1,6 @@
 /*!
  * @brief defines the main entry point for the program
+ * @author Jesse Batt
  * @date 10/12/2018
  * @todo TIDY EVERYTHING
  */
@@ -20,6 +21,7 @@
 
 #include "screen/handler/screenHandler.h"
 
+/* Variable */
 volatile bool restarting = false;
 
 void RAMCheck1()
@@ -136,6 +138,9 @@ void RAMCheck7()
     __LEDRedOff();
 }
 
+/*
+ * @brief performs the POST. Also handles hardware and software initialization
+ */
 void POST(void)
 {
     WatchdogStop();
@@ -164,7 +169,7 @@ void POST(void)
     RAMCheck6();
     RAMCheck7();
 
-    /* Initialisation */
+    /* Initialisations */
     __ButtonHardwareinit();
 
     /* Timers */
