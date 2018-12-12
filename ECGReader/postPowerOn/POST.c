@@ -24,7 +24,7 @@
 /* Variable */
 volatile bool restarting = false;
 
-void RAMCheck1()
+void RAMCheck1(void)
 {
     asm(
          "      mov.w #001C00h, R12 \n"
@@ -36,12 +36,9 @@ void RAMCheck1()
          "      cmp.w #002400h, R12 \n"
          "      jn loop1 \n"
         );
-
-    __LEDGreenOn();
-    __LEDRedOff();
 }
 
-void RAMCheck2()
+void RAMCheck2(void)
 {
     asm(
          "      mov.w #001C00h, R12 \n"
@@ -53,12 +50,9 @@ void RAMCheck2()
          "      cmp.w #002400h, R12 \n"
          "      jn loop2 \n"
         );
-
-    __LEDGreenOff();
-    __LEDRedOn();
 }
 
-void RAMCheck3()
+void RAMCheck3(void)
 {
     asm(
          "      mov.w #001C00h, R12 \n"
@@ -70,12 +64,9 @@ void RAMCheck3()
          "      cmp.w #002400h, R12 \n"
          "      jn loop3 \n"
         );
-
-    __LEDGreenOn();
-    __LEDRedOff();
 }
 
-void RAMCheck4()
+void RAMCheck4(void)
 {
     asm(
          "      mov.w #001C00h, R12 \n"
@@ -87,12 +78,9 @@ void RAMCheck4()
          "      cmp.w #002400h, R12 \n"
          "      jn loop4 \n"
         );
-
-    __LEDGreenOff();
-    __LEDRedOn();
 }
 
-void RAMCheck5()
+void RAMCheck5(void)
 {
     asm(
          "      mov.w #001C00h, R12 \n"
@@ -102,12 +90,9 @@ void RAMCheck5()
          "      cmp.w #002400h, R12 \n"
          "      jn loop5 \n"
         );
-
-    __LEDGreenOn();
-    __LEDRedOff();
 }
 
-void RAMCheck6()
+void RAMCheck6(void)
 {
     asm(
         "      mov.w #001C00h, R12 \n"
@@ -118,12 +103,9 @@ void RAMCheck6()
         "      cmp.w #002400h, R12 \n"
         "      jn loop6 \n"
         );
-
-    __LEDGreenOff();
-    __LEDRedOn();
 }
 
-void RAMCheck7()
+void RAMCheck7(void)
 {
     asm(
          "      mov.w #001C00h, R12 \n"
@@ -133,11 +115,21 @@ void RAMCheck7()
          "      cmp.w #002400h, R12 \n"
          "      jn loop7 \n"
         );
-
-    __LEDGreenOn();
-    __LEDRedOff();
 }
-
+/*
+ * @brief Resets the stack pointer
+ */
+void ResetStackPoint(void)
+{
+    asm(
+         "      mov.w #002400h, SP \n"
+        );
+}
+void ToggleLEDs(void)
+{
+    LEDUse(LED_GREEN, LED_TOGGLE);
+    LEDUse(LED_RED, LED_TOGGLE);
+}
 /*
  * @brief performs the POST. Also handles hardware and software initialization
  */
@@ -150,24 +142,31 @@ void POST(void)
      * to activate previously configured port settings
      */
     PM5CTL0 &= ~LOCKLPM5;
-
     /* Check restart  for re-init */
     if (restarting == true)
     {
         goto restart_here;
     }
-
     /* LEDs need init'ing before RAM check for the lights in each RAM check */
     __LEDHardwareInit();
+    LEDHandlerInitBothLEDs();
 
     /* RAM Checks */
     RAMCheck1();
+    LEDUse(LED_GREEN, LED_ON);
+    LEDUse(LED_RED, LED_OFF);
     RAMCheck2();
+    ToggleLEDs();
     RAMCheck3();
+    ToggleLEDs();
     RAMCheck4();
+    ToggleLEDs();
     RAMCheck5();
+    ToggleLEDs();
     RAMCheck6();
+    ToggleLEDs();
     RAMCheck7();
+    ToggleLEDs();
 
     /* Initialisations */
     __ButtonHardwareinit();
@@ -182,12 +181,10 @@ void POST(void)
     /* Screen Hardware */
     LCDInitHardware();
 
-    __LEDGreenOff();
-    __LEDRedOn();
+    ToggleLEDs();
 
     /* Initialisation - Software */
     ButtonHandlerInitBothButtons();
-    LEDHandlerInitBothLEDs();
 
     /* Clear the Screen */
     ScreenDisplayBufferInit(' ');
@@ -199,9 +196,5 @@ restart_here:
 
     WatchDogEnable();
 
-    /* Re-set the stack pointer */
-
-    asm(
-         "      mov.w #002400h, SP \n"
-        );
+    ResetStackPoint();
 }

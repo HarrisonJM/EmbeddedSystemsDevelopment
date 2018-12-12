@@ -4,26 +4,26 @@
  * @date 2/11/2018
  */
 
-#include <msp430.h>
-#include "../../helpers/boollint.h"
-
 #ifndef __I_LCD_H__
 #define __I_LCD_H__
 
+#include <msp430.h>
+#include "../../helpers/boollint.h"
+
 /*! Defines */
 /*!@{*/
-#define LCDPIXELMAXX 96
-#define LCDPIXELMAXY 96
+#define LCDPIXELMAXX (uint8_t)96
+#define LCDPIXELMAXY (uint8_t)96
 /*!@}*/
 
 /* init */
-extern void LCDInitHardware();
+extern void LCDInitHardware(void);
 
 /* Control */
-extern void LCDSetCSHigh();
-extern bool LCDCheckReady();
+extern void LCDSetCSHigh(void);
+extern bool LCDCheckReady(void);
 extern void LCDWriteCommandOrData(uint16_t commandOrData);
-void LCDWaitUntilDone();
-void LCDSetCSLow();
+void LCDWaitUntilDone(void);
+void LCDSetCSLow(void);
 
 #endif /* __I_LCD_H__ */

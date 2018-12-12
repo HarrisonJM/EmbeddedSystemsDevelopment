@@ -124,7 +124,8 @@ void __ScreenPrint(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]
         column += 1;
         str_p++;
 
-        if ((*str_p) == '\n')
+        /* If new line encountered or screen edge found, new line*/
+        if (((*str_p) == '\n') || (column >= SCREENMAXX))
         {
             column = 0;
             row += CHARPIXELWIDTH;
@@ -146,11 +147,41 @@ void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX],
 {
     if(invert == true)
     {
-        DB_a[y][x>>3] &= ~(0x80 >> (x & 0x7));
+        DB_a[y][x] |= 0x01;
     }
     else
     {
-        DB_a[y][x>>3] &= (0x80 >> (x & 0x7));
+        DB_a[y][x] &= ~0x01;
+    }
+}
+/*!
+ * @brief shifts the displaybuffer backwards (left) ish
+ */
+void __ShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
+{
+    uint8_t x = 0;
+    uint8_t y = 0;
+
+    for(; y < LCDPIXELMAXY-(uint8_t)1; ++y)
+    {
+        /* Start from the left. Shift things left. No pixel left behind */
+        for(; x < SCREENMAXX-(uint8_t)1; ++x)
+        {
+            /* The following is done this way as shifting a number with a '1' in the MSB is undefined */
+            /* If the MSB is ON */
+            if((DB_a[y][x] & (uint8_t)(0x80)))
+            {
+                /* Turn it off */
+                DB_a[y][x+(uint8_t)1] &= (uint8_t)0x7F;
+                /* If within the bounds of the screen */
+                if((y+(uint8_t)1 < LCDPIXELMAXY) && (x+(uint8_t)1 < SCREENMAXX))
+                {
+                    /* "shift" the pixel to the next column */
+                    DB_a[y][x+(uint8_t)1] |= (uint8_t)0x01;
+                }
+            }
+            (DB_a[y][x]) = (DB_a[y][x]) << (uint8_t)1;
+        }
     }
 }
 /*!

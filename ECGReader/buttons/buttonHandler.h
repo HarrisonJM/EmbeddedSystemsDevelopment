@@ -13,7 +13,7 @@
 /*!
  * @brief Initialise button related things
  */
-extern void ButtonHandlerInitBothButtons();
+extern void ButtonHandlerInitBothButtons(void);
 /*!
  * @brief handle the continuation of a state
  * @param button enum of the button we wish to reference

@@ -70,6 +70,13 @@ void ScreenPrintPixel(uint8_t x,
     __ScreenPrintPixel(DisplayBuffer, x, y, invert);
 }
 /*!
+ * @brief Shifts everything in the buffer << left << by a single pixel
+ */
+void ScreenShiftBuffer(void)
+{
+    __ShiftBuffer(DisplayBuffer);
+}
+/*!
  * @brief Flush the normal display buffer
  */
 void ScreenFlushDisplayBuffer()

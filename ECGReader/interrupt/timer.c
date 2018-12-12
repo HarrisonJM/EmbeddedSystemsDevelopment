@@ -36,26 +36,26 @@ __interrupt void Timer0_A0(void)
 //        ButtonTimer(BUTTONS2);
     }
 
-    if(ButtonGetState(BUTTONS2) == EVENT_BUTTON_PRESSED)
-        __LEDGreenOn();
-
-    if(buttonS1Queue->size > 0)
-    {
-        /*!
-         * @todo here we would actually pop from the
-         * queue into an event and use that for everything
-         * that requires it
-         */
-        EVENT_T e;
-        buttonS1Queue->PopFront(buttonS1Queue, &e);
-
-        if(e.event == EVENT_BUTTON_PRESSED)
-        {
-            __LEDRedOn();
-        }
-        else
-        {
-            __LEDRedOff();
-        }
-    }
+//    if(ButtonGetState(BUTTONS2) == EVENT_BUTTON_PRESSED)
+//        __LEDGreenOn();
+//
+//    if(buttonS1Queue->size > 0)
+//    {
+//        /*!
+//         * @todo here we would actually pop from the
+//         * queue into an event and use that for everything
+//         * that requires it
+//         */
+//        EVENT_T e;
+//        buttonS1Queue->PopFront(buttonS1Queue, &e);
+//
+//        if(e.event == EVENT_BUTTON_PRESSED)
+//        {
+//            __LEDRedOn();
+//        }
+//        else
+//        {
+//            __LEDRedOff();
+//        }
+//    }
 }

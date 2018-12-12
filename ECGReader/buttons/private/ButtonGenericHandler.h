@@ -5,11 +5,11 @@
  *
  * @date 19/11/2018
  */
-#include "O_button.h"
-#include "../buttonHandlingUtility.h"
-
 #ifndef __BUTTON_GENERIC_HANDLER_H__
 #define __BUTTON_GENERIC_HANDLER_H__
+
+#include "O_button.h"
+#include "../buttonHandlingUtility.h"
 
 /*!
  * @brief Inits the handler for the button

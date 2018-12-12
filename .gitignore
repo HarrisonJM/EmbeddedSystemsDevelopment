@@ -65,7 +65,6 @@ Release/
 .settings/
 targetConfigs/
 
-lnk_msp430fr5969.cmd
 .ccsproject
 .cproject
 .project

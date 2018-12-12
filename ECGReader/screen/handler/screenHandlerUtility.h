@@ -11,9 +11,9 @@
 
 /*! Definitions */
 /*!@{*/
-#define CHARPIXELWIDTH 8 /*! < The size of a character */
-#define SCREENMAXX (LCDPIXELMAXX / CHARPIXELWIDTH) /*! < The maximum size of the screen along the X */
-#define SCREENMAXY (LCDPIXELMAXY / CHARPIXELWIDTH) /*! < The maximum size of the screen along the Y */
+#define CHARPIXELWIDTH (uint8_t)8 /*! < The size of a character */
+#define SCREENMAXX (uint8_t)(LCDPIXELMAXX / CHARPIXELWIDTH) /*! < The maximum size of the screen along the X */
+#define SCREENMAXY (uint8_t)(LCDPIXELMAXY / CHARPIXELWIDTH) /*! < The maximum size of the screen along the Y */
 /*!@}*/
 
 #endif /* __SCREEN_HANDLER_UTILITY_H__ */

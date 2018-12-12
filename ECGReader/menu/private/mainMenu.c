@@ -11,6 +11,8 @@
 #include <screen/handler/screenHandler.h>
 #include "buttons/buttonHandlingUtility.h"
 
+//#include
+
 /* Prototypes */
 void MainMenuEnterState(MENUSELECT_T newState);
 void MainMenuEnterActivity();
@@ -18,12 +20,56 @@ void MainMenuTimerActivity();
 
 /* File scope variables */
 static MENUCONTEXT_T menu;
-
+/*! @brief Strings containing the available menu options to be printed. NB the leading space*/
+static const char *MainMenuStrings[SIZEMENUMAIN] =
+{
+     "",
+     " ECG",
+     " PrevRd",
+     " Profiles",
+     " Options",
+     " Reboot"
+};
 /* Function definitions */
+/*!
+ * @brief Changes the menu state to the next one
+ */
+MENUSELECT_T __MainMenuGoToNextOption(MENUSELECT_T oldState)
+{
+    MENUSELECT_T retState = MENU_NULL;
+    switch(oldState)
+    {
+    case MENU_NULL:
+        retState = MENU_ECG;
+        break;
+    case MENU_ECG:
+        retState = MENU_PREVREAD;
+        break;
+    case MENU_PREVREAD:
+        retState = MENU_PROFILE;
+        break;
+    case MENU_PROFILE:
+        retState = MENU_OPTIONS;
+        break;
+    case MENU_OPTIONS:
+        retState = MENU_REBOOT;
+        break;
+    case MENU_REBOOT:
+        retState = MENU_ECG;
+        break;
+    }
+
+    return retState;
+}
+/*!
+ * @brief
+ */
 void MainMenuNull()
 {
     /* Splash screen/initialization or smth */
-    menu.selectedOption = MENU_ECG;
+    /* Wait a second */
+    /* Then go into our first state */
+    MainMenuEnterState(__MainMenuGoToNextOption(menu.selectedOption));
 }
 /*!
  * @brief Prints the menu to the screen, with the selected option
@@ -55,12 +101,17 @@ void MainMenuTimer(EVENT_T *bS1Event, EVENT_T *bS2Event)
         /* Left button, next option */
         if(bS1Event->event == EVENT_BUTTON_PRESSED)
         {
-            MainMenuEnterState(menu.selectedOption++);
+            MainMenuEnterState(__MainMenuGoToNextOption(menu.selectedOption));
         }
         /* Right button, select activity */
         else if(bS1Event->event == EVENT_BUTTON_PRESSED)
         {
             MainMenuEnterActivity();
+        }
+        /* Just display the scene */
+        else
+        {
+            MainMenuEnter();
         }
     }
     else
@@ -96,7 +147,6 @@ void MainMenuEnterState(MENUSELECT_T newState)
         break;
     }
 
-    MainMenuEnterActivity();
     menu.selectedOption = newState;
 }
 /*!

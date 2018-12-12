@@ -12,7 +12,7 @@
 /*!
  * @brief Initialise button related things
  */
-extern void LEDHandlerInitBothLEDs();
+extern void LEDHandlerInitBothLEDs(void);
 /*!
  * @brief Returns the current state to the user
  * @param button enum of the button we wish to reference

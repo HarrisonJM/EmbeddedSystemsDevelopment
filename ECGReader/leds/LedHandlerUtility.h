@@ -12,7 +12,7 @@ typedef enum {
     LED_NULL = 0x00,    /* < Null state */
     LED_ON = 0x01,      /* < LED is on/turn on the LED */
     LED_OFF = 0x02,     /* < LED is off/turn off the LED */
-    LED_TOGGLE = 0x04   /* < Toggle the LED into the other state */
+    LED_TOGGLE = 0x04  /* < Toggle the LED into the other state */
     /*!@}*/
 } LEDACTION_T;
 

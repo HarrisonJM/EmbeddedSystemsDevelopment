@@ -24,15 +24,4 @@ typedef enum MENUSELECT {
     /*!@}*/
 } MENUSELECT_T;
 
-/*! @brief Strings containing the available menu options to be printed. NB the leading space*/
-const char *MainMenuStrings[SIZEMENUMAIN] =
-{
-     "",
-     " ECG",
-     " PrevRd",
-     " Profiles",
-     " Options",
-     " Reboot"
-};
-
 #endif /* __MENU_H__ */

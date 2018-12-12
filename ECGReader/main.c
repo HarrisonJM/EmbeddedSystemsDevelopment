@@ -11,6 +11,9 @@
 
 #include "menu/activities/activites.h"
 
+#include "leds/LedHandler.h"
+#include "leds/LedHandlerUtility.h"
+
 EVENTQUEUE_T* buttonS1Queue;
 EVENTQUEUE_T* buttonS2Queue;
 
