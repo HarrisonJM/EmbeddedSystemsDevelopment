@@ -6,7 +6,7 @@
 
 #ifndef ADC_H_
 #define ADC_H_
-
+/*
 #define RDGSARRAYSIZE 192
 
 extern volatile int rdg;
@@ -16,5 +16,5 @@ extern int rdgsArray[RDGSARRAYSIZE];
 extern void ADCInitHardware(void);
 
 extern void ADCStart(void);
-
+*/
 #endif /* ADC_H_ */

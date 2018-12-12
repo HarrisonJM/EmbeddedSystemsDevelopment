@@ -50,13 +50,13 @@ __interrupt void Timer0_A0(void)
 //        ButtonTimer(BUTTONS1);
 //        ButtonTimer(BUTTONS2);
     }
-
+/*
     timerAdcReading++;
     if(timerAdcReading >= 40)
     {
         timerAdcReading = 1;
     }
-
+*/
     if(ButtonGetState(BUTTONS2) == EVENT_BUTTON_PRESSED)
         __LEDGreenOn();
 
