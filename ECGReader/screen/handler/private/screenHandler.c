@@ -74,7 +74,7 @@ void ScreenPrintPixel(uint8_t x,
  */
 void ScreenShiftBuffer(void)
 {
-    __ShiftBuffer(DisplayBuffer);
+    __ScreenShiftBuffer(DisplayBuffer);
 }
 /*!
  * @brief Flush the normal display buffer

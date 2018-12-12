@@ -6,6 +6,8 @@
 
 #include <msp430.h>
 
+#define ACCUMULATION_CYCLES 1000
+
 /*!
  * @brief Inits Timer0(1ms)
  */
@@ -28,8 +30,14 @@ void InterruptTimerA2Init(void)
 {
     /* Timer A2 used for capture */
    TA2CTL |= TACLR;
-   TA2CTL   = ID_3 + TBSSEL_2 + MC_2;  /* Timer A2 using subsystem master clock, SMCLK(1.1 MHz) */
-   TA2CCTL1 = CM_1+CCIS_0+CAP+SCS;     /* Capture set up for Timer A2 */
+   //TA2 set as timer with RO as clock and TA3 as gated enable. CCIS is
+   // toggled between gnd and vcc.
+   TA2CTL = TASSEL_3 + MC_2;
+
+   //TA3 set as gate.
+   TA3CCR0 = ACCUMULATION_CYCLES;
+   TA3CTL = TASSEL_2 + MC_1;
+   TA3CCTL0 = CCIE;
 }
 /*!
  * @brief Disables Interrupts

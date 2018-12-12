@@ -142,31 +142,33 @@ void POST(void)
      * to activate previously configured port settings
      */
     PM5CTL0 &= ~LOCKLPM5;
-    /* Check restart  for re-init */
-    if (restarting == true)
-    {
-        goto restart_here;
-    }
+
+    /*! @todo Figure out how to deal with watchdog goto restarting thing */
+//    if(true == restarting)
+//    {
+//        goto labelRestart;
+//    }
+
     /* LEDs need init'ing before RAM check for the lights in each RAM check */
     __LEDHardwareInit();
     LEDHandlerInitBothLEDs();
 
-    /* RAM Checks */
-    RAMCheck1();
-    LEDUse(LED_GREEN, LED_ON);
-    LEDUse(LED_RED, LED_OFF);
-    RAMCheck2();
-    ToggleLEDs();
-    RAMCheck3();
-    ToggleLEDs();
-    RAMCheck4();
-    ToggleLEDs();
-    RAMCheck5();
-    ToggleLEDs();
-    RAMCheck6();
-    ToggleLEDs();
-    RAMCheck7();
-    ToggleLEDs();
+//    /* RAM Checks */
+//    RAMCheck1();
+//    LEDUse(LED_GREEN, LED_ON);
+//    LEDUse(LED_RED, LED_OFF);
+//    RAMCheck2();
+//    ToggleLEDs();
+//    RAMCheck3();
+//    ToggleLEDs();
+//    RAMCheck4();
+//    ToggleLEDs();
+//    RAMCheck5();
+//    ToggleLEDs();
+//    RAMCheck6();
+//    ToggleLEDs();
+//    RAMCheck7();
+//    ToggleLEDs();
 
     /* Initialisations */
     __ButtonHardwareinit();
@@ -181,7 +183,7 @@ void POST(void)
     /* Screen Hardware */
     LCDInitHardware();
 
-    ToggleLEDs();
+//    ToggleLEDs();
 
     /* Initialisation - Software */
     ButtonHandlerInitBothButtons();
@@ -192,9 +194,10 @@ void POST(void)
 
     InterruptEnable();
 
-restart_here:
+    /*! @todo Figure out how to deal with watchdog goto restarting thing */
+//labelRestart:
 
-    WatchDogEnable();
+//    WatchDogEnable();
 
-    ResetStackPoint();
+//    ResetStackPoint();
 }

@@ -157,7 +157,7 @@ void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX],
 /*!
  * @brief shifts the displaybuffer backwards (left) ish
  */
-void __ShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
+void __ScreenShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
     uint8_t x = 0;
     uint8_t y = 0;

@@ -20,7 +20,7 @@ __interrupt void watchdog_timer(void)
 {
     WDTCTL = WDTPW + WDTCNTCL + 3; /* Reset the watchdog */
     restarting = true;
-    LEDUse(LED_RED
-           , LED_ON);
-    main();
+    LEDUse(LED_GREEN
+           , LED_TOGGLE);
+//    main();
 }

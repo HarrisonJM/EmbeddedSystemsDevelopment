@@ -11,14 +11,16 @@
  * @date 9/12/2018
  */
 
+#include <math.h>
+
 #include "helpers/boollint.h"
 
 #include "hardwareAbstractions/public/I_lcd.h"
 #include "screen/handler/screenHandler.h"
 #include "screen/handler/screenHandlerUtility.h"
 
-#define PI   3.141592653 /* pi */
-#define PHIS 0.017453293 /* Radians */
+#define PI   (double)3.141592653 /* pi */
+#define PHIS (double)0.017453293 /* Radians */
 
 /* MISRA C: Ignored here because Hardware Abstraction */
 /*! @brief The middle of the screen/Middle pixel */
@@ -28,8 +30,8 @@
 void ActivityECGEnter(void);
 void ActivityECGTimer(void);
 void __ShiftBuffer(void);
-int8_t __GetValPos(double val);
-void __generateSineWave(void);
+int8_t __GetValPos(double *val);
+void __generateSineWave(double* sinVal);
 
 /*!
  * @brief Performs Activity initialisation, zeroes out the  display buffer,
@@ -45,17 +47,12 @@ void ActivityECGEnter(void)
 void ActivityECGTimer(void)
 {
     double rawVal = 0.0; /* Get value from ADC */
-    uint8_t i = 0;
-    uint8_t j = 0;
+    uint8_t y = 0;
 
     ScreenShiftBuffer();
-    for(; i < LCDPIXELMAXX; ++i)
-    {
-        for(; j < SCREENMAXX; ++j)
-        {
-            ScreenPrintPixel(i, j, false);
-        }
-    }
+
+    __generateSineWave(&rawVal);
+    y = __GetValPos(&rawVal);
 
     ScreenFlushDisplayBuffer();
 }
@@ -71,14 +68,14 @@ void ActivityECGTimer(void)
  * @return The position to print the pixel
  * @todo tidy up!
  */
-int8_t __GetValPos(double val)
+int8_t __GetValPos(double *val)
 {
     /* Previous value for predicting the next value */
     static int32_t prevValue = 0;
 
     /* MISRA C: I don't want the precision here */
     /* normalise our value*/
-    int32_t newVal = (double)val*(int32_t)100;
+    int32_t newVal = (double)(*val)*(int32_t)100;
     /* Negative flag */
     bool negative = false;
     /* Value predicter */
@@ -90,10 +87,10 @@ int8_t __GetValPos(double val)
     int8_t yPos = GRAPHZERO;
 
     /* Check if below zero */
-    if(val < (double)0)
+    if(*val < (double)0)
     {
         negative = true;
-        val = val * (double)-1.0;
+        (*val) = (*val) * (double)-1.0;
     }
     /* Check if value high or lower than previous */
     if(newVal > prevValue)
@@ -135,13 +132,108 @@ int8_t __GetValPos(double val)
 /*!
  * @brief Generates a test wave
  */
-void __generateSineWave(void)
+void __generateSineWave(double* sinVal, uint16_t time)
 {
+    double sineVals[] =
+    {0,
+     0.052336,
+     0.104528,
+     0.156434,
+     0.207912,
+     0.258819,
+     0.309017,
+     0.358368,
+     0.406737,
+     0.45399,
+     0.5,
+     0.544639,
+     0.587785,
+     0.62932,
+     0.669131,
+     0.707107,
+     0.743145,
+     0.777146,
+     0.809017,
+     0.838671,
+     0.866025,
+     0.891007,
+     0.913545,
+     0.93358,
+     0.951057,
+     0.965926,
+     0.978148,
+     0.987688,
+     0.994522,
+     0.99863,
+     1,
+     0.99863,
+     0.994522,
+     0.987688,
+     0.978148,
+     0.965926,
+     0.951057,
+     0.93358,
+     0.913545,
+     0.891007,
+     0.866025,
+     0.838671,
+     0.809017,
+     0.777146,
+     0.743145,
+     0.707107,
+     0.669131,
+     0.62932,
+     0.587785,
+     0.544639,
+     0.5,
+     0.453991,
+     0.406737,
+     0.358368,
+     0.309017,
+     0.258819,
+     0.207912,
+     0.156434,
+     0.104528,
+     0.052336,
+     5.89793e-10,
+     -0.052336,
+     -0.104528,
+     -0.156434,
+     -0.207912,
+     -0.258819,
+     -0.309017,
+     -0.358368,
+     -0.406737,
+     -0.45399,
+     -0.5,
+     -0.544639,
+     -0.587785,
+     -0.62932,
+     -0.669131,
+     -0.707107,
+     -0.743145,
+     -0.777146,
+     -0.809017,
+     -0.838671,
+     -0.866025,
+     -0.891007,
+     -0.913545,
+     -0.93358,
+     -0.951057,
+     -0.965926,
+     -0.978148,
+     -0.987688,
+     -0.994522,
+     -0.99863,
+     -1
+    };
 
+    *sinVal = sineVals[time];
+    if(time > sizeof(sineVals))
+        time = 0;
+    else
+        ++time;
 }
-
-
-
 
 
 

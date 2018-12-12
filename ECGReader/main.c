@@ -23,13 +23,13 @@ int main(void)
     POST();
 
     ActivityECGEnter();
-    ActivityECGTimer();
 
 //    ScreenPrint("TEST", false);
 //    ScreenSetText(0, 0, "TEST", false);
 
     while(1)
     {
+        ActivityECGTimer();
     }
 
 //    char adcRdg [5];

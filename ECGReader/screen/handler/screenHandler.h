@@ -28,6 +28,7 @@ extern void ScreenPrint(const char* str_p
 extern void ScreenPrintPixel(uint8_t x
                              , uint8_t y
                              , bool invert);
+extern void ScreenShiftBuffer(void);
 extern void ScreenFlushDisplayBuffer(void);
 
 /* Functions for printing to custom DisplayBuffers */

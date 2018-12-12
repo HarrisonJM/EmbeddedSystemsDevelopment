@@ -27,7 +27,7 @@ void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]
 void __ScreenPrint(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]
                    , const char* str_p
                    , bool invert);
-void __ShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
+void __ScreenShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
 void __ScreenFlushDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
 
 #endif /* __SCREEN_PRIVATE_FUNCTIONS_H__ */

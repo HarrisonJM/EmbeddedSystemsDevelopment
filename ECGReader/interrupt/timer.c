@@ -59,3 +59,15 @@ __interrupt void Timer0_A0(void)
 //        }
 //    }
 }
+
+/*
+ * @brief This ISR clears the LPM bits found in the Status Register (SR/R2)
+ * used when performing capacitive touch checks
+ */
+#pragma vector=TIMER3_A0_VECTOR
+__interrupt void TIMER3_A0_ISR(void)
+
+{
+    __bic_SR_register_on_exit(LPM3_bits);           // Exit LPM3 on reti
+}
+
