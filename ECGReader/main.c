@@ -41,9 +41,11 @@ bool invert = true;
      switch (__even_in_range(ADC12IV, ADC12IV_ADC12RDYIFG))
      {
      case ADC12IV_ADC12IFG1: // ADC12MEM1 Interrupt
-        ADC_value = ADC12MEM0; // Save MEM0
-        ADC_value2 = ADC12MEM1; // Save MEM1
-        rdg = rdgsArray[rdgsIndex++] = ADC12MEM0;
+        //ADC_value = ADC12MEM0; // Save MEM0
+        ADC_value2 = ADC12MEM0; // Save MEM1
+        //ADC_value2 = ADC12MEM1; // Save MEM1
+        rdg = rdgsArray[rdgsIndex++] = ADC12MEM12;
+       // rdg = rdgsArray[rdgsIndex++] = ADC12MEM0;
         if (rdgsIndex >= RDGSARRAYSIZE) rdgsIndex = 0;
         
       //  ScreenPrintCustom(DisplayBuffer, "Hello 3", invert);
@@ -175,7 +177,8 @@ for (i = 0; i< RDGSARRAYSIZE; i++) {
 
 // Configure ADC12
  // Turn on ADC and enable multiple conversions
- ADC12CTL0 = ADC12SHT0_2 | ADC12ON | ADC12MSC;
+ //ADC12CTL0 = ADC12SHT0_2 | ADC12ON | ADC12MSC;
+ ADC12CTL0 = ADC12SHT0_2 | ADC12ON; 
  // Sampling timer, single sequence
  ADC12CTL1 |= ADC12SHP | ADC12CONSEQ_1;
  // 12-bit conversion
@@ -183,10 +186,21 @@ for (i = 0; i< RDGSARRAYSIZE; i++) {
  // Enable ADC interrupt on MEM1
  ADC12IER0 |= ADC12IE1;
  // A3 select, Vref=1.2V
- ADC12MCTL0 |= ADC12INCH_3 | ADC12VRSEL_1;
+ //ADC12MCTL0 |= ADC12INCH_3 | ADC12VRSEL_1;
  // A4 select, Vref=1.2V, End of Sequence
- ADC12MCTL1 |= ADC12INCH_4 | ADC12VRSEL_1 | ADC12EOS;
+ //ADC12MCTL1 |= ADC12INCH_4 | ADC12VRSEL_1 | ADC12EOS;
+    //ADC12MCTL12 = ADC12INCH_12;  
+/*
 
+   ADC12CTL0 = ADC12SHT0_2 | ADC12ON;        // Sampling time, S&H=16, ADC12 on
+  //ADC12CTL1 = ADC12SHP;                     // Use sampling timer
+  // Use TA0.1 to trigger, and repeated-single-channel
+  ADC12CTL1 = ADC12SHP | ADC12SHS_1 | ADC12CONSEQ_2;
+  ADC12CTL2 |= ADC12RES_2;                  // 12-bit conversion results
+  ADC12CTL3 |= 0x0C;
+  ADC12MCTL12 = ADC12INCH_12;                // A12 ADC input select; Vref=AVCC // SELECT INPUT CHAN
+  ADC12IER0 |= ADC12IE12;                    // Enable ADC conv complete interrupt
+*/
 
     char adcRdg [5];
 
@@ -204,7 +218,7 @@ for (i = 0; i< RDGSARRAYSIZE; i++) {
         //
        // ScreenFlushDisplayBuffer();
         //sprintf(adcRdg, "%d", ADC_value);
-        sprintf (adcRdg, "%d", ADC_value);
+        sprintf (adcRdg, "%d", ADC_value2);
         
         ScreenPrintCustom(DisplayBuffer, adcRdg, invert);
         ScreenFlushDisplayBuffer();
