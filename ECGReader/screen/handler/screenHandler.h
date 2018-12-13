@@ -1,6 +1,6 @@
 /*!
  * @brief Public declarations for printing to the screen
- * @author Harrison Marcks
+ * @author Huseyin Sert, Harrison Marcks
  * @date 2/11/2018
  */
 

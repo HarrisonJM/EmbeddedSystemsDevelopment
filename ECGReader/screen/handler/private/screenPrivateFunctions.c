@@ -1,6 +1,6 @@
 /*!
  * @brief Definitions for lowlevel screen handling functions
- * @author Harrison Marcks
+ * @author Huseyin Sert, Harrison Marcks
  * @date 10/12/2018
  */
 

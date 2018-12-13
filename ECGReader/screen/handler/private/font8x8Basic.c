@@ -1,6 +1,6 @@
 /*!
  * @brief Source file definition for the 8x8font basic. So that the header can be used instead of an "extern" variable
- * @author Harrison Marcks
+ * @author Huseyin Sert, Harrison Marcks
  * @date 10/12/2018
  */
 

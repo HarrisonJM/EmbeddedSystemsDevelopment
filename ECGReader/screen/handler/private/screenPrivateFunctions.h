@@ -1,6 +1,6 @@
 /*!
  * @brief Declarations for low-level screen functions
- * @author Harrison Marcks
+ * @author Huseyin Sert, Harrison Marcks
  * @date 9/12/2018
  */
 
