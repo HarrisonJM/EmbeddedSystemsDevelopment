@@ -14,6 +14,10 @@ typedef signed char   int8_t;
 typedef signed int    int16_t;
 typedef signed long   int32_t;
 
+typedef unsigned long LONG;
+typedef unsigned short WORD;
+typedef unsigned char BYTE;
+
 #ifndef BOOL
 #ifndef FALSE
 #define FALSE 0u
@@ -25,6 +29,11 @@ typedef signed long   int32_t;
 typedef uint8_t BOOL;
 typedef uint8_t bool;
 
+#endif
+
+#ifndef NULL
+#define NULL 0x0000000000000000
+#define null NULL
 #endif
 
 #endif /* __BOOLINT_H__ */
