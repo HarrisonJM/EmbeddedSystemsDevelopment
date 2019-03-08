@@ -22,14 +22,16 @@ int main(void)
     /* Perform the post */
     POST();
 
-    ActivityECGEnter();
+    //ActivityECGEnter();
 
 //    ScreenPrint("TEST", false);
 //    ScreenSetText(0, 0, "TEST", false);
-
+    ScreenPrint("HELLO", 1);
+    ScreenFlushDisplayBuffer();
     while(1)
     {
-        ActivityECGTimer();
+        //ActivityECGTimer();
+        
     }
 
 //    char adcRdg [5];

@@ -189,7 +189,7 @@ void POST(void)
     ButtonHandlerInitBothButtons();
 
     /* Clear the Screen */
-    ScreenDisplayBufferInit(' ');
+    ScreenDisplayBufferInit("");
     ScreenFlushDisplayBuffer();
 
     InterruptEnable();
