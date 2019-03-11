@@ -15,6 +15,7 @@
 #include "hardwareAbstractions/public/I_sliders.h"
 #include "hardwareAbstractions/public/I_watchdog.h"
 #include "hardwareAbstractions/public/I_interrupt.h"
+// #include "hardwareAbstractions/public/I_adc.h"
 
 #include "buttons/buttonHandler.h"
 #include "leds/LedHandler.h"
@@ -184,6 +185,9 @@ void POST(void)
     LCDInitHardware();
 
 //    ToggleLEDs();
+    
+    /* Setup ADC*/
+    ADCSetup();
 
     /* Initialisation - Software */
     ButtonHandlerInitBothButtons();
@@ -200,4 +204,5 @@ void POST(void)
 //    WatchDogEnable();
 
 //    ResetStackPoint();
+
 }
