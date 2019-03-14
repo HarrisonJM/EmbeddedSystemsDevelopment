@@ -4,7 +4,7 @@
  * @date 10/12/18
  */
 
-#include <msp430.h>
+#include <msp430fr5969.h>
 
 #define ACCUMULATION_CYCLES 1000
 

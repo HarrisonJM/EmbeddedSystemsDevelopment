@@ -4,7 +4,7 @@
  * @date 10/12/18
  */
 #include <helpers/eventQueue/eventQueue.h>
-#include <msp430.h>
+#include <msp430fr5969.h>
 
 #include "buttons/buttonHandler.h"
 #include "buttons/buttonHandlingUtility.h"
