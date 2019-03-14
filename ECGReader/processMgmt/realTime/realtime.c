@@ -9,9 +9,9 @@
  * @todo idle process
  * @todo process starvation
  */
-#include "realtime.h"
+#include <msp430fr5969.h>
 
-#include <msp430.h>
+#include "realtime.h"
 
 #include <helpers/linkedlist/linkedList.h>
 #include <helpers/boollint.h>
@@ -20,35 +20,38 @@
 #define MAXPROC 100
 /*! Maximum stack size */
 #define STACKSIZE 100
-/*! Arbirtrary number to check for overflow */
+/*! Arbitrary number to check for overflow */
 #define DETECTOVERFLOWVAL 0xcd6abf4b
 /*!
  * @brief The different states a process can be in
  * @{
  */
-typedef enum PROCSTAT {
+ enum PROCSTAT {
     TASK_UNUSED,
     TASK_RUNNABLE,
-    TASK_WAITING
-} procStat_e;
+    TASK_RUNNING,
+    TASK_WAITING,
+    TASK_BLOCKED
+};
 /*! @} */
 
 /*!
  * @brief The process block
  * @{
  */
-typedef struct PROCESS {
+struct PROCESS {
     uint16_t _procStat;          /*! < The status of the process */
 	uint16_t _milliDelay;        /*! < */
 	uint32_t _sp;                /*! < The stack pointer */
     uint8_t _index;              /*! < Where in the process list the process sits */
     bool _inUse;                 /*! < Whether this block is in use */
     int8_t _priority;            /*! < Where in the process list the process sits */
+    int8_t _origPriority;        /*! < The processes original priority. Used to deal with aging/starvation */
     linkedListItem_T _item;      /*! < The list element identifier */
 	uint8_t _stack[STACKSIZE];   /*! < The stack */
 
     unsigned int _overflowDetect; /*! < Shoudl help to detect if there is overflow */
-} Process_t;
+};
 /*! @} */
 
 /* Forward Declarations */
@@ -86,7 +89,7 @@ bool CheckProcessValid(Process_t* proc)
  * 
  * @param proc A pointer to the process we wish to lower the priority of
  */
-void DecreaseProcessPriority(Process_t* proc)
+void __DecreaseProcessPriority(Process_t* proc)
 {
     proc->_priority--;
     Process_t* nextProc = LISTENTRY(proc->_item._nextItem
@@ -96,10 +99,94 @@ void DecreaseProcessPriority(Process_t* proc)
     /* If priority has changed in a meaningful way, swap them */
     if(nextProc->_priority > proc->_priority)
     {
-        ListItemInsert(proc, nextProc);
+        ListItemInsert(&proc->_item
+                        , &nextProc->_item);
+    }
+}
+/*!
+ * @brief Tries to deal with process starvation by 
+ * gradually increasing the priorty of a process until
+ * it's run
+ * 
+ * @param proc A pointer to the process we wish to increase the priority of
+ */
+void __IncreaseProcessPriority(Process_t* proc)
+{
+    proc->_priority++;
+    Process_t* nextProc = LISTENTRY(proc->_item._nextItem
+                                    , Process_t
+                                    , _item);
+
+    /* If priority has changed in a meaningful way, swap them */
+    if(nextProc->_priority < proc->_priority)
+    {
+        ListItemInsert(&proc->_item
+                        , &nextProc->_item);
     }
 }
 
+/*!
+ * @brief More public function for specifically increasing the 
+ * _current_ process's priority
+ */
+void IncreasePriority()
+{
+    __IncreaseProcessPriority(currentlyRunningProcess);
+}
+/*!
+ * @brief More public function for specifically decreasing the 
+ * _current_ process's priority
+ */
+void DecreasePriority()
+{
+    __DecreaseProcessPriority(currentlyRunningProcess);
+}
+/*!
+ * @brief Delays the current process for msDelay
+ * @param msDelay a 16-bit number for hwo many milliseconds 
+ * the process should eb delayed for
+ */
+void AddDelay(uint16_t msDelay)
+{
+	asm(
+			" dint \n"
+	);
+
+	// Set up the delay
+    Process_t* curProc = currentlyRunningProcess;
+
+    curProc->_milliDelay = msDelay;
+    curProc->_procStat = TASK_WAITING;
+
+	asm(
+			" eint \n"
+	);
+	/* Invoke the timer as it will handle process switching */
+	TA0CTL |= TAIFG;
+	/* Wait for the interrupt */
+	asm(
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+			" nop \n"
+	);
+}
 /*!
  * @brief Initialises a process for running
  * @param procPriority The priority of the process
@@ -116,12 +203,11 @@ void InitProcess(unsigned int procPriority
         LONG stackPointer;
         LONG progCount;
         LONG savedSP;
-
         WORD pc1;
         WORD pc2;
 
 		asm(
-				" movx.a SR,&intStat\n"
+				" movx.a sr,&intStat\n"
 			);
 
 		intStat |= GIE;
@@ -129,7 +215,6 @@ void InitProcess(unsigned int procPriority
 		progCount = (LONG)funct;
 
 		// Construct combined PC+SR used by interrupt
-
 		pc1 = (WORD)progCount;
 		pc2 = (WORD)(((progCount>>4)&0x0F000) | intStat&0x00FFF);
 
@@ -181,6 +266,7 @@ void StartRealTimeScheduler()
             return;
 
         currentlyRunningProcess = curProc;
+        curProc->_procStat = TASK_RUNNING;
 
 		stackPointer = curProc->_sp;
 		asm(
@@ -203,76 +289,100 @@ void StartRealTimeScheduler()
 	}
 }
 /*!
- * @brief services the scheduler whenever it's called
+ * @brief Services the scheduler whenever it's called
  */
 void ServiceScheduler()
 {
     LONG stackPointer;
+    int i = 0;
+    Process_t* nProc = NULL;
+    linkedListItem_T* iProcL = NULL;
 
     Process_t* proc = LISTENTRY((ListHead(&processList))
+                                , Process_t
+                                , _item);
+
+    /* Save first process details */
+    asm(
+            " push.a R15\n"
+            " push.a R14\n"
+            " push.a R13\n"
+            " push.a R12\n"
+            " push.a R11\n"
+            " push.a R10\n"
+            " push.a R9\n"
+            " push.a R8\n"
+            " push.a R7\n"
+            " push.a R6\n"
+            " push.a R5\n"
+            " push.a R4\n"
+            " push.a R3\n"
+            " movx.a sp,&stackPointer\n"
+        );
+    proc->_sp = stackPointer;
+
+    iProcL = ListTail(&processList);
+    while((iProcL = iProcL->_previousItem))
+    {
+        Process_t* iproc = LISTENTRY(iProcL
+                                    , Process_t
+                                    , _item);
+
+        if (iproc->_procStat == TASK_WAITING)
+        {
+            if (iproc->_milliDelay > 0)
+            {
+                iproc->_milliDelay;
+            }
+
+            if (iproc->_milliDelay == 0)
+            {
+                iproc->_milliDelay = TASK_RUNNABLE;
+            }
+        }
+    }
+    /* Switch processes (highest priority is process 0) - real-time dispatcher */
+    iProcL = ListTail(&processList);
+    while((iProcL = iProcL->_previousItem))
+    {
+        Process_t* iProc = LISTENTRY(iProcL
+                                    , Process_t
+                                    , _item);
+
+        if (iProc->_procStat == TASK_RUNNABLE)
+        {
+            // currentlyRunningProcess = i;
+            currentlyRunningProcess = iProc;
+            break;
+        }
+    }
+
+    nProc = LISTENTRY((ListHead(&processList))
                             , Process_t
                             , _item);
+    stackPointer = nProc->_sp;
 
-    /* highest prior has changed */
-    if(currentlyRunningProcess != proc)
-    {
-        
-    }
-    else /* If the same proccess is still running, decrease its priority */
-    {
-        DecreaseProcessPriority(proc);
-    }    
-
-    /* If the head has changed, proceed */
-    if(proc != ListHead(&processList))
-    {
-        /* Save first process details */
-        asm(
-                " push.a R15\n"
-                " push.a R14\n"
-                " push.a R13\n"
-                " push.a R12\n"
-                " push.a R11\n"
-                " push.a R10\n"
-                " push.a R9\n"
-                " push.a R8\n"
-                " push.a R7\n"
-                " push.a R6\n"
-                " push.a R5\n"
-                " push.a R4\n"
-                " push.a R3\n"
-                " movx.a sp,&stackPointer\n"
-            );
-            Process_t* newHead = LISTENTRY((ListHead(&processList))
-                                            , Process_t
-                                            , _item);
-            /* With the change of heads the processes need to be swapped */
-            proc->_sp = stackPointer;
-            stackPointer = newHead->_sp;
-
-        asm(
-                " movx.a &stackPointer,SP \n"
-                " pop.a R3 \n"
-                " pop.a R4 \n"
-                " pop.a R5 \n"
-                " pop.a R6 \n"
-                " pop.a R7 \n"
-                " pop.a R8 \n"
-                " pop.a R9 \n"
-                " pop.a R10 \n"
-                " pop.a R11 \n"
-                " pop.a R12 \n"
-                " pop.a R13 \n"
-                " pop.a R14 \n"
-                " pop.a R15 \n"
-        );
-
-    }
+    asm(
+            " movx.a &stackPointer,sp \n"
+            " pop.a R3 \n"
+            " pop.a R4 \n"
+            " pop.a R5 \n"
+            " pop.a R6 \n"
+            " pop.a R7 \n"
+            " pop.a R8 \n"
+            " pop.a R9 \n"
+            " pop.a R10 \n"
+            " pop.a R11 \n"
+            " pop.a R12 \n"
+            " pop.a R13 \n"
+            " pop.a R14 \n"
+            " pop.a R15 \n"
+    );
 }
 /*!
- * @brief Returns the first available processbloc
- * @return A pointer to the available bloc
- */
+* @brief Returns the first available processbloc
+* @return A pointer to the available bloc
+*/
 static Process_t* FindFreeProcessBloc()
 {
     int i = MAXPROC-1;
@@ -288,9 +398,9 @@ static Process_t* FindFreeProcessBloc()
     return NULL;
 }
 /*!
- * @brief Inserts the new process based on its priority
- * @param newProcess A pointer to the process we wish to insert
- */
+* @brief Inserts the new process based on its priority
+* @param newProcess A pointer to the process we wish to insert
+*/
 static void PriorityInsertNewProcess(Process_t* newProcess)
 {
     linkedListItem_T* listHead = ListHead(&processList);

@@ -16,10 +16,11 @@
  * @brief ListElement struct
  * @{
  */
-typedef struct LINKEDLISTITEM {
+typedef struct LINKEDLISTITEM linkedListItem_T;
+struct LINKEDLISTITEM {
     linkedListItem_T* _nextItem;        /*! < Next item in list */
     linkedListItem_T* _previousItem;    /*! < Previous item in the list */
-} linkedListItem_T;
+};
 /*! @} */
 
 /*!

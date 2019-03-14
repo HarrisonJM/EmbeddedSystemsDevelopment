@@ -70,7 +70,7 @@ linkedListItem_T* ListRemoveItem (linkedListItem_T* removeItem)
         return NULL;
     }
 
-    removeItem->_previousItem->next = removeItem->_nextItem;
+    removeItem->_previousItem->_nextItem = removeItem->_nextItem;
     removeItem->_nextItem->_previousItem = removeItem->_previousItem;
     return removeItem->_nextItem;
 }
