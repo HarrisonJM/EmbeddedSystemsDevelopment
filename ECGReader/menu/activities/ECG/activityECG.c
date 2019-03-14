@@ -33,6 +33,11 @@ void __ShiftBuffer(void);
 int8_t __GetValPos(double *val);
 void __generateSineWave(double* sinVal);
 
+static void ActivityECGTest(void); // for testing purposes
+
+#pragma PERSISTENT (DMA_DST)
+unsigned int DMA_DST[1024] = {0}; // This is where DMA will put the ADC readings
+
 /*!
  * @brief Performs Activity initialisation, zeroes out the  display buffer,
  * @todo Starts the ECG work/interrupts?
@@ -40,6 +45,7 @@ void __generateSineWave(double* sinVal);
 void ActivityECGEnter(void)
 {
     ScreenDisplayBufferInit(' ');
+    //ActivityECGTest(); 
 }
 /*!
  * @brief Performs timer activity work. Only run when the ADC has a value
@@ -55,6 +61,31 @@ void ActivityECGTimer(void)
     y = __GetValPos(&rawVal);
 
     ScreenFlushDisplayBuffer();
+}
+
+/*!
+ * @brief For testing... 
+ */
+void ActivityECGTest() 
+{
+    __data16_write_addr((unsigned short) &DMA1DA, (unsigned long) DMA_DST); // dest add, DMA_DST
+    DMA1CTL |= DMAREQ; // start DMA transfer
+    __delay_cycles(5000);
+    ADC12CTL0 |= ADC12ENC; // Start sampling/conversion
+    char reg[128];
+    while(1)
+    {
+        sprintf(reg, "%d", ADC12MEM12);
+        ScreenPrint(reg, 1);
+        ScreenFlushDisplayBuffer();
+         __delay_cycles(5000);
+        ScreenPrint("blah", 1);
+        ScreenFlushDisplayBuffer();
+        __delay_cycles(5000);
+        ScreenPrint("som", 1);
+        ScreenFlushDisplayBuffer();      
+    }
+    
 }
 /*!
  * @brief Figures out where to put the value. Currently designed for sine waves

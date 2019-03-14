@@ -18,7 +18,7 @@ void InterruptTimerA0Init(void)
 
     TA0CCTL1 = OUTMOD_3;                        // TACCR1 set/reset
     TA0CCR1 = 1024;                             // TACCR1 PWM Duty Cycle
-    TA0CTL = TASSEL_2 + MC_1; // Timer A using subsystem master clock, SMCLK(1.1 MHz)
+    TA0CTL = TASSEL_2 + MC_1 + TACLR; // Timer A using subsystem master clock, SMCLK(1.1 MHz)
                               // and count UP to create a 1ms interrupt
                               // PWM Period
 }

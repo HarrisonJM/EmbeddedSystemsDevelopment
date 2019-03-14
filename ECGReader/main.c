@@ -26,7 +26,7 @@ int main(void)
 
 //    ScreenPrint("TEST", false);
 //    ScreenSetText(0, 0, "TEST", false);
-    ScreenPrint("HELLO", 1);
+    ScreenPrint("Post success...", 1);
     ScreenFlushDisplayBuffer();
     while(1)
     {
