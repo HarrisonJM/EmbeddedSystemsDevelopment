@@ -11,6 +11,8 @@
 
 #include "menu/activities/activites.h"
 
+#include <screen/handler/screenHandler.h>
+
 #include "leds/LedHandler.h"
 #include "leds/LedHandlerUtility.h"
 

@@ -21,7 +21,7 @@
 /*! Maximum stack size */
 #define STACKSIZE 100
 /*! Arbitrary number to check for overflow */
-#define DETECTOVERFLOWVAL 0xcd6abf4b
+#define DETECTOVERFLOWVAL (uint32_t)0xcd6abf4b
 /*!
  * @brief The different states a process can be in
  * @{
@@ -34,6 +34,20 @@
     TASK_BLOCKED
 };
 /*! @} */
+
+ /*!
+  * @brief File scoped variables
+  * These must be declared outside of the function scope otherwise the
+  * assembler can't find the addresses (because they don't exist)
+  * @{
+  */
+/* static */LONG intStat;        /*! <  Status flags */
+ /* static */LONG stackPointer;   /*! <  Stackpointer tracker */
+ /* static */LONG progCount;      /*! <  The program counter */
+ /* static */LONG savedSP;        /*! <  Another stackpointer tracker */
+ /* static */WORD pc1;            /*! <  First part of program counter and status register combination */
+ /* static */WORD pc2;            /*! <  PC&SR shifted */
+/*! @}*/
 
 /*!
  * @brief The process block
@@ -50,7 +64,7 @@ struct PROCESS {
     linkedListItem_T _item;      /*! < The list element identifier */
 	uint8_t _stack[STACKSIZE];   /*! < The stack */
 
-    unsigned int _overflowDetect; /*! < Shoudl help to detect if there is overflow */
+    uint32_t _overflowDetect; /*! < Shoudl help to detect if there is overflow */
 };
 /*! @} */
 
@@ -150,6 +164,7 @@ void AddDelay(uint16_t msDelay)
 {
 	asm(
 			" dint \n"
+	        " nop \n"
 	);
 
 	// Set up the delay
@@ -159,7 +174,9 @@ void AddDelay(uint16_t msDelay)
     curProc->_procStat = TASK_WAITING;
 
 	asm(
+	        " nop \n"
 			" eint \n"
+	        " nop \n"
 	);
 	/* Invoke the timer as it will handle process switching */
 	TA0CTL |= TAIFG;
@@ -187,6 +204,7 @@ void AddDelay(uint16_t msDelay)
 			" nop \n"
 	);
 }
+
 /*!
  * @brief Initialises a process for running
  * @param procPriority The priority of the process
@@ -199,13 +217,6 @@ void InitProcess(unsigned int procPriority
 
 	if (newProcess != NULL)
 	{
-        LONG intStat;
-        LONG stackPointer;
-        LONG progCount;
-        LONG savedSP;
-        WORD pc1;
-        WORD pc2;
-
 		asm(
 				" movx.a sr,&intStat\n"
 			);
@@ -321,6 +332,7 @@ void ServiceScheduler()
         );
     proc->_sp = stackPointer;
 
+    /* Decrement delay timers */
     iProcL = ListTail(&processList);
     while((iProcL = iProcL->_previousItem))
     {
@@ -332,7 +344,7 @@ void ServiceScheduler()
         {
             if (iproc->_milliDelay > 0)
             {
-                iproc->_milliDelay;
+                iproc->_milliDelay--;
             }
 
             if (iproc->_milliDelay == 0)
