@@ -32,7 +32,7 @@ void ScreenDisplayBufferInit(char setting)
         {
             for (j = CHARPIXELWIDTH; j != 0; --j)
             {
-                DisplayBuffer[(k * CHARPIXELWIDTH) + j][i] = __ReverseByte(~font8x8_basic[ch][j]);
+                DisplayBuffer[(k * CHARPIXELWIDTH) + j][i] = __ReverseByte(font8x8_basic[ch][j]);
             }
         }
     }
