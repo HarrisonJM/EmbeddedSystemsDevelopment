@@ -15,6 +15,7 @@
 #include "hardwareAbstractions/public/I_sliders.h"
 #include "hardwareAbstractions/public/I_watchdog.h"
 #include "hardwareAbstractions/public/I_interrupt.h"
+#include "hardwareAbstractions/public/I_ports.h"
 
 #include "buttons/buttonHandler.h"
 #include "leds/LedHandler.h"
@@ -172,6 +173,8 @@ void POST(void)
 
     /* Initialisations */
     __ButtonHardwareinit();
+    initPort1Interrupt();
+    initPort4Interrupt();
 
     /* Timers */
     InterruptTimerA0Init();
@@ -184,12 +187,15 @@ void POST(void)
     LCDInitHardware();
 
 //    ToggleLEDs();
+    
+    /* Setup ADC*/
+    ADCSetup();
 
     /* Initialisation - Software */
     ButtonHandlerInitBothButtons();
 
     /* Clear the Screen */
-    ScreenDisplayBufferInit(' ');
+    ScreenDisplayBufferInit("");
     ScreenFlushDisplayBuffer();
 
     InterruptEnable();
@@ -200,4 +206,5 @@ void POST(void)
 //    WatchDogEnable();
 
 //    ResetStackPoint();
+
 }

@@ -11,6 +11,8 @@
 
 #include "menu/activities/activites.h"
 
+#include <screen/handler/screenHandler.h>
+
 #include "leds/LedHandler.h"
 #include "leds/LedHandlerUtility.h"
 
@@ -22,14 +24,16 @@ int main(void)
     /* Perform the post */
     POST();
 
-    ActivityECGEnter();
+    //ActivityECGEnter();
 
 //    ScreenPrint("TEST", false);
 //    ScreenSetText(0, 0, "TEST", false);
-
+    ScreenPrint("Post success...", 1);
+    ScreenFlushDisplayBuffer();
     while(1)
     {
-        ActivityECGTimer();
+        //ActivityECGTimer();
+        
     }
 
 //    char adcRdg [5];

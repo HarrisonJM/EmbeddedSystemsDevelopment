@@ -3,7 +3,7 @@
  * @author Harrison J Marcks
  * @date 8 Nov 2018
  */
-#include <msp430.h>
+#include <msp430fr5969.h>
 
 #include "helpers/boollint.h"
 /*!

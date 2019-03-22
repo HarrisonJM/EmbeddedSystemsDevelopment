@@ -139,6 +139,19 @@ void __ScreenPrint(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]
  * @param x The x co-ordinate to print the pixel
  * @param y The y co-ordinate to print the pixel
  * @param invert Whether to invert the square or not
+ * 
+ * Example funtion below relies on an input of 96x96
+ * static void Sharp96x96_PixelDraw(void *pvDisplayData, 
+//                                 int16_t lX, 
+//                                 int16_t lY,
+//                                 uint16_t ulValue)
+// {
+//     if( ClrBlack == ulValue){
+//             DisplayBuffer[lY][lX>>3] &= ~(0x80 >> (lX & 0x7));
+//     }else{
+//             DisplayBuffer[lY][lX>>3] |= (0x80 >> (lX & 0x7));
+//     }
+// }
  */
 void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX],
                         uint8_t x,
@@ -154,6 +167,8 @@ void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX],
         DB_a[y][x] &= ~0x01;
     }
 }
+// 
+
 /*!
  * @brief shifts the displaybuffer backwards (left) ish
  */

@@ -7,7 +7,7 @@
 #ifndef __I_LCD_H__
 #define __I_LCD_H__
 
-#include <msp430.h>
+#include <msp430fr5969.h>
 #include "../../helpers/boollint.h"
 
 /*! Defines */
