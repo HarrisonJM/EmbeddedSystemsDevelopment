@@ -104,7 +104,7 @@ void MainMenuTimer(EVENT_T *bS1Event, EVENT_T *bS2Event)
             MainMenuEnterState(__MainMenuGoToNextOption(menu.selectedOption));
         }
         /* Right button, select activity */
-        else if(bS1Event->event == EVENT_BUTTON_PRESSED)
+        else if(bS2Event->event == EVENT_BUTTON_PRESSED)
         {
             MainMenuEnterActivity();
         }

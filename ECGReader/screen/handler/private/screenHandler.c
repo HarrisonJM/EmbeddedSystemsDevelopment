@@ -21,21 +21,7 @@ uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
  */
 void ScreenDisplayBufferInit(char setting)
 {
-    uint8_t i; /* X */
-    uint8_t j; /* char position */
-    uint8_t k; /* Y */
-
-    unsigned char ch = setting - ' ';
-    for (k = SCREENMAXY; k != 0; --k)
-    {
-        for (i = SCREENMAXX; i != 0; --i)
-        {
-            for (j = CHARPIXELWIDTH; j != 0; --j)
-            {
-                DisplayBuffer[(k * CHARPIXELWIDTH) + j][i] = __ReverseByte(font8x8_basic[ch][j]);
-            }
-        }
-    }
+    __ScreenDisplayBufferInit(' ');
 }
 
 void ScreenPrintChar(uint8_t x
@@ -152,4 +138,12 @@ void ScreenPrintCustom(uint8_t customDB[LCDPIXELMAXY][SCREENMAXX]
 void ScreenFlushDisplayBufferCustom(uint8_t customDB[LCDPIXELMAXY][SCREENMAXX])
 {
     __ScreenFlushDisplayBuffer(customDB);
+}
+/*!
+ * @brief Creates a splash screen for 5 seconds before it goes in to the main menu
+ *
+ */
+void ScreenSplash()
+{
+    __ScreenSplashScreen();
 }

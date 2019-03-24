@@ -8,5 +8,6 @@
 #define __FONT_8_X_8_BASIC_H_
 
 extern const char font8x8_basic[96][8];
+extern const char SplashTitle[96][8];
 
 #endif /* __FONT_8_X_8_BASIC_H_ */
