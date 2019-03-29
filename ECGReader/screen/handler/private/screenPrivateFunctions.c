@@ -11,14 +11,12 @@
 
 #include "font8x8Basic.h"
 
-/* The display buffer we're using */
-uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
-
 /*!
  * @brief Initialise the display buffer
  * @param setting Pass in character to print across screen
  */
-void __ScreenDisplayBufferInit(char setting)
+void __ScreenDisplayBufferInit(char setting,
+                               uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
     uint8_t i; /* X */
     uint8_t j; /* char position */
@@ -31,7 +29,7 @@ void __ScreenDisplayBufferInit(char setting)
         {
             for (j = CHARPIXELWIDTH; j != 0; --j)
             {
-                DisplayBuffer[(k * CHARPIXELWIDTH) + j][i] = __ReverseByte(font8x8_basic[ch][j]);
+                DB_a[(k * CHARPIXELWIDTH) + j][i] = __ReverseByte(font8x8_basic[ch][j]);
             }
         }
     }
@@ -272,20 +270,6 @@ void __ScreenFlushDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 
 //Work in progress below this point. Please do not touch.
 
-void __initDisplayBuffer(char setting)
-{
-    int i;
-    int j;
-
-    for (i=0; i<96; i++)
-    {
-        for(j=0; j<12; j++)
-        {
-            DisplayBuffer[i][j] = setting;
-        }
-    }
-}
-
 const char Tank[8][4] =
 {
         {0x49, 0xFF, 0x82, 0x00},
@@ -302,18 +286,18 @@ const char Tank[8][4] =
  * @brief Creates a splash screen
  * @param
  */
-void __ScreenSplashScreen()
+void __ScreenSplashScreen(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
     int i;
     int j;
 
-    __initDisplayBuffer(0xFF);
+    __ScreenDisplayBufferInit(0xFF, DB_a);
 
     for (i=0; i<8; i++)
     {
         for(j=0; j<10; j++)
         {
-            DisplayBuffer[i+72][j] = __ReverseByte(~SplashTitle[j][i]);
+            DB_a[i+72][j] = __ReverseByte(~SplashTitle[j][i]);
         }
     }
 
@@ -328,15 +312,15 @@ void __ScreenSplashScreen()
 
     for (i=0; i<8; i++)
     {
-        DisplayBuffer[i+10][3] = ~Tank[i][0];
-        DisplayBuffer[i+10][5] = ~Tank[i][1];
-        DisplayBuffer[i+10][7] = ~Tank[i][2];
-        DisplayBuffer[i+10][9] = ~Tank[i][3];
+        DB_a[i+10][3] = ~Tank[i][0];
+        DB_a[i+10][5] = ~Tank[i][1];
+        DB_a[i+10][7] = ~Tank[i][2];
+        DB_a[i+10][9] = ~Tank[i][3];
     }
 
     for (i=0; i<8; i++)
     {
-        DisplayBuffer[i+k+10][3] = ~Tank[i][2];
+        DB_a[i+k+10][3] = ~Tank[i][2];
         k = (k+1) % 80;
     }
 }

@@ -21,7 +21,8 @@ uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
  */
 void ScreenDisplayBufferInit(char setting)
 {
-    __ScreenDisplayBufferInit(' ');
+    __ScreenDisplayBufferInit(' '
+                              , &DisplayBuffer);
 }
 
 void ScreenPrintChar(uint8_t x
