@@ -1,6 +1,9 @@
 /*!
  * @brief Declarations for low-level screen functions
  * @author Huseyin Sert, Harrison Marcks
+ * @addtogroup screen
+ * @addtogroup handler
+ * @addtogroup private
  * @date 9/12/2018
  */
 

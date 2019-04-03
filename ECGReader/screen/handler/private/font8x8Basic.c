@@ -1,6 +1,9 @@
 /*!
  * @brief Source file definition for the 8x8font basic. So that the header can be used instead of an "extern" variable
  * @author Huseyin Sert, Harrison Marcks
+ * @addtogroup screen
+ * @addtogroup handler
+ * @addtogroup private
  * @date 10/12/2018
  */
 

@@ -1,6 +1,7 @@
 /*!
  * @brief Forward declaration for the POST function
  * @author Jesse Batt
+ * @addtogroup postPowerOn
  * @date 10/12/18
  */
 

@@ -1,22 +1,16 @@
-#include <msp430.h> 
+/*!
+ * @brief Basic Time Slice scheduler implementaiton
+ * @author Jesse Batt
+ * @addtogroup processMgmt
+ * @addtogroup timeSlice
+ * @date 30/11/2018
+ */
+
+#include <msp430fr5969.h>
 
 #define LONG unsigned long
 #define WORD unsigned short
 #define BYTE unsigned char
-
-
-////////////////////////////
-// Start of User Programs //
-////////////////////////////
-
-
-
-
-///////////////////////////
-// End  of Use Programs  //
-///////////////////////////
-
-
 
 #define MAX_PROCESSES   2
 #define STACK_SIZE      100

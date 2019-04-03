@@ -1,6 +1,8 @@
 /*!
  * @brief Public declarations for printing to the screen
  * @author Huseyin Sert, Harrison Marcks
+ * @addtogroup screen
+ * @addtogroup handler
  * @date 2/11/2018
  */
 
