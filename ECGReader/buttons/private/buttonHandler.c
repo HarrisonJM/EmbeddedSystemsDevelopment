@@ -1,6 +1,8 @@
 /*!
  * @brief Button handler for both buttons. Handles pressed(click), held, and double click
  * @author Harrison J Marcks
+ * @addtogroup buttons
+ * @addtogroup private
  * @date 12/11/2018
  */
 #include "O_button.h"
@@ -32,14 +34,14 @@ void ButtonTimer(BUTTONSELECT_T button)
 {
     switch (button)
     {
-    case BUTTONS1:
-        __ButtonTimer(&S1);
-        break;
-    case BUTTONS2:
-        __ButtonTimer(&S2);
-        break;
-    default:
-        break;
+        case BUTTONS1:
+            __ButtonTimer(&S1);
+            break;
+        case BUTTONS2:
+            __ButtonTimer(&S2);
+            break;
+        default:
+            break;
     }
 }
 /*!
@@ -52,16 +54,15 @@ int ButtonGetState(const BUTTONSELECT_T button)
     int state = EVENT_BUTTON_NULL;
     switch (button)
     {
-    case BUTTONS1:
-        state = __ButtonGetState(&S1);
-        break;
-    case BUTTONS2:
-        state = __ButtonGetState(&S2);
-        break;
-    default:
-        break;
+        case BUTTONS1:
+            state = __ButtonGetState(&S1);
+            break;
+        case BUTTONS2:
+            state = __ButtonGetState(&S2);
+            break;
+        default:
+            break;
     }
-
     return state;
 }
 /*!
@@ -74,16 +75,15 @@ int ButtonGetNumberOfPresses(const BUTTONSELECT_T button)
     int buttonPressNum = 0;
     switch (button)
     {
-    case BUTTONS1:
-        buttonPressNum = __ButtonGetNumberOfPresses(&S1);
-        break;
-    case BUTTONS2:
-        buttonPressNum = __ButtonGetNumberOfPresses(&S2);
-        break;
-    default:
-        break;
+        case BUTTONS1:
+            buttonPressNum = __ButtonGetNumberOfPresses(&S1);
+            break;
+        case BUTTONS2:
+            buttonPressNum = __ButtonGetNumberOfPresses(&S2);
+            break;
+        default:
+            break;
     }
-
     return buttonPressNum;
 }
 /*!
@@ -96,14 +96,14 @@ void ButtonSetNumberOfPresses(const BUTTONSELECT_T button,
 {
     switch (button)
     {
-    case BUTTONS1:
-        __ButtonSetNumberOfPresses(&S1, newPresses);
-        break;
-    case BUTTONS2:
-        __ButtonSetNumberOfPresses(&S2, newPresses);
-        break;
-    default:
-        break;
+        case BUTTONS1:
+            __ButtonSetNumberOfPresses(&S1, newPresses);
+            break;
+        case BUTTONS2:
+            __ButtonSetNumberOfPresses(&S2, newPresses);
+            break;
+        default:
+            break;
     }
 }
 /*!
@@ -124,6 +124,5 @@ EVENTQUEUE_T* ButtonGetQueue(const BUTTONSELECT_T button)
         queue_p = __ButtonGetEventQueue(&S2);
         break;
     }
-
     return queue_p;
 }

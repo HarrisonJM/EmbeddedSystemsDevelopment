@@ -1,8 +1,10 @@
 /*!
  * @brief Generic Handler public declarations
- *
  * @author Harrison J Marcks
- *
+ * @addtogroup buttons
+ * @{
+ * @addtogroup private
+ * @{
  * @date 19/11/2018
  */
 #ifndef __BUTTON_GENERIC_HANDLER_H__
@@ -48,3 +50,5 @@ void __ButtonTimer(ButtonStore_t* buttonStore);
 EVENTQUEUE_T* __ButtonGetEventQueue(ButtonStore_t* buttonStore);
 
 #endif /* __BUTTON_GENERIC_HANDLER_H__ */
+
+/*! @} @} */

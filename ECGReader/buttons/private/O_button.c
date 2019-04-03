@@ -1,6 +1,10 @@
 /*!
  * @brief initiliases our button "objects"
  * @author Harrison J Marcks
+ * @addtogroup buttons
+ * @{
+ * @addtogroup private
+ * @{
  * @date 12/11/2018
  */
 
@@ -23,3 +27,5 @@ void ButtonS2Init(ButtonStore_t* S2)
 {
     S2->ReadButton = __ReadButtonS2;
 }
+
+/*! @} @} */

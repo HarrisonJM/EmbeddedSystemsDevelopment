@@ -2,6 +2,7 @@
  * @brief Utility header for the button handling.
  * @author Harrison J Marcks
  * @addtogroup buttons
+ * @{
  * @date 12/11/2018
  */
 
@@ -30,3 +31,5 @@ typedef enum{
 } BUTTONSELECT_T;
 
 #endif /* __BUTTON_HANDLING_UTILITY_H__ */
+
+/*! @} @} */

@@ -2,7 +2,9 @@
  * @brief Public declarations for the button handler
  * @author Harrison J Marcks
  * @addtogroup buttons
+ * @{
  * @addtogroup private
+ * @{
  * @date 12/11/2018
  */
 
@@ -36,7 +38,7 @@ extern int ButtonGetNumberOfPresses(const BUTTONSELECT_T button);
 /*!
  * @brief Sets the number of Times The Button has been pressed
  * @param button enum of the button we wish to reference
- * @param newPresses The new humber of presses
+ * @param newPresses The new number of presses
  */
 extern void ButtonSetNumberOfPresses(const BUTTONSELECT_T button,
                                      const int newPresses);
@@ -44,8 +46,10 @@ extern void ButtonSetNumberOfPresses(const BUTTONSELECT_T button,
  * @brief Returns the address of the slected button's event queue
  * @param button The button we wish to get the queue for
  * @param queue An empty pointer we wish to set the queue to
- * @return The address for the selcted buttosn event queue
+ * @return The address for the selected buttons event queue
  */
 EVENTQUEUE_T* ButtonGetQueue(const BUTTONSELECT_T button);
 
 #endif /* __BUTTON_HANDLER_H__ */
+
+/*! @} @} */
