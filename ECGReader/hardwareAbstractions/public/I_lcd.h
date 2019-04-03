@@ -12,8 +12,8 @@
 
 /*! Defines */
 /*!@{*/
-#define LCDPIXELMAXX (uint8_t)96
-#define LCDPIXELMAXY (uint8_t)96
+#define LCDPIXELMAXX ((uint8_t)96)
+#define LCDPIXELMAXY ((uint8_t)96)
 /*!@}*/
 
 /* init */

@@ -11,7 +11,7 @@
 #define EVENT_BUTTON_PRESS  1
 
 /*
- * Protoypes
+ * Prototypes
  */
 bool __PopFront(EVENTQUEUE_T *q, EVENT_T *e);
 bool __PushBack(EVENTQUEUE_T* q,
