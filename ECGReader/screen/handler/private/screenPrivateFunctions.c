@@ -270,57 +270,63 @@ void __ScreenFlushDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 
 //Work in progress below this point. Please do not touch.
 
-const char Tank[8][4] =
+void __initDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX], char setting)
 {
-        {0x49, 0xFF, 0x82, 0x00},
-        {0x49, 0x1C, 0x82, 0xFF},
-        {0x49, 0x1C, 0xFE, 0x38},
-        {0x7F, 0xFC, 0xFE, 0x38},
-        {0x7F, 0x1C, 0xFE, 0x3F},
-        {0x7F, 0x1C, 0x92, 0x38},
-        {0x41, 0xFF, 0x92, 0x38},
-        {0x41, 0x00, 0x92, 0xFF}
-};
+    int i;
+    int j;
+
+    for (i=0; i<96; i++)
+    {
+        for(j=0; j<12; j++)
+        {
+            DB_a[i][j] = setting;
+        }
+    }
+}
+
+int k = 0;
 
 /*!
  * @brief Creates a splash screen
  * @param
  */
+
 void __ScreenSplashScreen(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
+{
+    __initDisplayBuffer(DB_a, 0xFF);
+    __DeadBeefCow(DB_a);
+    __ScreenFlushDisplayBuffer(DB_a);
+    __DeadBeefText(DB_a);
+}
+
+void __DeadBeefCow(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
     int i;
     int j;
 
-    __ScreenDisplayBufferInit(0xFF, DB_a);
+    //__initDisplayBuffer(DB_a, 0xFF);
 
-    for (i=0; i<8; i++)
+    for (i=0; i<96; i++)
     {
-        for(j=0; j<10; j++)
+        for(j=0; j<12; j++)
         {
-            DB_a[i+72][j] = __ReverseByte(~SplashTitle[j][i]);
+            DB_a[i+5][j] = ~Cow[i][j];
         }
     }
+}
 
-//    for (i=0; i<8; i++)
-//    {
-//        for(j=0; j<6; j++)
-//        {
-//            DisplayBuffer[i+80][j] = ~font8x8_basic[j][i+10];
-//        }
-//    }
-    int k = 0;
+void __DeadBeefText(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
+{
+    int i;
+    int j;
 
-    for (i=0; i<8; i++)
+    //__initDisplayBuffer(DB_a, 0xFF);
+
+    for (i=0; i<96; i++)
     {
-        DB_a[i+10][3] = ~Tank[i][0];
-        DB_a[i+10][5] = ~Tank[i][1];
-        DB_a[i+10][7] = ~Tank[i][2];
-        DB_a[i+10][9] = ~Tank[i][3];
-    }
-
-    for (i=0; i<8; i++)
-    {
-        DB_a[i+k+10][3] = ~Tank[i][2];
-        k = (k+1) % 80;
+        for(j=0; j<12; j++)
+        {
+            DB_a[i+72][j] = ~DeadBeef[i][j];
+        }
     }
 }

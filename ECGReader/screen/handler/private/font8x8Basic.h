@@ -9,5 +9,7 @@
 
 extern const char font8x8_basic[96][8];
 extern const char SplashTitle[96][8];
+extern const char Cow[96][12];
+extern const char DeadBeef[96][12];
 
 #endif /* __FONT_8_X_8_BASIC_H_ */

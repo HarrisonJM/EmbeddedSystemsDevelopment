@@ -21,7 +21,7 @@ uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
  */
 void ScreenDisplayBufferInit(char setting)
 {
-    __ScreenDisplayBufferInit(' '
+    __ScreenDisplayBufferInit(0xFF
                               , &DisplayBuffer);
 }
 
@@ -146,5 +146,5 @@ void ScreenFlushDisplayBufferCustom(uint8_t customDB[LCDPIXELMAXY][SCREENMAXX])
  */
 void ScreenSplash()
 {
-    __ScreenSplashScreen();
+    __ScreenSplashScreen(DisplayBuffer);
 }
