@@ -1,6 +1,8 @@
 /*!
  * @brief Implementation for button handling
  * @author Harrison J Marcks
+ * @addtogroup buttons
+ * @addtogroup private
  * @date 12/11/2018
  */
 
@@ -121,8 +123,8 @@ static void ButtonPressedTimer(ButtonStore_t* buttonStore)
     else
     {
         /* Still pressed */
-        if (buttonStore->buttonPressTime
-                >= (BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER))
+        if ((BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER)
+                >= (buttonStore->buttonPressTime))
         {
             ButtonEnterState(buttonStore, EVENT_BUTTON_HELD);
         }
@@ -155,8 +157,8 @@ static void ButtonHeldTimer(ButtonStore_t* buttonStore)
     else
     {
         /* Still pressed */
-        if (buttonStore->buttonPressTime
-                >= (BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER))
+        if ((BUTTON_HELD_TIME / INTERVAL_BUTTON_HANDLER)
+                >= (buttonStore->buttonPressTime))
         {
             ButtonAddEvent(EVENT_BUTTON_HELD,
                            buttonStore);
@@ -187,20 +189,22 @@ static void ButtonEnterState(ButtonStore_t* buttonStore,
 {
     switch (newState)
     {
-    case EVENT_BUTTON_NULL:
-        break;
-    case EVENT_BUTTON_RELEASED:
-        break;
-    case EVENT_BUTTON_PRESSED:
-        ButtonPressedEnter(buttonStore);
-        break;
-    case EVENT_BUTTON_HELD:
-        ButtonHeldEnter(buttonStore);
-        break;
-    case EVENT_BUTTON_DOUBLE_CLICK:
-    case EVENT_BUTTON_DOUBLE_CLICK_HELD:
-    default:
-        break;
+        case EVENT_BUTTON_NULL:
+            break;
+        case EVENT_BUTTON_RELEASED:
+            break;
+        case EVENT_BUTTON_PRESSED:
+            ButtonPressedEnter(buttonStore);
+            break;
+        case EVENT_BUTTON_HELD:
+            ButtonHeldEnter(buttonStore);
+            break;
+        case EVENT_BUTTON_DOUBLE_CLICK:
+            break;
+        case EVENT_BUTTON_DOUBLE_CLICK_HELD:
+            break;
+        default:
+            break;
     }
     /* Set new state */
     buttonStore->buttonState = newState;
@@ -213,20 +217,22 @@ void __ButtonTimer(ButtonStore_t* buttonStore)
 {
     switch (buttonStore->buttonState)
     {
-    case EVENT_BUTTON_NULL:
-        break;
-    case EVENT_BUTTON_RELEASED:
-        ButtonReleaseTimer(buttonStore);
-        break;
-    case EVENT_BUTTON_PRESSED:
-        ButtonPressedTimer(buttonStore);
-        break;
-    case EVENT_BUTTON_HELD:
-        ButtonHeldTimer(buttonStore);
-        break;
-    case EVENT_BUTTON_DOUBLE_CLICK:
-    case EVENT_BUTTON_DOUBLE_CLICK_HELD:
-    default:
-        break;
+        case EVENT_BUTTON_NULL:
+            break;
+        case EVENT_BUTTON_RELEASED:
+            ButtonReleaseTimer(buttonStore);
+            break;
+        case EVENT_BUTTON_PRESSED:
+            ButtonPressedTimer(buttonStore);
+            break;
+        case EVENT_BUTTON_HELD:
+            ButtonHeldTimer(buttonStore);
+            break;
+        case EVENT_BUTTON_DOUBLE_CLICK:
+            break;
+        case EVENT_BUTTON_DOUBLE_CLICK_HELD:
+            break;
+        default:
+            break;
     }
 }

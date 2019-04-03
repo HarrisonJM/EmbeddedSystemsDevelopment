@@ -1,3 +1,10 @@
+/*!
+ * @brief Real Time Scheduler header
+ * @author Harrison Marcks
+ * @addtogroup processMgmt
+ * @addtogroup realTime
+ * @date 29/03/2019
+ */
 
 #ifndef __REALTIME_H__
 #define __REALTIME_H__
