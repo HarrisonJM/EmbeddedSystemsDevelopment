@@ -7,8 +7,6 @@
 /* line and column names are now redundant but left in just for piece of mind */
 uint32_t column = 0;
 uint32_t line = 0;
-/*! @brief Write lines (0x80, image update mode ) and VCOM bit (0x40, video communication) */
-static const uint8_t command = 0xC0;
 
 extern char __ReverseByte(char inByte);
 extern uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
@@ -16,12 +14,35 @@ extern uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
 #pragma vector=USCI_B0_VECTOR
 __interrupt void UCBSCREEN(void)
 {
-    switch(UCB0IV) /* Check pin interrupted against */
+    bool lineSelect = true;
+
+    switch((UCB0IFG & UCTXIFG)) /* Check pin interrupted against */
     {
         default:
+            if(lineSelect)
+            {
+                UCB0TXBUF = __ReverseByte(line+1);
+                lineSelect = false;
+                line++;
+                if(line == 97)
+                {
+                    line = 0;
+                }
+            }
+            else
+            {
+                UCB0TXBUF = DisplayBuffer[line-1][column];
+                column++;
+                if(12 == column)
+                {
+                    column = 0;
+                    lineSelect = true;
+                    UCB0TXBUF = 0x00;
+                }
+            }
             break;
     }
-    
+
     // LCDSetCSHigh();
     // LCDWriteCommandOrData(command);
 

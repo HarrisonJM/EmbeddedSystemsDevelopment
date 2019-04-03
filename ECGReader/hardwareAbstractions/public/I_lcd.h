@@ -1,6 +1,8 @@
 /*!
  * @brief Public API functions for interacting with the screen hardware
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup public
  * @date 2/11/2018
  */
 

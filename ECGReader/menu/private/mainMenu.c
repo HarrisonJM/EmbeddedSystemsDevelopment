@@ -7,7 +7,6 @@
 
 #include "mainMenu.h"
 #include "../activities/activites.h"
-
 #include <screen/handler/screenHandler.h>
 #include "buttons/buttonHandlingUtility.h"
 

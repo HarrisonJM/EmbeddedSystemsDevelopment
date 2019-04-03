@@ -1,6 +1,6 @@
 /*!
  * @brief Public declarations for printing to the screen
- * @author Huseyin Sert, Harrison Marcks
+ * @author Harrison Marcks
  * @addtogroup screen
  * @addtogroup handler
  * @date 2/11/2018
@@ -32,6 +32,7 @@ extern void ScreenPrintPixel(uint8_t x
                              , bool invert);
 extern void ScreenShiftBuffer(void);
 extern void ScreenFlushDisplayBuffer(void);
+extern void ScreenSplash(void);
 
 /* Functions for printing to custom DisplayBuffers */
 extern void ScreenPrintCharCustom(uint8_t customDB[LCDPIXELMAXY][SCREENMAXX]

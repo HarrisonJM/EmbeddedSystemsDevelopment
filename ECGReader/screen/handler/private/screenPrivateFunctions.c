@@ -1,6 +1,6 @@
 /*!
  * @brief Definitions for lowlevel screen handling functions
- * @author Huseyin Sert, Harrison Marcks
+ * @author Harrison Marcks
  * @addtogroup screen
  * @addtogroup handler
  * @addtogroup private
@@ -8,35 +8,9 @@
  */
 
 #include "../screenHandlerUtility.h"
-
 #include "helpers/boollint.h"
 #include "hardwareAbstractions/public/I_lcd.h"
-
 #include "font8x8Basic.h"
-
-/*!
- * @brief Initialise the display buffer
- * @param setting Pass in character to print across screen
- */
-void __ScreenDisplayBufferInit(char setting,
-                               uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
-{
-    uint8_t i; /* X */
-    uint8_t j; /* char position */
-    uint8_t k; /* Y */
-
-    unsigned char ch = setting - ' ';
-    for (k = SCREENMAXY; k != 0; --k)
-    {
-        for (i = SCREENMAXX; i != 0; --i)
-        {
-            for (j = CHARPIXELWIDTH; j != 0; --j)
-            {
-                DB_a[(k * CHARPIXELWIDTH) + j][i] = __ReverseByte(font8x8_basic[ch][j]);
-            }
-        }
-    }
-}
 
 /*!
  * @brief Inverts the byte passed to it
@@ -66,6 +40,29 @@ char __ReverseByte(char inByte)
             outByte |= BIT0;
 
         return outByte;
+}
+/*!
+ * @brief Initialise the display buffer
+ * @param setting Pass in character to print across screen
+ */
+void __ScreenDisplayBufferInit(char setting,
+                               uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
+{
+    uint8_t i; /* X */
+    uint8_t j; /* char position */
+    uint8_t k; /* Y */
+
+    unsigned char ch = setting - ' ';
+    for (k = SCREENMAXY; k != 0; --k)
+    {
+        for (i = SCREENMAXX; i != 0; --i)
+        {
+            for (j = CHARPIXELWIDTH; j != 0; --j)
+            {
+                DB_a[(k * CHARPIXELWIDTH) + j][i] = __ReverseByte(font8x8_basic[ch][j]);
+            }
+        }
+    }
 }
 /*!
  * @brief Sets the display buffer to contain a single char in the given position
@@ -286,28 +283,10 @@ void __initDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX], char setting)
         }
     }
 }
-
-int k = 0;
-
-/*!
- * @brief Creates a splash screen
- * @param
- */
-
-void __ScreenSplashScreen(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
-{
-    __initDisplayBuffer(DB_a, 0xFF);
-    __DeadBeefCow(DB_a);
-    __ScreenFlushDisplayBuffer(DB_a);
-    __DeadBeefText(DB_a);
-}
-
 void __DeadBeefCow(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
     int i;
     int j;
-
-    //__initDisplayBuffer(DB_a, 0xFF);
 
     for (i=0; i<96; i++)
     {
@@ -323,13 +302,26 @@ void __DeadBeefText(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
     int i;
     int j;
 
-    //__initDisplayBuffer(DB_a, 0xFF);
-
-    for (i=0; i<96; i++)
+    for (i=0; i<11; i++)
     {
         for(j=0; j<12; j++)
         {
             DB_a[i+72][j] = ~DeadBeef[i][j];
         }
     }
+}
+
+/*!
+ * @brief Creates a splash screen
+ * @param DB_a ** to the display buffer in use
+ */
+
+void __ScreenSplashScreen(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
+{
+    __initDisplayBuffer(DB_a
+                        , 0xFF);
+    __DeadBeefCow(DB_a);
+//    __ScreenFlushDisplayBuffer(DB_a);
+    __DeadBeefText(DB_a);
+//    __ScreenFlushDisplayBuffer(DB_a);
 }

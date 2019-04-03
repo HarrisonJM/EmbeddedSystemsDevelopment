@@ -1,6 +1,8 @@
 /*!
  * @brief Sliders initialization
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup slidersPrivate
  * @date 10/12/2018
  */
 

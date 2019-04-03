@@ -17,6 +17,7 @@
 #include "hardwareAbstractions/public/I_watchdog.h"
 #include "hardwareAbstractions/public/I_interrupt.h"
 #include "hardwareAbstractions/public/I_ports.h"
+#include "hardwareAbstractions/public/I_adc.h"
 
 #include "buttons/buttonHandler.h"
 #include "leds/LedHandler.h"
@@ -175,12 +176,13 @@ void POST(void)
 
     /* Initialisations */
     __ButtonHardwareinit();
-    initPort1Interrupt();
-    initPort4Interrupt();
-
+    InterruptPort1Init();
+    InterruptPort4Init();
+    InterruptUCB0Init();
+#include "hardwareAbstractions/public/I_adc.h"
     /* Timers */
     InterruptTimerA0Init();
-    InterruptTimerA2Init();
+//    InterruptTimerA2Init();
 
     /* Sliders */
     SliderHardwareInit();
@@ -197,8 +199,11 @@ void POST(void)
     ButtonHandlerInitBothButtons();
 
     /* Clear the Screen */
-    ScreenDisplayBufferInit("");
-    ScreenFlushDisplayBuffer();
+    LCDSetCSHigh();
+    /*! @brief Write lines (0x80, image update mode ) and VCOM bit (0x40, video communication) */
+    LCDWriteCommandOrData(0xC0);
+    ScreenDisplayBufferInit('\0');
+//    ScreenFlushDisplayBuffer();
 
     InterruptEnable();
 

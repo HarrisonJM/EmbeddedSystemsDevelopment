@@ -1,6 +1,8 @@
 /*!
  * @brief LED functions for using the LEDs
  * @author Harrison J Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup public
  * @date 12/11/18
  */
 

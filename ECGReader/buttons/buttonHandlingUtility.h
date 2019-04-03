@@ -1,6 +1,7 @@
 /*!
  * @brief Utility header for the button handling.
  * @author Harrison J Marcks
+ * @addtogroup buttons
  * @date 12/11/2018
  */
 

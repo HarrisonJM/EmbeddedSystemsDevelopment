@@ -1,6 +1,8 @@
 /*!
  * @brief Slider forward declarations
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup public
  * @date 10/12/2018
  */
 

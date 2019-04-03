@@ -1,6 +1,6 @@
 /*!
  * @brief Declarations for low-level screen functions
- * @author Huseyin Sert, Harrison Marcks
+ * @author Harrison Marcks
  * @addtogroup screen
  * @addtogroup handler
  * @addtogroup private
@@ -12,6 +12,8 @@
 
 #include "helpers/boollint.h"
 
+extern void __ScreenDisplayBufferInit(char setting
+                                      , uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
 extern char __ReverseByte(char inByte);
 extern void __ScreenPrintChar(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]
                        , uint8_t x
@@ -32,5 +34,9 @@ void __ScreenPrint(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]
                    , bool invert);
 void __ScreenShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
 void __ScreenFlushDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
+
+void __DeadBeefCow(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
+void __DeadBeefText(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
+void __ScreenSplashScreen(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX]);
 
 #endif /* __SCREEN_PRIVATE_FUNCTIONS_H__ */
