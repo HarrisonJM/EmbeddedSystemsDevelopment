@@ -7,7 +7,9 @@
  */
 
 #include <msp430.h>
-
+/*!
+ * @brief initialises the slider hardware
+ */
 void SliderHardwareInit(void)
 {
     /* Capacitive Touch */

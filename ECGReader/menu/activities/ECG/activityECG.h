@@ -3,6 +3,12 @@
  * @author Harrison Marcks
  * @date 9/12/2018
  *
+ * @addtogroup menu
+ * @{
+ * @addtogroup activites
+ * @{
+ * @addtogroup ECG
+ * @{
  */
 
 #ifndef __ACTIVITY_ECG_H__
@@ -13,3 +19,5 @@ extern void ActivityECGTimer();
 extern void ActivityECGTest();
 
 #endif /* __ACTIVITY_ECG_H__ */
+
+/*! @} @} @} */

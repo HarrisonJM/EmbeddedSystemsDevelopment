@@ -2,8 +2,11 @@
  * @brief Source file definition for the 8x8font basic. So that the header can be used instead of an "extern" variable
  * @author Huseyin Sert, Harrison Marcks
  * @addtogroup screen
+ * @{
  * @addtogroup handler
+ * @{
  * @addtogroup private
+ * @{
  * @date 10/12/2018
  */
 
@@ -244,3 +247,5 @@ const char DeadBeef[11][12] = {
 { 0x00, 0x7F, 0xCF, 0xF7, 0x1D, 0xFF, 0x3F, 0xCF, 0xF7, 0xFB, 0x80, 0x00}, /* - */
 { 0x00, 0x7E, 0x0F, 0xF7, 0x1D, 0xF8, 0x3F, 0x8F, 0xF7, 0xFB, 0x80, 0x00}, /* - */
 };
+
+/* @} @} @} */

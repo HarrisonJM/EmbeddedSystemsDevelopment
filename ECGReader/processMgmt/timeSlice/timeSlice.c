@@ -2,7 +2,9 @@
  * @brief Basic Time Slice scheduler implementaiton
  * @author Jesse Batt
  * @addtogroup processMgmt
+ * @{
  * @addtogroup timeSlice
+ * @{
  * @date 30/11/2018
  */
 
@@ -154,3 +156,4 @@ void run_process(unsigned int process_index)
 
 
 
+/*! @} @} */

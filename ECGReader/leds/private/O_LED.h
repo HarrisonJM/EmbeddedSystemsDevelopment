@@ -2,6 +2,11 @@
  * @brief The LED object tracker
  * @author Harrison James Marcks
  * @date 23/11/18
+ *
+ * @addtogroup leds
+ * @{
+ * @addtogroup private
+ * @{
  */
 #ifndef __O_LED_H__
 #define __O_LED_H__
@@ -27,3 +32,5 @@ void LEDGreenInit(LEDSTORE_T* green);
 void LEDRedInit(LEDSTORE_T* red);
 
 #endif /* __O_LED_H__ */
+
+/*! @} @} */

@@ -2,7 +2,9 @@
  * @brief Real Time Scheduler header
  * @author Harrison Marcks
  * @addtogroup processMgmt
+ * @{
  * @addtogroup realTime
+ * @{
  * @date 29/03/2019
  */
 
@@ -42,7 +44,7 @@ void DecreaseProcessPriority(Process_t* proc);
 /*!
  * @brief Initialises a process for running
  * @param procPriority The priority of the process
- * @param A pointer to the function
+ * @param funct A pointer to the function
  */
 void InitProcess(unsigned int procPriority
                  , void (*funct)());
@@ -56,3 +58,6 @@ void StartRealTimeScheduler();
 void ServiceScheduler();
 
 #endif /* __REALTIME_H__ */
+
+/*! @}
+ * @} */

@@ -2,6 +2,11 @@
  * @brief Implementationf or public interface functions
  * @author Harrison J Marcks
  * @date 23/11/2018
+ *
+ * @addtogroup leds
+ * @{
+ * @addtogroup private
+ * @{
  */
 
 #include "O_LED.h"
@@ -24,7 +29,7 @@ void LEDHandlerInitBothLEDs()
 }
 /*!
  * @brief Returns the current state to the user
- * @param button enum of the button we wish to reference
+ * @param led enum of the led we wish to reference
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
 LEDACTION_T LEDGetState(const LEDSELECT_T led)
@@ -62,3 +67,5 @@ void LEDUse(const LEDSELECT_T led
         break;
     }
 }
+
+/*! @} @} */

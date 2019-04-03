@@ -2,7 +2,9 @@
  * @brief Utility definitons for the screen handler
  * @author Harrison Marcks
  * @addtogroup screen
+ * @{
  * @addtogroup handler
+ * @{
  * @date 10/12/18
  */
 
@@ -19,3 +21,5 @@
 /*!@}*/
 
 #endif /* __SCREEN_HANDLER_UTILITY_H__ */
+
+/*! @} @} */

@@ -2,6 +2,9 @@
  * @brief Public LED handler interface
  * @author Harrison James Marcks
  * @date 23/11/18
+ *
+ * @addtogroup leds
+ * @{
  */
 
 #ifndef __LEDHANDLER_H__
@@ -15,7 +18,7 @@
 extern void LEDHandlerInitBothLEDs(void);
 /*!
  * @brief Returns the current state to the user
- * @param button enum of the button we wish to reference
+ * @param led enum of the led we wish to reference
  * @return The state the button is currently in as defined by BUTTONSTATE_E
  */
 extern LEDACTION_T LEDGetState(const LEDSELECT_T led);
@@ -28,3 +31,5 @@ extern void LEDUse(const LEDSELECT_T led
                    , const LEDACTION_T newState);
 
 #endif /* __LEDHANDLER_H__ */
+
+/*! @} */
