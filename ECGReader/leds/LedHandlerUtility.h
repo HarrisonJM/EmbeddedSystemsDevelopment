@@ -2,6 +2,9 @@
  * @brief Utility header for the LED Handler
  * @author Harrison Marcks
  * @date 11/12/2018
+ *
+ * @addtogroup leds
+ * @{
  */
 #ifndef __LEDHANDLERUTILITY_H__
 #define __LEDHANDLERUTILITY_H__
@@ -23,3 +26,5 @@ typedef enum {
 } LEDSELECT_T;
 
 #endif /* __LEDHANDLERUTILITY_H__ */
+
+/*! @} */

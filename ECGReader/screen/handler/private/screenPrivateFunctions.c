@@ -2,8 +2,11 @@
  * @brief Definitions for lowlevel screen handling functions
  * @author Harrison Marcks
  * @addtogroup screen
+ * @{
  * @addtogroup handler
+ * @{
  * @addtogroup private
+ * @{
  * @date 10/12/2018
  */
 
@@ -44,6 +47,7 @@ char __ReverseByte(char inByte)
 /*!
  * @brief Initialise the display buffer
  * @param setting Pass in character to print across screen
+ * @param DB_a The display buffer we'd like to print to
  */
 void __ScreenDisplayBufferInit(char setting,
                                uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
@@ -195,6 +199,7 @@ void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX],
 
 /*!
  * @brief shifts the displaybuffer backwards (left) ish
+ * @param DB_a The display buffer we'd like to print to
  */
 void __ScreenShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
@@ -225,9 +230,6 @@ void __ScreenShiftBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 }
 /*!
  * @brief Prints to the display itself
- *
- * The counting up loops are, unfortunately, required in this implementation
- * otherwise nothing appears to work.
  *
  * @param DB_a The array/double pointer to where the display buffer is stored
  *
@@ -267,10 +269,12 @@ void __ScreenFlushDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
     LCDSetCSLow();
 
 }
-
-//Work in progress below this point. Please do not touch.
-
-void __initDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX], char setting)
+/*!
+ * @brief new ScreenDisplayBufferInit that doesn't leave a black abr at the top maybe
+ * @param DB_a The array/double pointer to where the display buffer is stored
+ * @param setting The char we'd like to set the screen to
+ */
+void __ScreenDisplayBufferInit2(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX], char setting)
 {
     int i;
     int j;
@@ -283,6 +287,10 @@ void __initDisplayBuffer(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX], char setting)
         }
     }
 }
+/*!
+ * @brief prints a cow to the buffer
+ * @param DB_a The array/double pointer to where the display buffer is stored
+ */
 void __DeadBeefCow(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
     int i;
@@ -296,7 +304,10 @@ void __DeadBeefCow(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
         }
     }
 }
-
+/*!
+ * @brief Prints deadbeef in special font to the screen
+ * @param DB_a The array/double pointer to where the display buffer is stored
+ */
 void __DeadBeefText(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
     int i;
@@ -315,13 +326,14 @@ void __DeadBeefText(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
  * @brief Creates a splash screen
  * @param DB_a ** to the display buffer in use
  */
-
 void __ScreenSplashScreen(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX])
 {
-    __initDisplayBuffer(DB_a
+    __ScreenDisplayBufferInit2(DB_a
                         , 0xFF);
     __DeadBeefCow(DB_a);
-//    __ScreenFlushDisplayBuffer(DB_a);
+    __ScreenFlushDisplayBuffer(DB_a);
     __DeadBeefText(DB_a);
-//    __ScreenFlushDisplayBuffer(DB_a);
+    __ScreenFlushDisplayBuffer(DB_a);
 }
+
+/*! @} @} @} */

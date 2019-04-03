@@ -2,8 +2,11 @@
  * @brief direct handler for printing to the LCD screen
  * @author Harrison Marcks
  * @addtogroup screen
+ * @{
  * @addtogroup handler
+ * @{
  * @addtogroup private
+ * @{
  * @date 30/11/2018
  */
 #include "screen/handler/screenHandler.h"
@@ -22,7 +25,7 @@ uint8_t DisplayBuffer[LCDPIXELMAXY][SCREENMAXX];
 void ScreenDisplayBufferInit(char setting)
 {
     __ScreenDisplayBufferInit(0xFF
-                              , &DisplayBuffer);
+                              , DisplayBuffer);
 }
 
 void ScreenPrintChar(uint8_t x
@@ -148,3 +151,5 @@ void ScreenSplash(void)
 {
     __ScreenSplashScreen(DisplayBuffer);
 }
+
+/*! @} @} @} */

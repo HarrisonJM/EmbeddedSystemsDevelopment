@@ -2,6 +2,11 @@
  * @brief MainMenu related definitions
  * @author Harrison Marcks
  * @date 9/12/2018
+ *
+ * @addtogroup menu
+ * @{
+ * @addtogroup private
+ * @{
  */
 
 #ifndef __MENU_H__
@@ -25,3 +30,5 @@ typedef enum MENUSELECT {
 } MENUSELECT_T;
 
 #endif /* __MENU_H__ */
+
+/*! @} @} */

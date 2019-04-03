@@ -3,6 +3,11 @@
  * @author Dan Steer
  * @author Harrison Marcks
  * @date 12/11/2018
+ *
+ * @addtogroup menu
+ * @{
+ * @addtogroup private
+ * @{
  */
 
 #include "mainMenu.h"
@@ -91,7 +96,7 @@ void MainMenuEnter()
 /*!
  * @brief Decides whether an action needs to take place
  * @param bS1Event The latest event on button S1
- * @param bS1Event The latest event on button S2
+ * @param bS2Event The latest event on button S2
  */
 void MainMenuTimer(EVENT_T *bS1Event, EVENT_T *bS2Event)
 {
@@ -204,3 +209,5 @@ void MainMenuTimerActivity()
         break;
     }
 }
+
+/*! @} @} */

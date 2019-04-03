@@ -2,6 +2,7 @@
  * @brief POST, RAM Checks, some initialisation
  * @author Jesse Batt
  * @addtogroup postPowerOn
+ * @{
  * @date 10/12/2018
  * @todo TIDY EVERYTHING
  */
@@ -215,3 +216,5 @@ void POST(void)
     ResetStackPoint(); */
 
 }
+
+/*! @} */

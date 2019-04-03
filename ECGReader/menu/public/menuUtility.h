@@ -2,6 +2,11 @@
  * @brief Definitions for all menu related things
  * @author Harrison Marcks
  * @date 9/12/2018
+ *
+ * @addtogroup menu
+ * @{
+ * @addtogroup public
+ * @{
  */
 
 #ifndef __MENU_UTILITY_H__
@@ -19,3 +24,5 @@ typedef struct MENUCONTEXT {
 } MENUCONTEXT_T;
 
 #endif /* __MENU_UTILITY_H__ */
+
+/*! @} @} */
