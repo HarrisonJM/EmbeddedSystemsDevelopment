@@ -1,6 +1,8 @@
 /*!
  * @brief Public declarations for the button handler
  * @author Harrison J Marcks
+ * @addtogroup buttons
+ * @addtogroup private
  * @date 12/11/2018
  */
 
