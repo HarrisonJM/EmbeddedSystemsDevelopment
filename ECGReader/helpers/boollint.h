@@ -32,8 +32,8 @@ typedef uint8_t bool;
 #endif
 
 #ifndef NULL
-#define NULL 0x0000000000000000
-#define null NULL
+/*#define NULL 0x0000000000000000
+#define null NULL */
 #endif
 
 #endif /* __BOOLINT_H__ */

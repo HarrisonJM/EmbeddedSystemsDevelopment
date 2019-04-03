@@ -1,6 +1,8 @@
 /*!
  * @brief Utility definitons for the screen handler
  * @author Harrison Marcks
+ * @addtogroup screen
+ * @addtogroup handler
  * @date 10/12/18
  */
 

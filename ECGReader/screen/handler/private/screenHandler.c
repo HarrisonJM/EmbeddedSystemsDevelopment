@@ -1,6 +1,9 @@
 /*!
  * @brief direct handler for printing to the LCD screen
  * @author Huseyin Sert, Harrison Marcks
+ * @addtogroup screen
+ * @addtogroup handler
+ * @addtogroup private
  * @date 30/11/2018
  */
 

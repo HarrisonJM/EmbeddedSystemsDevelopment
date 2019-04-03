@@ -1,14 +1,14 @@
 /*!
- * @brief realtime scheduler (process priorites)
- * 
- * @author harrison marcks
- * 
- * @date 4/3/2019
- * 
+ * @brief Real Time Scheduler header
+ * @author Harrison Marcks
+ * @addtogroup processMgmt
+ * @addtogroup realTime
+ * @date 04/03/2019
  * @todo delay
  * @todo idle process
  * @todo process starvation
  */
+
 #include <msp430fr5969.h>
 
 #include "realtime.h"

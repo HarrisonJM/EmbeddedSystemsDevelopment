@@ -1,6 +1,8 @@
 /*!
  * @brief Slider Utility definitions
  * @author Harrison Marcks
+ * @addtogroup sliders
+ * @addtogroup public
  * @date 12/12/2018
  */
 

@@ -1,6 +1,9 @@
 /*!
  * @brief Definitions for lowlevel screen handling functions
  * @author Huseyin Sert, Harrison Marcks
+ * @addtogroup screen
+ * @addtogroup handler
+ * @addtogroup private
  * @date 10/12/2018
  */
 
