@@ -14,6 +14,11 @@ typedef signed char   int8_t;
 typedef signed int    int16_t;
 typedef signed long   int32_t;
 
+#ifndef _SIZE_T_DECLARED
+#define _SIZE_T_DECLARED
+typedef __SIZE_T_TYPE__ size_t;
+#endif
+
 typedef unsigned long LONG;
 typedef unsigned short WORD;
 typedef unsigned char BYTE;

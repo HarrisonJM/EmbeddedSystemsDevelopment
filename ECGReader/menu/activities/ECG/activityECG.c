@@ -11,8 +11,6 @@
  * @date 9/12/2018
  */
 
-#include <math.h>
-
 #include "helpers/boollint.h"
 
 #include "hardwareAbstractions/public/I_lcd.h"
@@ -33,7 +31,7 @@ void __ShiftBuffer(void);
 int8_t __GetValPos(double *val);
 void __generateSineWave(double* sinVal);
 
-static void ActivityECGTest(void); // for testing purposes
+//static void ActivityECGTest(void); // for testing purposes
 
 #pragma PERSISTENT (DMA_DST)
 unsigned int DMA_DST[1024] = {0}; // This is where DMA will put the ADC readings
@@ -44,7 +42,8 @@ unsigned int DMA_DST[1024] = {0}; // This is where DMA will put the ADC readings
  */
 void ActivityECGEnter(void)
 {
-    ScreenDisplayBufferInit(' ');
+    ScreenDisplayBufferInit('\0');
+    ScreenFlushDisplayBuffer();
     //ActivityECGTest(); 
 }
 /*!
@@ -57,16 +56,28 @@ void ActivityECGTimer(void)
 
     ScreenShiftBuffer();
 
-    __generateSineWave(&rawVal);
-    y = __GetValPos(&rawVal);
-
+//    __generateSineWave(&rawVal); // 2000 = 0
+//    y = __GetValPos(&rawVal);
+    y = 45;
+    ScreenPrintPixel(0, y, 0);
     ScreenFlushDisplayBuffer();
 }
+void dec_to_str (char* str, uint32_t val, size_t digits)
+{
+  size_t i=1u;
 
+  for(; i<=digits; i++)
+  {
+    str[digits-i] = (char)((val % 10u) + '0');
+    val/=10u;
+  }
+
+  str[i-1u] = '\0'; // assuming you want null terminated strings?
+}
 /*!
  * @brief For testing... 
  */
-void ActivityECGTest() 
+void ActivityECGTest()
 {
     __data16_write_addr((unsigned short) &DMA1DA, (unsigned long) DMA_DST); // dest add, DMA_DST
     DMA1CTL |= DMAREQ; // start DMA transfer
@@ -75,17 +86,13 @@ void ActivityECGTest()
     char reg[128];
     while(1)
     {
-        sprintf(reg, "%d", ADC12MEM12);
+        dec_to_str(reg, ADC12MEM12, 5u);
+//        sprintf(reg, "%d", ADC12MEM12);
         ScreenPrint(reg, 1);
         ScreenFlushDisplayBuffer();
-         __delay_cycles(5000);
-        ScreenPrint("blah", 1);
-        ScreenFlushDisplayBuffer();
-        __delay_cycles(5000);
-        ScreenPrint("som", 1);
-        ScreenFlushDisplayBuffer();      
+         __delay_cycles(7500);
     }
-    
+
 }
 /*!
  * @brief Figures out where to put the value. Currently designed for sine waves
@@ -173,15 +180,3 @@ void __generateSineWave(double* sinVal)
 //    else
         ++time;
 }
-
-
-
-
-
-
-
-
-
-
-
-

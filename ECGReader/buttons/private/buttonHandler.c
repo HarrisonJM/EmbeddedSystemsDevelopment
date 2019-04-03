@@ -3,7 +3,6 @@
  * @author Harrison J Marcks
  * @date 12/11/2018
  */
-
 #include "O_button.h"
 #include "../buttonHandlingUtility.h"
 #include "ButtonGenericHandler.h"

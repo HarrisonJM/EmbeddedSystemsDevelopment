@@ -1,6 +1,8 @@
 /*!
  * @brief Public forward declarations for the timer init functions
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup public
  * @date 10/12/18
  */
 
@@ -9,6 +11,10 @@
 
 extern void InterruptTimerA0Init(void);
 extern void InterruptTimerA2Init(void);
+/*!
+ * @brief initialises the UCB0 interrupt for use
+ */
+void InterruptUCB0Init(void);
 extern void InterruptDisable(void);
 extern void InterruptEnable(void);
 

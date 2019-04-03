@@ -1,11 +1,8 @@
 /*!
  * @brief direct handler for printing to the LCD screen
- * @author Huseyin Sert, Harrison Marcks
+ * @author Harrison Marcks
  * @date 30/11/2018
  */
-
-#include <stdlib.h>
-
 #include "screen/handler/screenHandler.h"
 #include "screenPrivateFunctions.h"
 
@@ -144,7 +141,7 @@ void ScreenFlushDisplayBufferCustom(uint8_t customDB[LCDPIXELMAXY][SCREENMAXX])
  * @brief Creates a splash screen for 5 seconds before it goes in to the main menu
  *
  */
-void ScreenSplash()
+void ScreenSplash(void)
 {
     __ScreenSplashScreen(DisplayBuffer);
 }

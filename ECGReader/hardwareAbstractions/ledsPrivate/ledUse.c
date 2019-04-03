@@ -1,6 +1,8 @@
 /*!
  * @brief Hardware implementations for using the LEDs
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup ledPrivate
  * @date 12/11/18
  */
 

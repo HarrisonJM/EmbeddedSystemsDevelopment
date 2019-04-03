@@ -1,6 +1,8 @@
 /*!
  * @brief functions for controlling the watchdog Timer
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup watchdogPrivate
  * @date 10/12/2018
  */
 

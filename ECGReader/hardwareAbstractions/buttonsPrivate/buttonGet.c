@@ -1,6 +1,8 @@
 /*!
  * @brief Non-hardware agnostic implementation for grabbing button information
  * @author Harrison J Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup buttonsPrivate
  * @date 8 Nov 2018
  */
 #include <msp430fr5969.h>

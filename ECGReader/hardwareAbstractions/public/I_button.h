@@ -1,6 +1,8 @@
 /*!
  * @brief Externs public button functions
  * @author Harrison J Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup public
  * @date 12/11/2018
  */
 
