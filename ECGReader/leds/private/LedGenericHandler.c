@@ -2,6 +2,11 @@
  * @brief An LED handler for tracking the state of the buttons
  * @author Harrison J Marcks
  * @date 23/11/18
+ *
+ * @addtogroup leds
+ * @{
+ * @addtogroup private
+ * @{
  */
 
 #include <helpers/eventQueue/eventQueue.h>
@@ -36,6 +41,7 @@ LEDACTION_T __LEDGetState(LEDSTORE_T *ledStore)
 /*!
  * @brief Handles LEDs uniformly, gives us a way to track, in software, what the lights are doing
  * @param ledStore A pointer to the LED we wish to use
+ * @param newState the state the LED should take
  */
 void __LEDHandler(LEDSTORE_T* ledStore
                   , const LEDACTION_T newState)
@@ -79,3 +85,5 @@ static void __LEDTurnOff(LEDSTORE_T* ledStore)
     ledStore->LEDOff();
     ledStore->state = LED_OFF;
 }
+
+/*! @} @} */

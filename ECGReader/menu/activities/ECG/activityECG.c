@@ -9,6 +9,12 @@
  *
  * @author Harrison Marcks
  * @date 9/12/2018
+ * @addtogroup menu
+ * @{
+ * @addtogroup activites
+ * @{
+ * @addtogroup ECG
+ * @{
  */
 
 #include "helpers/boollint.h"
@@ -180,3 +186,5 @@ void __generateSineWave(double* sinVal)
 //    else
         ++time;
 }
+
+/*! @} @} @} */

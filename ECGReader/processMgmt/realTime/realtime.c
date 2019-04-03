@@ -1,12 +1,13 @@
 /*!
  * @brief Real Time Scheduler header
  * @author Harrison Marcks
- * @addtogroup processMgmt
- * @addtogroup realTime
  * @date 04/03/2019
- * @todo delay
- * @todo idle process
- * @todo process starvation
+ * @addtogroup processMgmt
+ * @{
+ * @addtogroup realTime
+ * @{
+ * @todo idle process?
+ * @todo process starvation?
  */
 
 #include <msp430fr5969.h>
@@ -69,7 +70,15 @@ struct PROCESS {
 /*! @} */
 
 /* Forward Declarations */
+/*!
+* @brief Inserts the new process based on its priority
+* @param newProcess A pointer to the process we wish to insert
+*/
 static void PriorityInsertNewProcess(Process_t* newProcess);
+/*!
+* @brief Returns the first available processbloc
+* @return A pointer to the available bloc
+*/
 static Process_t* FindFreeProcessBloc();
 
 /* Filescoped */
@@ -208,7 +217,7 @@ void AddDelay(uint16_t msDelay)
 /*!
  * @brief Initialises a process for running
  * @param procPriority The priority of the process
- * @param A pointer to the function
+ * @param funct A pointer to the function
  */
 void InitProcess(unsigned int procPriority
                  , void (*funct)())
@@ -439,3 +448,6 @@ static void PriorityInsertNewProcess(Process_t* newProcess)
         }
     }
 }
+
+/*! @}
+ * @} */

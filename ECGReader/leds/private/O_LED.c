@@ -2,6 +2,11 @@
  * @brief initilisation functions for the LED "object"
  * @author Harrison J Marcks
  * @date 23/11/18
+ *
+ * @addtogroup leds
+ * @{
+ * @addtogroup private
+ * @{
  */
 
 #include "O_LED.h"
@@ -27,3 +32,5 @@ void LEDGreenInit(LEDSTORE_T* green)
     green->LEDOff = __LEDGreenOff;
     green->LEDToggle = __LEDGreenToggle;
 }
+
+/*! @} @} */

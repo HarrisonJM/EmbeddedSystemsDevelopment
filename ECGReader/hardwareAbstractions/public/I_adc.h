@@ -8,7 +8,9 @@
 #ifndef __I_ADC_H__
 #define __I_ADC_H__
 
-/* Initialise and configure ADC components */
+/*!
+ * @brief Initialise and configure ADC components
+ */
 extern void ADCSetup(void);
 
 #endif /* __I_ADC_H__ */
