@@ -8,6 +8,7 @@
  * 4) Go back to 1)
  *
  * @author Harrison Marcks
+ * @author Dan Steer
  * @date 9/12/2018
  * @addtogroup menu
  * @{
@@ -37,10 +38,10 @@ void __ShiftBuffer(void);
 int8_t __GetValPos(double *val);
 void __generateSineWave(double* sinVal);
 
-//static void ActivityECGTest(void); // for testing purposes
+/*static void ActivityECGTest(void); // for testing purposes*/
 
 #pragma PERSISTENT (DMA_DST)
-unsigned int DMA_DST[1024] = {0}; // This is where DMA will put the ADC readings
+unsigned int DMA_DST[1024] = {0}; /* This is where DMA will put the ADC readings */
 
 /*!
  * @brief Performs Activity initialisation, zeroes out the  display buffer,
@@ -50,7 +51,7 @@ void ActivityECGEnter(void)
 {
     ScreenDisplayBufferInit('\0');
     ScreenFlushDisplayBuffer();
-    //ActivityECGTest(); 
+    /*ActivityECGTest(); */
 }
 /*!
  * @brief Performs timer activity work. Only run when the ADC has a value
@@ -62,13 +63,13 @@ void ActivityECGTimer(void)
 
     ScreenShiftBuffer();
 
-//    __generateSineWave(&rawVal); // 2000 = 0
-//    y = __GetValPos(&rawVal);
+/*    __generateSineWave(&rawVal); // 2000 = 0*/
+/*    y = __GetValPos(&rawVal);*/
     y = 45;
     ScreenPrintPixel(0, y, 0);
     ScreenFlushDisplayBuffer();
 }
-void dec_to_str (char* str, uint32_t val, size_t digits)
+void ADCDecToStr (char* str, uint32_t val, size_t digits)
 {
   size_t i=1u;
 
@@ -78,22 +79,22 @@ void dec_to_str (char* str, uint32_t val, size_t digits)
     val/=10u;
   }
 
-  str[i-1u] = '\0'; // assuming you want null terminated strings?
+  str[i-1u] = '\0'; /*assuming you want null terminated strings?*/
 }
 /*!
  * @brief For testing... 
  */
 void ActivityECGTest()
 {
-    __data16_write_addr((unsigned short) &DMA1DA, (unsigned long) DMA_DST); // dest add, DMA_DST
-    DMA1CTL |= DMAREQ; // start DMA transfer
+    __data16_write_addr((unsigned short) &DMA1DA, (unsigned long) DMA_DST); /*dest add, DMA_DST*/
+    DMA1CTL |= DMAREQ; /*start DMA transfer*/
     __delay_cycles(5000);
-    ADC12CTL0 |= ADC12ENC; // Start sampling/conversion
+    ADC12CTL0 |= ADC12ENC; /*Start sampling/conversion*/
     char reg[128];
     while(1)
     {
-        dec_to_str(reg, ADC12MEM12, 5u);
-//        sprintf(reg, "%d", ADC12MEM12);
+        ADCDecToStr(reg, ADC12MEM12, 5u);
+        /*sprintf(reg, "%d", ADC12MEM12);*/
         ScreenPrint(reg, 1);
         ScreenFlushDisplayBuffer();
          __delay_cycles(7500);
@@ -149,7 +150,7 @@ int8_t __GetValPos(double *val)
     /* How many times is it away from 0 */
     fromZero = newVal/(int32_t)2;
 
-    if(negative == true)
+    if(true == negative)
     {
         yPos -= (int8_t)fromZero;
     }
@@ -180,10 +181,10 @@ void __generateSineWave(double* sinVal)
 {
     static uint16_t time = 0;
 
-//    *sinVal = sineVals[time];
-//    if(time > INT32_MAX)
+/*    *sinVal = sineVals[time];*/
+/*    if(time > INT32_MAX)*/
         time = 0;
-//    else
+/*    else*/
         ++time;
 }
 
