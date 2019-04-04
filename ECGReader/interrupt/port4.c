@@ -1,3 +1,11 @@
+/*!
+ * @brief ISR for Port 4
+ * @author Harrison Marcks
+ * @addtogroup interrupt
+ * @{
+ * @date 12/12/2018
+ */
+
 #include <msp430fr5969.h>
 #include <buttons/private/O_button.h>
 #include <buttons/buttonHandler.h>
@@ -18,3 +26,5 @@ __interrupt void port4_ISR(void)
             break;
     }
 }
+
+/*! @} */

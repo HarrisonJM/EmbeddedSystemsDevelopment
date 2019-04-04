@@ -1,3 +1,11 @@
+/*!
+ * @brief ISR for the UCB0 for an event driven screen
+ * @author Harrison Marcks
+ * @addtogroup interrupt
+ * @{
+ * @date 12/12/2018
+ */
+
 #include <msp430fr5969.h>
 #include <helpers/boollint.h>
 
@@ -505,3 +513,5 @@ __interrupt void UCBSCREEN(void)
 // }
 
 */
+
+/*! @} */
