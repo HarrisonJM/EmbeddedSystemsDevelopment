@@ -16,9 +16,9 @@ void SliderHardwareInit(void)
     CAPTIO0CTL = CAPTIOEN + (3<<4) + (4<<1);
 
     /* Right slider */
-    P1REN  |= BIT3; /* Pull up resistor */
-    P1DIR  |= BIT3; /* activiate */
-    P1OUT  &= ~BIT3; /* input */
+    P1REN  |= BIT3;     /* Pull up resistor */
+    P1DIR  |= BIT3;     /* activiate */
+    P1OUT  &= ~BIT3;    /* input */
 
     P1REN  |= BIT4;
     P1DIR  |= BIT4;

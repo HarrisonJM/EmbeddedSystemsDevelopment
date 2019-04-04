@@ -13,7 +13,7 @@
  */
 void WatchdogStop(void)
 {
-    WDTCTL = WDTPW | WDTHOLD;       // Stop watchdog timer
+    WDTCTL = WDTPW | WDTHOLD;       /* Stop watchdog timer */
 }
 /*!
  * @brief starts/re-enables the watchdog timer
