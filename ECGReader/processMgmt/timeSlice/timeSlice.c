@@ -49,7 +49,7 @@ void initialise_process(unsigned int process_index, void (*funct)())
         stack_pointer = (LONG)&process[process_index] + STACK_SIZE - 2;
         program_counter = (LONG)funct;
 
-        // Construct combined PC+SR used by interrupt
+        /* Construct combined PC+SR used by interrupt */
 
         pc1 = (WORD)program_counter;
         pc2 = (WORD)(((program_counter>>4)&0x0F000) | status&0x00FFF);
@@ -108,52 +108,52 @@ void run_process(unsigned int process_index)
 }
 
 
-//#pragma vector=TIMER0_A0_VECTOR
-//__interrupt void Timer0_A0 (void)    // Timer0 A0 1ms interrupt service routine
-//{
-//    // Save first process details...
-//
-//    asm(
-////            " push.a R15\n"
-////            " push.a R14\n"
-////            " push.a R13\n"
-////            " push.a R12\n"
-////            " push.a R11\n"
-//            " push.a R10\n"
-//            " push.a R9\n"
-//            " push.a R8\n"
-//            " push.a R7\n"
-//            " push.a R6\n"
-//            " push.a R5\n"
-//            " push.a R4\n"
-//            " push.a R3\n"
-//            " movx.a sp,&stack_pointer\n"
-//        );
-//
-//    process[current_process].sp = stack_pointer;
-//
-//    current_process = (current_process+1) % MAX_PROCESSES;
-//
-//    stack_pointer = process[current_process].sp;
-//
-//    asm(
-//            " movx.a &stack_pointer,SP \n"
-//            " pop.a R3 \n"
-//            " pop.a R4 \n"
-//            " pop.a R5 \n"
-//            " pop.a R6 \n"
-//            " pop.a R7 \n"
-//            " pop.a R8 \n"
-//            " pop.a R9 \n"
-//            " pop.a R10 \n"
-////            " pop.a R11 \n"
-////            " pop.a R12 \n"
-////            " pop.a R13 \n"
-////            " pop.a R14 \n"
-////            " pop.a R15 \n"
-//    );
-//}
+/* #pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer0_A0 (void)    /* Timer0 A0 1ms interrupt service routine */
+{
+    /* Save first process details... */
 
+    asm(
+            " push.a R15\n"
+            " push.a R14\n"
+            " push.a R13\n"
+            " push.a R12\n"
+            " push.a R11\n"
+            " push.a R10\n"
+            " push.a R9\n"
+            " push.a R8\n"
+            " push.a R7\n"
+            " push.a R6\n"
+            " push.a R5\n"
+            " push.a R4\n"
+            " push.a R3\n"
+            " movx.a sp,&stack_pointer\n"
+        );
+
+    process[current_process].sp = stack_pointer;
+
+    current_process = (current_process+1) % MAX_PROCESSES;
+
+    stack_pointer = process[current_process].sp;
+
+    asm(
+            " movx.a &stack_pointer,SP \n"
+            " pop.a R3 \n"
+            " pop.a R4 \n"
+            " pop.a R5 \n"
+            " pop.a R6 \n"
+            " pop.a R7 \n"
+            " pop.a R8 \n"
+            " pop.a R9 \n"
+            " pop.a R10 \n"
+            " pop.a R11 \n"
+            " pop.a R12 \n"
+            " pop.a R13 \n"
+            " pop.a R14 \n"
+            " pop.a R15 \n"
+    );
+}
+*/
 
 
 /*! @} @} */

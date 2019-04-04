@@ -2,8 +2,11 @@
  * @brief Non-hardware agnostic implementation for grabbing button information
  * @author Harrison J Marcks
  * @addtogroup hardwareAbstractions
+ * @{
  * @addtogroup buttonsPrivate
+ * @{
  * @date 8 Nov 2018
+ * @{
  */
 #include <msp430fr5969.h>
 
@@ -14,8 +17,8 @@
 void __ButtonHardwareinit()
 {
     /* Button S2 */
-    P1DIR &= ~BIT1; // P1.1 input (switch 2)
-    P1REN |= BIT1; // P1.1 pull up resistor
+    P1DIR &= ~BIT1; /* P1.1 input (switch 2) */
+    P1REN |= BIT1; /* P1.1 pull up resistor */
 
     /* Button S1*/
     P4DIR &= ~BIT5; /* P4.5 input (switch 1) 0b0010 0000*/
@@ -37,3 +40,5 @@ bool __ReadButtonS1()
 {
     return (P4IN & BIT5);
 }
+
+/*! @} @} @} */

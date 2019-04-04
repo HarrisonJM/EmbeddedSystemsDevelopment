@@ -180,10 +180,10 @@ void POST(void)
     InterruptPort1Init();
     InterruptPort4Init();
     InterruptUCB0Init();
-#include "hardwareAbstractions/public/I_adc.h"
+
     /* Timers */
     InterruptTimerA0Init();
-//    InterruptTimerA2Init();
+    /* InterruptTimerA2Init(); */
 
     /* Sliders */
     SliderHardwareInit();
@@ -204,7 +204,7 @@ void POST(void)
     /*! @brief Write lines (0x80, image update mode ) and VCOM bit (0x40, video communication) */
     LCDWriteCommandOrData(0xC0);
     ScreenDisplayBufferInit('\0');
-//    ScreenFlushDisplayBuffer();
+    /* ScreenFlushDisplayBuffer();*/
 
     InterruptEnable();
 

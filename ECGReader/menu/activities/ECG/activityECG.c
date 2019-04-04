@@ -38,7 +38,7 @@ void __ShiftBuffer(void);
 int8_t __GetValPos(double *val);
 void __generateSineWave(double* sinVal);
 
-/*static void ActivityECGTest(void); // for testing purposes*/
+/*static void ActivityECGTest(void); /* for testing purposes*/ */
 
 #pragma PERSISTENT (DMA_DST)
 unsigned int DMA_DST[1024] = {0}; /* This is where DMA will put the ADC readings */
@@ -63,7 +63,7 @@ void ActivityECGTimer(void)
 
     ScreenShiftBuffer();
 
-/*    __generateSineWave(&rawVal); // 2000 = 0*/
+/*    __generateSineWave(&rawVal); /* 2000 = 0 */ */
 /*    y = __GetValPos(&rawVal);*/
     y = 45;
     ScreenPrintPixel(0, y, 0);
