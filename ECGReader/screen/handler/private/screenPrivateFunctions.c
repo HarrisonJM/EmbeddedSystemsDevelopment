@@ -195,7 +195,6 @@ void __ScreenPrintPixel(uint8_t DB_a[LCDPIXELMAXY][SCREENMAXX],
         DB_a[y][x] &= ~0x01;
     }
 }
-// 
 
 /*!
  * @brief shifts the displaybuffer backwards (left) ish

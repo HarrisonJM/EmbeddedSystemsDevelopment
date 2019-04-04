@@ -11,7 +11,7 @@ __interrupt void port1_ISR(void)
     {
         case 0: break; /* NO INTERRUPT */
         case 2:  /* P1.0 */ /* RIGHT BUTTON */
-//            ButtonTimer(BUTTONS2);
+            /*ButtonTimer(BUTTONS2); */
             break;
         case 4:
             LEDUse(LED_GREEN, LED_TOGGLE);

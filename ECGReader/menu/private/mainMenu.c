@@ -3,7 +3,6 @@
  * @author Dan Steer
  * @author Harrison Marcks
  * @date 12/11/2018
- *
  * @addtogroup menu
  * @{
  * @addtogroup private
@@ -14,8 +13,6 @@
 #include "../activities/activites.h"
 #include <screen/handler/screenHandler.h>
 #include "buttons/buttonHandlingUtility.h"
-
-//#include
 
 /* Prototypes */
 void MainMenuEnterState(MENUSELECT_T newState);

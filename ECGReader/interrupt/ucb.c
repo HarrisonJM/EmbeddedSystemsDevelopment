@@ -43,6 +43,7 @@ __interrupt void UCBSCREEN(void)
             break;
     }
 
+    /*
     // LCDSetCSHigh();
     // LCDWriteCommandOrData(command);
 
@@ -54,11 +55,13 @@ __interrupt void UCBSCREEN(void)
     //     {
     //         LCDWriteCommandOrData(DB_a[line][column]);
     //     }
-    //     /* EOL byte */
+    //     // EOL byte
     //     LCDWriteCommandOrData(0x00);
-    // }    
+    // }
+    */
 }
 
+/*
 // #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 // #pragma vector = USCI_B0_VECTOR
 // __interrupt void USCI_B0_ISR(void)
@@ -500,3 +503,5 @@ __interrupt void UCBSCREEN(void)
 
 
 // }
+
+*/

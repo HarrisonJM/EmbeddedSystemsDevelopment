@@ -2,6 +2,8 @@
  * @brief the watchdog timer interrupt service routine
  * @author Harrison Marcks
  * @date 10/12/18
+ * @addtogroup interrupt
+ * @{
  */
 
 #include <msp430.h>
@@ -22,5 +24,7 @@ __interrupt void watchdog_timer(void)
     restarting = true;
     LEDUse(LED_GREEN
            , LED_TOGGLE);
-//    main();
+    /* main(); */
 }
+
+/*! @} */

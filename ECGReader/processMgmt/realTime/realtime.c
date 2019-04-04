@@ -176,7 +176,7 @@ void AddDelay(uint16_t msDelay)
 	        " nop \n"
 	);
 
-	// Set up the delay
+	/* Set up the delay*/
     Process_t* curProc = currentlyRunningProcess;
 
     curProc->_milliDelay = msDelay;
@@ -234,7 +234,7 @@ void InitProcess(unsigned int procPriority
 		stackPointer = (LONG)&processes[newProcess->_index] + STACKSIZE - 2;
 		progCount = (LONG)funct;
 
-		// Construct combined PC+SR used by interrupt
+		/*Construct combined PC+SR used by interrupt*/
 		pc1 = (WORD)progCount;
 		pc2 = (WORD)(((progCount>>4)&0x0F000) | intStat&0x00FFF);
 
@@ -372,7 +372,7 @@ void ServiceScheduler()
 
         if (iProc->_procStat == TASK_RUNNABLE)
         {
-            // currentlyRunningProcess = i;
+            /* currentlyRunningProcess = i;*/
             currentlyRunningProcess = iProc;
             break;
         }
@@ -429,13 +429,13 @@ static void PriorityInsertNewProcess(Process_t* newProcess)
 
     while((curItem = ListItemPrev(curItem)) != listHead)
     {
-        // Search through processes for where to insert new process
+        /* Search through processes for where to insert new process*/
         Process_t* curProc = LISTENTRY(curItem
                                         , Process_t
                                         , _item);
 
-        // If a higher priority, we move on. 
-        // If the same or lower, place here
+        /* If a higher priority, we move on. */
+        /* If the same or lower, place here*/
         if (newProcess->_priority == curProc->_priority)
         {
             ListItemInsert(curItem

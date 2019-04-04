@@ -2,6 +2,8 @@
  * @brief Implements the timer interrupts
  * @author Harrison Marcks
  * @date 10/12/18
+ * @addtogroup interrupt
+ * @{
  */
 #include <helpers/eventQueue/eventQueue.h>
 #include <msp430fr5969.h>
@@ -11,7 +13,7 @@
 #include "leds/LedHandler.h"
 #include "hardwareAbstractions/public/I_led.h"
 
-//#include "menu/activities/ECG/activityECG.h"
+/*#include "menu/activities/ECG/activityECG.h"*/
 #include "menu/activities/activites.h"
 
 extern volatile int timerAdcReading;
@@ -37,6 +39,7 @@ __interrupt void Timer0_A0(void)
         msCounter10 = 0;
     }
 }
+/*
 ///*
 // * @brief This ISR clears the LPM bits found in the Status Register (SR/R2)
 // * used when performing capacitive touch checks
@@ -45,5 +48,6 @@ __interrupt void Timer0_A0(void)
 //__interrupt void TIMER3_A0_ISR(void)
 //{
 //    __bic_SR_register_on_exit(LPM3_bits);           // Exit LPM3 on reti
-//}
+//} */
 
+/*! @} */

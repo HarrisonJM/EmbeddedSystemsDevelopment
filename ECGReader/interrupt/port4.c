@@ -13,7 +13,7 @@ __interrupt void port4_ISR(void)
         case 2: break; /* P4.0 */
         /* ........ */
         case 12: /* P4.5 */ /* LEFT BUTTON */
-//            ButtonTimer(BUTTONS1);
+            /*ButtonTimer(BUTTONS1);*/
             LEDUse(LED_GREEN, LED_TOGGLE);
             break;
     }
