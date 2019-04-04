@@ -109,9 +109,9 @@ void run_process(unsigned int process_index)
 
 
 /* #pragma vector=TIMER0_A0_VECTOR
-__interrupt void Timer0_A0 (void)    /* Timer0 A0 1ms interrupt service routine */
+__interrupt void Timer0_A0 (void)    // Timer0 A0 1ms interrupt service routine
 {
-    /* Save first process details... */
+    // Save first process details...
 
     asm(
             " push.a R15\n"
