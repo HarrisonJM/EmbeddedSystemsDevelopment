@@ -1,6 +1,6 @@
 /*!
  * @brief forward/extern declaration of the font8x8_basic char array
- * @author Harrison Marcks, Len Biro
+ * @author Huseyin sert, Harrison Marcks, Len Biro
  * @addtogroup screen
  * @{
  * @addtogroup handler

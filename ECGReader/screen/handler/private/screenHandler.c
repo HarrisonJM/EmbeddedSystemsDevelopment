@@ -1,6 +1,6 @@
 /*!
  * @brief direct handler for printing to the LCD screen
- * @author Harrison Marcks
+ * @author Huseyin Sert, Harrison Marcks
  * @addtogroup screen
  * @{
  * @addtogroup handler
