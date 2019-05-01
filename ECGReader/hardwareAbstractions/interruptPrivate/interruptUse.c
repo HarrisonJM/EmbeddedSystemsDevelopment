@@ -1,6 +1,8 @@
 /*!
  * @brief contains only the timer init functions
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup interruptPrivate
  * @date 10/12/18
  */
 
@@ -38,6 +40,19 @@ void InterruptTimerA2Init(void)
    TA3CCR0 = ACCUMULATION_CYCLES;
    TA3CTL = TASSEL_2 + MC_1;
    TA3CCTL0 = CCIE;
+}
+/*!
+ * @brief initialises the UCB0 interrupt for use
+ */
+void InterruptUCB0Init(void)
+{
+//    P4SEL1 &= (~BIT5); // Set P1.3 SEL as GPIO
+//    P4DIR &= (~BIT5); // Set P1.3 SEL as Input
+//    P4IES |= (BIT5); // Falling Edge
+//    P4IFG &= (~BIT5); // Clear interrupt flag for P1.3
+//    P4IE |= (BIT5); // Enable interrupt for P1.3
+
+
 }
 /*!
  * @brief Disables Interrupts

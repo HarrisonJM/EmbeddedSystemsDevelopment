@@ -1,6 +1,8 @@
 /*!
  * @brief Public Forward decalrations for the watchdgo timer
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup public
  * @date 10/12/18
  */
 

@@ -1,6 +1,8 @@
 /*!
  * @brief LCD hardware abstraction
  * @author Harrison Marcks
+ * @addtogroup hardwareAbstractions
+ * @addtogroup lcdPrivate
  * @date 2/12/2018
  */
 

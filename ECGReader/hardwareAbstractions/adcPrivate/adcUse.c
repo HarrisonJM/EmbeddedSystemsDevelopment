@@ -1,6 +1,8 @@
 /*!
  * @brief Initlisation and configuration for the ADC
  * @author Dan Steer
+ * @addtogroup hardwareAbstractions
+ * @addtogroup adcPrivate
  * @date 11/03/2019
  */
 
